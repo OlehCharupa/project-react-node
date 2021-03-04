@@ -13,9 +13,9 @@ ReactDOM.render(
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <React.StrictMode>
-          <Container>
+          {/* <Container> */}
             <App />
-          </Container>
+          {/* </Container> */}
         </React.StrictMode>
       </BrowserRouter>
     </PersistGate>
