@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import rootReducer from "./slice";
 import storage from "redux-persist/lib/storage";
 import sprintsReducer from "./reducers/sprintsReducer.js";
+import tasksReducer from "./reducers/tasksReducer.js";
 import {
   persistStore,
   persistReducer,
@@ -24,6 +25,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: {
     sprints: sprintsReducer,
+    tasks: tasksReducer,
     auth: persistedReducer,
   },
   middleware: getDefaultMiddleware({
