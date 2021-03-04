@@ -1,3 +1,3 @@
 import { Server } from "./server.js";
 
-new Server().start()
+new Server().start();
