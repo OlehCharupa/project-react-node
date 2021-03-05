@@ -1,0 +1,54 @@
+.usermemu__wrapper {
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user__name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.04em;
+  color: #181c27;
+  /* margin-right: 20px; */
+}
+.logout__button {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: no-repeat url("./images/logout-mobile.svg") #a6a6a6;
+  background-position: right 35% bottom 45%;
+}
+.logout__span {
+  visibility: hidden;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.04em;
+  color: rgba(24, 28, 39, 0.6);
+}
+
+@media screen and (min-width: 768px) {
+  .usermemu__wrapper {
+    width: 245px;
+  }
+  .logout__button {
+    padding-left: 28px;
+    width: 90px;
+    border-radius: 0;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: no-repeat left url("./images/logout.svg");
+  }
+  .logout__span {
+    visibility: visible;
+  }
+}

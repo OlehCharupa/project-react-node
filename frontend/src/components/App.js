@@ -1,11 +1,13 @@
-import styles from './App.module.css';
+import styles from "./App.module.css";
+import Container from "./Container/Container";
+import Header from "./Header/Header";
 
 function App() {
   return (
-    <div className={styles}>
+    <Container>
+      <Header />
       <h1>hello</h1>
-    </div>
-
+    </Container>
   );
 }
 
