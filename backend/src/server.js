@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
@@ -15,10 +16,10 @@ export class Server {
 
   async start() {
     this.initServer();
+    this.initMiddlewares();
     this.initConfig();
     this.initRoutes();
     await this.initDatabase();
-    this.initMiddlewares();
     this.initErrorHandling();
     this.startListening();
   }
@@ -52,6 +53,12 @@ export class Server {
     this.server.use(express.json());
     this.server.use(cors());
     this.server.use(morgan("dev"));
+    this.server.use(bodyParser.json());
+    this.server.use(
+      bodyParser.urlencoded({
+        extended: true,
+      })
+    );
   }
 
   initRoutes() {
