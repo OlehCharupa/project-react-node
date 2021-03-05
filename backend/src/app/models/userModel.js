@@ -1,7 +1,11 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
 const users = new Schema({
-  // жду схему бд (модели)
+  login: String,
+  email: String,
+  password: String,
+  token: String,
+  verificationToken: String,
 });
-const modelUser = model("User", users);
-export default modelUser;
+export default mongoose.model("users", users);
