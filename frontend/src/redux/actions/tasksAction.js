@@ -10,6 +10,9 @@ import {
   DELETE_TASK_ERROR,
   DELETE_TASK_REQUEST,
   DELETE_TASK_SUCCESS,
+  UPDATE_TASK_REQUEST,
+  UPDATE_TASK_SUCCESS,
+  UPDATE_TASK_ERROR,
   CHANGE_ERROR,
 } from "../constants/tasksConstants";
 
@@ -25,6 +28,10 @@ const deleteTaskRequest = createAction(DELETE_TASK_REQUEST);
 const deleteTaskSuccess = createAction(DELETE_TASK_SUCCESS);
 const deleteTaskError = createAction(DELETE_TASK_ERROR);
 
+const updateTaskRequest = createAction(UPDATE_TASK_REQUEST);
+const updateTaskSuccess = createAction(UPDATE_TASK_SUCCESS);
+const updateTaskError = createAction(UPDATE_TASK_ERROR);
+
 const changeError = createAction(CHANGE_ERROR);
 
 export default {
@@ -37,5 +44,8 @@ export default {
   deleteTaskRequest,
   deleteTaskSuccess,
   deleteTaskError,
+  updateTaskRequest,
+  updateTaskSuccess,
+  updateTaskError,
   changeError,
 };
