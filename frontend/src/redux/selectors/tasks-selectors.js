@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-export const tasksSelector = (state) => state.sprints;
+export const tasksSelector = (state) => state.tasks;
 export const allTasksSelector = (state) => tasksSelector(state).items;
 export const errorSelector = (state) => tasksSelector(state).error;
 export const filterSelector = (state) => tasksSelector(state).filter;

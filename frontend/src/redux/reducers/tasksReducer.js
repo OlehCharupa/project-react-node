@@ -11,6 +11,9 @@ import {
   DELETE_TASK_ERROR,
   DELETE_TASK_REQUEST,
   DELETE_TASK_SUCCESS,
+  UPDATE_TASK_ERROR,
+  UPDATE_TASK_SUCCESS,
+  UPDATE_TASK_REQUEST,
   CHANGE_TASK_FILTER,
   CHANGE_ERROR,
 } from "../constants/tasksConstants.js";
@@ -20,6 +23,10 @@ const items = createReducer([], {
   [ADD_TASK_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_TASK_SUCCESS]: (state, { payload }) =>
     state.filter((task) => task.id !== payload),
+  [UPDATE_TASK_SUCCESS]: (state, { payload }) => [
+    ...state.filter((task) => task.id !== payload.id),
+    ...payload,
+  ],
 });
 
 const filter = createReducer("", {
@@ -40,6 +47,9 @@ const loading = createReducer(false, {
   [DELETE_TASK_REQUEST]: () => true,
   [DELETE_TASK_SUCCESS]: () => false,
   [DELETE_TASK_ERROR]: () => false,
+  [UPDATE_TASK_REQUEST]: () => true,
+  [UPDATE_TASK_SUCCESS]: () => false,
+  [UPDATE_TASK_ERROR]: () => false,
 });
 
 export default combineReducers({
