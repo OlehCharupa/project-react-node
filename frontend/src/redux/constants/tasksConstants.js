@@ -10,4 +10,5 @@ export const DELETE_TASK_REQUEST = "tasks/deleteSprintRequest";
 export const DELETE_TASK_SUCCESS = "tasks/deleteSprintSuccess";
 export const DELETE_TASK_ERROR = "tasks/deleteSprintError";
 
+export const CHANGE_TASK_FILTER = "tasks/filterChange";
 export const CHANGE_ERROR = "error/change";
