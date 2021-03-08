@@ -30,8 +30,6 @@ const Device = ({ children }) => {
 };
 
 const SprintDIV = styled.div`
-  width: 1026px;
-
   padding-top: 20px;
   padding-bottom: 80px;
 `;
