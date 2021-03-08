@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { TransitionGroup } from "react-transition-group";
 import transition from "styled-transition-group";
 import TasksListItem from "../TasksListItem/TasksListItem";
-import { allTasksSelector } from "../../redux/selectors/tasks-selectors";
-import tasksOperations from "../../redux/operations/tasksOperations";
+import {
+  getVisibleTasks,
+  loaderSelector,
+} from "../../redux/selectors/tasks-selectors";
+import LoaderSpinner from "react-loader-spinner";
 
 const Ul = styled.ul`
   padding: 0;
@@ -20,7 +23,6 @@ const Ul = styled.ul`
     margin: -10px;
   }
 `;
-
 const Li = transition.li.attrs({
   unmountOnExit: true,
   mountOnEntry: true,
@@ -38,8 +40,7 @@ const Li = transition.li.attrs({
     margin-bottom: 10px;
   }
   display:flex;
-  align-items: baseline;
-  padding: 20px 30px;
+  padding: 20px;
   }
 
   padding: 20px 20px 50px 20px;
@@ -68,25 +69,43 @@ const Li = transition.li.attrs({
     @media (min-width: 768px) and (max-width: 1279px) {
       width: calc((100% - 40px) / 2);
       margin: 10px;
-  }
+    }
+    @media (max-width: 1279px){
+      align-items: baseline;
+    }
+    @media (min-width: 1280px){
+      align-items: center;
+    }
+`;
+const LoaderDIV = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const TasksList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(tasksOperations.fetchTasks());
-  }, []);
-
-  const tasks = useSelector((state) => allTasksSelector(state));
+  const tasks = useSelector((state) => getVisibleTasks(state));
+  const isLoading = useSelector((state) => loaderSelector(state));
 
   return (
-    <TransitionGroup component={Ul}>
-      {tasks.map((task) => (
-        <Li key={task.id}>
-          <TasksListItem id={task.id} />
-        </Li>
-      ))}
-    </TransitionGroup>
+    <>
+      {isLoading && (
+        <LoaderDIV>
+          <LoaderSpinner
+            type="ThreeDots"
+            color="#ff6b08"
+            height={100}
+            width={100}
+          />
+        </LoaderDIV>
+      )}
+      <TransitionGroup component={Ul}>
+        {tasks.map((task) => (
+          <Li key={task.id}>
+            <TasksListItem id={task.id} />
+          </Li>
+        ))}
+      </TransitionGroup>
+    </>
   );
 };
 

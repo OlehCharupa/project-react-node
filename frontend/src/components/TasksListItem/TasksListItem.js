@@ -8,7 +8,6 @@ import deleteSvg from "./images/delete.svg";
 
 const TITLE = styled.p`
   margin-top: 0;
-
   text-align: center;
 
   font-weight: 500;
@@ -52,7 +51,6 @@ const DIV = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-grow: 1;
 
   @media (max-width: 767px) {
     &:not(:last-child) {
@@ -77,6 +75,13 @@ const DIV = styled.div`
   @media (min-width: 768px) and (max-width: 1279px) {
     &:not(:last-child) {
       margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    width: calc((100% - 120px) / 4);
+    &:not(:last-child) {
+      margin-right: 30px;
     }
   }
 `;
@@ -108,9 +113,11 @@ const Button = styled.button`
   right: 10px;
 
   @media (min-width: 1280px) {
-    bottom: 50%;
-    right: 30px;
-    transform: translateY(50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+
+    transform: translateY(-50%);
   }
 
   content: "";
