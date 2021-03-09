@@ -34,7 +34,6 @@
     left: 10px;
     top: 70px;
     transition: top 0.5s;
-
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -44,13 +43,13 @@
 }
 
 .input{
+    background-color: none;
     display: block;
     width: 100%;
     padding: 5px;
     margin: auto;
     border: 1px solid rgba(24, 28, 39, 0.2);
     background: no-repeat bottom, 50% calc(100% -1px);
-    background-color: none;
     border: none;
     background-size: 0 100%, 100% 100%;
     background-image: linear-gradient(0deg, #FF6B08 2px, rgba(156, 39, 176, 0) 0), linear-gradient(0deg, #ccc 1px, hsla(0, 0%, 82%, 0) 0);
@@ -64,7 +63,7 @@
     transition-duration: 0.3s;
     box-shadow: none;
 }
-.input:focus + .label, .input:not(:placeholder-shown) + .label{
+.input:focus + .label, .input:not(:placeholder-shown) + .label,.input:checked{
     top: 45px;
     font-size: 14px;
     line-height: 17px;
@@ -73,7 +72,11 @@
 .labelError{
     color: #ff0808;
     font-weight: 800;
-
+}
+.labelError {
+ .input:focus{
+        background-image: linear-gradient(0deg, #ff0808 2px, rgba(156, 39, 176, 0) 0), linear-gradient(0deg, #ccc 1px, hsla(0, 0%, 82%, 0) 0);
+    }
 }
 .input:focus + .labelError, .input:not(:placeholder-shown) + .labelError{
     top: 45px;

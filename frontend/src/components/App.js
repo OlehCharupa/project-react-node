@@ -9,8 +9,8 @@ function App() {
     <Container>
       <Header />
       {/* <h1>hello</h1> */}
-      {/* <SignUp /> */}
-      <SignIn />
+      <SignUp />
+      {/* <SignIn /> */}
     </Container>
   );
 }

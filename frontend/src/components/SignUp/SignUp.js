@@ -54,23 +54,24 @@ const SignUp = () => {
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
                                 <Field className={signUp.input} name="email" type="email" id='email' placeholder="Email"  />
+                                
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (<label className={signUp.label} htmlFor='email' >Email*</label>)}
+                                ) : <label className={signUp.label} htmlFor='email' >Email*</label>}
                             </div>
 
                             <div className={signUp.form__item}>
                                 <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Password"  />
                                 {errors.password && touched.password ? (
-                                    <label className={signUp.labelError} htmlFor='password' >{errors.password}</label>
+                                    <label className={signUp.labelError} htmlFor='pass' >{errors.password}</label>
                                 ): ( <label htmlFor='pass' className={signUp.label} >Password*</label>)}
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="repeatPassword" type="password" id='repeatPassword' className={signUp.input} placeholder="repeatPassword"  />
+                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="repeatPassword"  />
                                 {errors.repeatPassword && touched.repeatPassword ? (
-                                     <label className={signUp.labelError } htmlFor='email'>{errors.repeatPassword}</label>
-                                ): ( <label htmlFor='repeatPassword' className={signUp.label} >Password*</label>)}
+                                     <label className={signUp.labelError } htmlFor='repeatPass'>{errors.repeatPassword}</label>
+                                ): <label htmlFor='repeatPass' className={signUp.label} >Password*</label>}
                             </div>
 
                             <button type='submit' className={signUp.btn}>Зареєструватися</button>

@@ -12,14 +12,14 @@ const routes = [
     {
         path: paths.registration,
         label: 'Регистрация',
-        // component: lazy(() => import('../pages/.......')), //раскомментировать,  в импорт внести место и имя своего компонента
+        component: lazy(() => import('../pages/Registration-page/index.js')), //раскомментировать,  в импорт внести место и имя своего компонента
         private: false,
         restricted: true,
     },
     {
         path: paths.login,
         label: 'Вход',
-        // component: lazy(() => import('../pages/.....')), //раскомментировать,  в импорт внести место и имя своего компонента
+        component: lazy(() => import('../pages/Login-page/index.js')), //раскомментировать,  в импорт внести место и имя своего компонента
         private: false,
         restricted: true,
     },
