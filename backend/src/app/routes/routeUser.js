@@ -4,7 +4,10 @@ import {
   loginUser,
   authentUser,
   logoutUser,
+  authentUserMail,
 } from "./../controllers/userController.js";
+import authenticateJWT from "./../../helpers/jwt.js";
+
 let router = express.Router();
 // import middleware
 //
@@ -12,6 +15,7 @@ let router = express.Router();
 // POST routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get("/authent/:verificationToken", authentUser);
+router.post("/authent", authenticateJWT, authentUser);
+router.get("/authent/:verificationToken", authentUserMail);
 router.post("/logout", logoutUser);
 export default router;
