@@ -366,13 +366,14 @@ const Sprints = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const params = useParams().sprintId;
+  const params = useParams();
 
   const filter = useSelector((state) => filterSelector(state));
 
   useEffect(() => {
     // fetch sprint tasks
     dispatch(tasksOperations.fetchTasks());
+    console.log(params);
   }, []);
 
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
