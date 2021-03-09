@@ -81,8 +81,6 @@ const SprintsList = () => {
   const location = useLocation();
   const history = useHistory();
 
-  console.dir();
-
   const sprintHandler = (e) => {
     const { sprintId } = e.currentTarget.dataset;
     if (e.target.nodeName !== "BUTTON") {

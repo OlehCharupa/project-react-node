@@ -11,7 +11,7 @@ let router = express.Router();
 
 // POST routes
 router.post("/register", registerUser);
-router.post("./login", loginUser);
-router.post("./authent", authentUser);
-router.post("./logout", logoutUser);
+router.post("/login", loginUser);
+router.get("/authent/:verificationToken", authentUser);
+router.post("/logout", logoutUser);
 export default router;
