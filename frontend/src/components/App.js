@@ -7,6 +7,7 @@ import { Switch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PublicRoute from "./PublicRoute/PublicRoute";
 
+
 function App() {
   return (
     <Container>
