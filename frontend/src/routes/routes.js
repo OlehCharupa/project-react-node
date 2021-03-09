@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 
+
 export const paths = {
+    home: '/',
     registration: '/registration',
     login: '/login',
     projects: '/projects',
@@ -9,6 +11,15 @@ export const paths = {
 }
 
 const routes = [
+    {
+        path: paths.home,
+        label: 'Домашняя страница',
+        exact: true,
+        component: lazy(() => import('../pages/Registration-page/index.js')), //раскомментировать,  в импорт внести место и имя своего компонента
+        private: false,
+        restricted: true,
+    },
+
     {
         path: paths.registration,
         label: 'Регистрация',
