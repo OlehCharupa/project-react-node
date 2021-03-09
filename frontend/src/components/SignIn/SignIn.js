@@ -3,6 +3,7 @@ import signIn from './SignIn.module.css';
 // import BgImage from '../BgImage/BgImage';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
+import { NavLink } from 'react-router-dom';
 
 const SignIn = () => {
     const SigninSchema = Yup.object().shape({
@@ -50,7 +51,7 @@ const SignIn = () => {
                                 ): ( <label htmlFor='pass' className={signIn.label} >Password*</label>)}
                             </div>
                             <button type='submit' className={signIn.btn}>Увійти</button>
-                            <p className={signIn.form__text}>Немає акаунту? <a href='#' className={signIn.form__link} >Зареєструватись</a></p>
+                            <p className={signIn.form__text}>Немає акаунту? <NavLink to="/registration" exact className={signIn.form__link} >Зареєструватись</NavLink></p>
                         </Form>
                     )}
                 </Formik>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import signUp from './SignUp.module.css';
 // import BgImage from '../BgImage/BgImage';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
-
+import { NavLink } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -46,14 +46,13 @@ const SignUp = () => {
                     validationSchema={SignupSchema}
                     onSubmit={values => {
                         // same shape as initial values
-                        setRegState({...values})
-                        console.log(regForm);
+                        console.log("values ",values);
                     }}
                 >
                     {({ errors, touched }) => (
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
-                                <Field className={signUp.input} name="email" type="email" id='email' placeholder="Email"  />
+                                <Field className={(errors.email && touched.email) ? (signUp.inputError):(signUp.input)} name="email" type="email" id='email' placeholder="Email"  />
                                 
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
@@ -61,21 +60,21 @@ const SignUp = () => {
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Password"  />
+                                <Field name="password" type="password" id='pass' className={(errors.password && touched.password) ? (signUp.inputError) : (signUp.input)} placeholder="Password"  />
                                 {errors.password && touched.password ? (
                                     <label className={signUp.labelError} htmlFor='pass' >{errors.password}</label>
                                 ): ( <label htmlFor='pass' className={signUp.label} >Password*</label>)}
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="repeatPassword"  />
+                                <Field name="repeatPassword" type="password" id='repeatPass' className={(errors.repeatPassword && touched.repeatPassword) ? (signUp.inputError) : (signUp.input)} placeholder="repeatPassword"  />
                                 {errors.repeatPassword && touched.repeatPassword ? (
                                      <label className={signUp.labelError } htmlFor='repeatPass'>{errors.repeatPassword}</label>
                                 ): <label htmlFor='repeatPass' className={signUp.label} >Password*</label>}
                             </div>
 
                             <button type='submit' className={signUp.btn}>Зареєструватися</button>
-                            <p className={signUp.form__text}>Маєте акаунт? <a href='#' className={signUp.form__link} >Увійти</a></p>
+                            <p className={signUp.form__text}>Маєте акаунт? <NavLink to="/login" exact className={signUp.form__link} >Увійти</NavLink></p>
                         </Form>
                     )}
                 </Formik>

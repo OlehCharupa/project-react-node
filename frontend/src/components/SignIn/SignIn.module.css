@@ -42,7 +42,12 @@
     letter-spacing: 0.04em;
     color: rgba(24, 28, 39, 0.6);
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+}
 .input{
     display: block;
     width: 100%;
