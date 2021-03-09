@@ -1,0 +1,1 @@
+export const isLogin = (state) => false;  // поменять на значение со стейта

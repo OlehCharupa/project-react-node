@@ -65,8 +65,18 @@ const deleteTask = (id) => (dispatch) => {
     .catch((error) => dispatch(tasksAction.deleteTaskError(error)));
 };
 
+const updateTask = (id, whpd) => (dispatch) => {
+  dispatch(tasksAction.updateTaskRequest());
+
+  axios
+    .patch("tasks", { id, wastedHoursPerDay: whpd })
+    .then(({ data }) => dispatch(tasksAction.updateTaskSuccess(data)))
+    .catch((error) => dispatch(tasksAction.updateTaskError(error)));
+};
+
 export default {
   addTask,
   fetchTasks,
   deleteTask,
+  updateTask,
 };
