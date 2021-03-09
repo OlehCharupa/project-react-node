@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import style from "./Sprints.module.css";
 import sprite from "./images/sprite.svg";
@@ -332,6 +333,7 @@ const HeaderP = styled.p`
     width: calc((100% - 120px) / 4);
     &:not(:last-child) {
       margin-right: 30px;
+    }
   }
 `;
 const SprintNameAndAddBtnDIV = styled.div`
@@ -362,9 +364,14 @@ const CurrentDateAndFilterDIV = styled.div`
 
 const Sprints = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
+  const params = useParams().sprintId;
+
   const filter = useSelector((state) => filterSelector(state));
 
   useEffect(() => {
+    // fetch sprint tasks
     dispatch(tasksOperations.fetchTasks());
   }, []);
 
@@ -379,6 +386,10 @@ const Sprints = () => {
       nameRef.setSelectionRange(nameRef.value.length, nameRef.value.length);
 
       window.addEventListener("keydown", closeAndUpdateName);
+    } else {
+      // update name query
+      nameRef.setAttribute("readonly", true);
+      nameRef.classList.add(style.edit);
     }
   };
   const sprintNameInputHandler = (e) => {
@@ -401,6 +412,13 @@ const Sprints = () => {
       nameRef.classList.add(style.edit);
       window.removeEventListener("keydown", closeAndUpdateName);
     }
+  };
+  const goBack = () => {
+    const { state } = location;
+    if (state && state.from) {
+      return history.push(state.from);
+    }
+    history.push("/");
   };
   return (
     <SprintDIV>
