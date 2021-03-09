@@ -6,12 +6,13 @@ import routes from "../routes/routes.js"
 import { Switch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PublicRoute from "./PublicRoute/PublicRoute";
+import Spiner from "./Spiner/Spiner";
 
 function App() {
   return (
     <Container>
       <Header />
-      <Suspense fallback={`<h1>Loading</h1>`}>
+      <Suspense fallback={<Spiner />}>
         <Switch>
           {routes.map((route) => {
             return route.private ? (
