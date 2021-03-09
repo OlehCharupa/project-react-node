@@ -1,12 +1,15 @@
 import styles from "./App.module.css";
-import Container from "./Container/Container";
+import Container from "../components/Container/Container";
 import Header from "./Header/Header";
+import ProjectPage from "../pages/ProjectPage/ProjectPage";
+import SprintPage from "../pages/SprintPage/SprintPage";
 
 function App() {
   return (
     <Container>
       <Header />
-      <h1>hello</h1>
+      {/* <ProjectPage /> */}
+      <SprintPage />
     </Container>
   );
 }
