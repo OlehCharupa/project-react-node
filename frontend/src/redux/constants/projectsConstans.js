@@ -1,0 +1,13 @@
+export const ADD_PROJECT_REQUEST = "projects/addProjectRequest";
+export const ADD_PROJECT_SUCCESS = "projects/addProjectSuccess";
+export const ADD_PROJECT_ERROR = "projects/addProjectError";
+
+export const FETCH_PROJECTS_REQUEST = "projects/fetchProjectsRequest";
+export const FETCH_PROJECTS_SUCCESS = "projects/fetchProjectsSuccess";
+export const FETCH_PROJECTS_ERROR = "projects/fetchProjectsError";
+
+export const DELETE_PROJECT_REQUEST = "projects/deleteProjectRequest";
+export const DELETE_PROJECT_SUCCESS = "projects/deleteProjectSuccess";
+export const DELETE_PROJECT_ERROR = "projects/deleteProjectError";
+
+export const CHANGE_ERROR = "error/change";

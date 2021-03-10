@@ -1,0 +1,44 @@
+.mainLeftSprint{
+  position: relative;
+  width: 2255px;
+  min-height: 100%;
+}
+
+.mainLeftSprint:after{
+  content: "";
+  display: block;
+  position: absolute;
+  height: 120%;
+  width: 1px;
+  background-color: rgba(24, 28, 39, 0.1);
+  top: 0;
+  left: 220px;
+}
+
+.arrow{
+  content: url(./images/arrow.svg);
+  width: 30px;
+}
+
+.showProject{
+  width: 100px;
+  margin-left: 20px;
+}
+
+.link{
+  text-decoration: none;
+  color: #181C27;
+}
+
+@media screen and (max-width: 767px) {
+
+  .mainLeftSprint{
+    width: 216px;
+    min-height: 100%;
+  }
+
+  .mainLeftSprint{
+    display: none;
+  }
+
+}

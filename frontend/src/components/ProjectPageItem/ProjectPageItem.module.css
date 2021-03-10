@@ -1,0 +1,491 @@
+  /* Цвет бэкграунда */
+
+  .item:nth-child(8n + 1) {
+    background-color: #8C72DF;
+  }
+  
+  .item:nth-child(8n + 2) {
+    background-color: #FF765F;
+  }
+  
+  .item:nth-child(8n + 3) {
+    background-color: #72df87;
+  }
+  
+  .item:nth-child(8n + 4) {
+    background-color: #f78336;
+  }
+  
+  .item:nth-child(8n + 5) {
+    background-color: #f3be2f;
+  }
+  
+  .item:nth-child(8n + 6) {
+    background-color: #e46dde;
+  }
+  
+  .item:nth-child(8n + 7) {
+    background-color: #4594f1;
+  }
+  
+  .item:nth-child(8n + 8) {
+    background-color: #d45535;
+  } 
+
+  /* Ховер елементы */
+
+  .item:nth-child(8n + 1):hover {
+    box-shadow: 1px 6px 10px #8C72DF;
+  }
+  
+  .item:nth-child(8n + 2):hover {
+    box-shadow: 1px 6px 10px #FF765F;
+  }
+  
+  .item:nth-child(8n + 3):hover {
+    box-shadow: 1px 6px 10px #72df87;
+  }
+  
+  .item:nth-child(8n + 4):hover {
+    box-shadow: 1px 6px 10px #f78336;
+  }
+  
+  .item:nth-child(8n + 5):hover {
+    box-shadow: 1px 6px 10px #f3be2f;
+  }
+  
+  .item:nth-child(8n + 6):hover {
+    box-shadow: 1px 6px 10px #e46dde;
+  }
+  
+  .item:nth-child(8n + 7):hover {
+    box-shadow: 1px 6px 10px #4594f1;
+  }
+  
+  .item:nth-child(8n + 8):hover {
+    box-shadow: 1px 6px 10px #d45535;
+  }
+
+  /* Цвет корзины */
+
+  .item:nth-child(8n + 1) .deleteBtn {
+    background-color: #8C72DF;
+  }
+  
+  .item:nth-child(8n + 2) .deleteBtn {
+    background-color: #FF765F;
+  }
+  
+  .item:nth-child(8n + 3) .deleteBtn {
+    background-color: #72df87;
+  }
+  
+  .item:nth-child(8n + 4) .deleteBtn {
+    background-color: #f78336;
+  }
+  
+  .item:nth-child(8n + 5) .deleteBtn {
+    background-color: #f3be2f;
+  }
+  
+  .item:nth-child(8n + 6) .deleteBtn {
+    background-color: #e46dde;
+  }
+  
+  .item:nth-child(8n + 7) .deleteBtn {
+    background-color: #4594f1;
+  }
+  
+  .item:nth-child(8n + 8) .deleteBtn {
+    background-color: #d45535;
+  }
+
+
+@media screen and (max-width: 767px) {
+  .item:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  .item:nth-child(2n + 1) {
+    margin-left: 0;
+  }
+  
+
+  .item {
+    list-style: none;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+    width: calc((100% - 10px) / 2);
+    height: 136px;
+    border: none;
+    border-radius: 5px;
+    transition: 150ms linear;
+    overflow: hidden;
+    transition: all 250ms linear;
+  }
+
+  .overlay {
+    position: absolute;
+    padding: 10px 10px;
+    top: 0;
+    left: 0;
+    width: 136px;
+    height: 136px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .itemTitle {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+  }
+  
+  .item:hover .itemDescription {
+    opacity: 1;
+  }
+  
+  .itemDescription {
+    margin-top: 6px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+  }
+  
+  .deleteBtn {
+    outline: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #ffffff;
+    border-radius: 50%;
+    background-image: url("./projectImg/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-y: -22px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 250ms linear;
+  }
+  
+  .deleteBtn:hover,
+  .deleteBtn:focus {
+    width: 32px;
+    height: 32px;
+    box-shadow: 0px 0px 25px #ffffff;
+  }
+
+
+}
+
+@media screen and (min-width: 768px) {
+
+   /* Waves */
+
+   @media screen and (max-width: 1279px){
+    .item:nth-child(4n + 1)::before {
+      content: url("./projectImg/Wave_1-1.png");
+      position: absolute;
+      left: 0;
+      top: 16px;
+    }
+    
+    .item:nth-child(4n + 1)::after {
+      content: url("./projectImg/Wave_1-2.png");
+      position: absolute;
+      left: 0;
+      top: 16px;
+    }
+    
+    .item:nth-child(4n + 2)::before {
+      content: url("./projectImg/Wave_2-1.png");
+      position: absolute;
+       left: -240px;
+       top: 16px;
+    }
+    
+    .item:nth-child(4n + 2)::after {
+      content: url("./projectImg/Wave_2-2.png");
+      position: absolute;
+       left: -230px;
+       top: 16px;
+    }
+    
+    .item:nth-child(4n + 3)::before {
+      content: url("./projectImg/Wave_3-1.png");
+      position: absolute;
+       left: -460px;
+       top: 16px;
+    }
+    
+    .item:nth-child(4n + 3)::after {
+      content: url("./projectImg/Wave_3-2.png");
+      position: absolute;
+       left: -470px;
+       top: 16px;
+    }
+    
+    .item:nth-child(4n + 4)::before {
+      content: url("./projectImg/Wave_4-1.png");
+      position: absolute;
+       left: -50px;
+       top: 16px;
+    }
+    
+    .item:nth-child(4n + 4)::after {
+      content: url("./projectImg/Wave_4-2.png");
+      position: absolute;
+       left: -435px;
+       top: 16px;
+    }
+
+    .item:nth-child(3n) {
+      margin-right: 0;
+    }
+  
+    .item:first-child{
+      margin-left: 0;
+    }
+  
+    .item:nth-child(3n + 1) {
+      margin-left: 0;
+    }
+  }
+
+
+  .item {
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    width: calc((100% - 40px) / 3);
+    height: 216px;
+    border: none;
+    border-radius: 5px;
+    transition: 150ms linear;
+    overflow: hidden;
+    transition: all 250ms linear;
+  }
+
+  .overlay {
+    position: absolute;
+    padding: 20px 20px;
+    top: 0;
+    left: 0;
+    width: 136px;
+    height: 136px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .itemTitle {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 30px;
+    color: #ffffff;
+  }
+  
+  .item:hover .itemDescription {
+    opacity: 1;
+  }
+  
+  .itemDescription {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    padding-top:10px;
+    letter-spacing: 0.04em;
+    color: #FFFFFF
+  }
+  
+  .deleteBtn {
+    outline: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #ffffff;
+    border-radius: 50%;
+    background-image: url("./projectImg/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-y: -22px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 250ms linear;
+  }
+  
+  .deleteBtn:hover,
+  .deleteBtn:focus {
+    width: 32px;
+    height: 32px;
+    box-shadow: 0px 0px 25px #ffffff;
+  }
+
+}
+
+@media screen and (min-width: 1280px) {
+
+  .item:nth-child(4n + 1)::before {
+    content: url("./projectImg/Wave_1-1.png");
+    position: absolute;
+    left: 0;
+    top: 76px;
+  }
+  
+  .item:nth-child(4n + 1)::after {
+    content: url("./projectImg/Wave_1-2.png");
+    position: absolute;
+    left: 0;
+    top: 76px;
+  }
+  
+  .item:nth-child(4n + 2)::before {
+    content: url("./projectImg/Wave_2-1.png");
+    position: absolute;
+     left: -300px;
+     top: 76px;
+  }
+  
+  .item:nth-child(4n + 2)::after {
+    content: url("./projectImg/Wave_2-2.png");
+    position: absolute;
+     left: -295px;
+     top: 76px;
+  }
+  
+  .item:nth-child(4n + 3)::before {
+    content: url("./projectImg/Wave_3-1.png");
+    position: absolute;
+     left: -145px;
+     top: 76px;
+  }
+  
+  .item:nth-child(4n + 3)::after {
+    content: url("./projectImg/Wave_3-2.png");
+    position: absolute;
+     left: -245px;
+     top: 76px;
+  }
+  
+  .item:nth-child(4n + 4)::before {
+    content: url("./projectImg/Wave_4-1.png");
+    position: absolute;
+     left: -435px;
+     top: 76px;
+  }
+  
+  .item:nth-child(4n + 4)::after {
+    content: url("./projectImg/Wave_4-2.png");
+    position: absolute;
+     left: -280px;
+     top: 76px;
+  }
+
+  .item:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  .item:first-child{
+    margin-left: 0;
+  }
+
+  .item:nth-child(4n + 1) {
+    margin-left: 0;
+  }
+  
+  .item {
+    list-style: none;
+    position: relative;
+    width: calc((100% - 60px) / 4);
+    height: 270px;
+    border: none;
+    border-radius: 5px;
+    transition: 150ms linear;
+    overflow: hidden;
+    transition: all 250ms linear;
+  }
+  
+  .overlay {
+    position: absolute;
+    padding: 28px 30px;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 270px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .itemTitle {
+    word-wrap: break-word;
+    font-family: "Montserrat";
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 32px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+  }
+  
+  .item:hover .itemDescription {
+    opacity: 1;
+  }
+  
+  .itemDescription {
+    word-wrap: break-word;
+    opacity: 0;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    transition: all 250ms linear;
+  }
+  
+  .deleteBtn {
+    outline: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #ffffff;
+    border-radius: 50%;
+    background-image: url("./projectImg/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-y: -22px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 250ms linear;
+  }
+  
+  .deleteBtn:hover,
+  .deleteBtn:focus {
+    width: 32px;
+    height: 32px;
+    box-shadow: 0px 0px 25px #ffffff;
+  }
+
+
+}
+

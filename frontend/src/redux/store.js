@@ -17,6 +17,7 @@ import {
 
 export const store = configureStore({
   reducer: {
+    projects: projectsReducer,
     sprints: sprintsReducer,
     tasks: tasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
