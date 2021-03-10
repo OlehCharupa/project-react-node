@@ -6,7 +6,6 @@ import style from "./SprintPage.module.css";
 import container from "../../components/Container/Container";
 
 const SprintPage = () => {
-  // const items = useSelector((state) => state);
   return (
     <>
       <div className={(container, style.MainPage)}>

@@ -44,7 +44,7 @@ const routes = [
   {
     path: paths.projectId,
     label: "Проект",
-    // component: lazy(() => import('../pages/SprintPage/SprintPage.js')), //раскомментировать,  в импорт внести место и имя своего компонента
+    component: lazy(() => import("../pages/SprintPage/SprintPage.js")), //раскомментировать,  в импорт внести место и имя своего компонента
     private: true,
     restricted: true,
   },
