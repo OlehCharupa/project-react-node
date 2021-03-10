@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 // import { modalToggle } from "../../redux/actions/modalAction";
@@ -10,8 +10,10 @@ import style from "./Modal.module.css";
 const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
 // const Modal = () => {
 
-  // в компоненті, який викликає модальне вікно потрібно прописати:
+  // в компоненті, який викликає модальне вікно потрібно прописати :
 
+// import { modalToggle } from "../../redux/actions/modalAction";
+  
   // const isModalOpen = useSelector((state) => state.modal);
   // const dispatch = useDispatch();
   // const toggleModal = () => {
@@ -29,8 +31,10 @@ const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
 
   // children - сама форма
 
+
+
   useEffect(() => {
-    isModalOpen && addListener();
+      isModalOpen && addListener();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
