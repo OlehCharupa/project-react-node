@@ -5,6 +5,7 @@ import { paths } from "../../routes/routes";
 import style from "./UserMenu.module.css";
 import authOperation from "../../redux/operations/authOperations";
 import { getUserName } from "../../redux/selectors/authSelectors";
+import { modalToggle } from "../../redux/actions/modalAction";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ const UserMenu = () => {
 
   const logOut = () => {
     dispatch(authOperation.logOut());
-    history.push(paths.registration);
+    dispatch(modalToggle(false))
+    history.push(paths.login);
   };
   return (
     <div className={style.usermemu__wrapper}>
