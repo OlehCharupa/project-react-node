@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+// import { modalToggle } from "../../redux/actions/modalAction";
 import modalTransition from "./CSSTransition/ModalTransition.module.css";
 import overlayTransition from "./CSSTransition/OverlayTransition.module.css";
 
 import style from "./Modal.module.css";
 
-const Modal = () => {
-  // const Modal = ({ children, openModal, toggleModal, onSubmit }) => {
-  //       в компоненті, який викликає модальне вікно потрібно прописати:
-  const [openModal, setOpenModal] = useState(false);
-  const toggleModal = () => {
-    setOpenModal(!openModal);
-  };
+const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
+// const Modal = () => {
 
-  //     та передати openModal, toggleModal
+  // в компоненті, який викликає модальне вікно потрібно прописати:
 
-  //     також потрібно передати onSubmit, де буде реалізована логіка, яка має виконуватись при натисканні на клавішу Готово, та очищення форми
-  const onSubmit = (e) => {
-    let example = false;
-    e.preventDefault();
-    return example;
-  };
+  // const isModalOpen = useSelector((state) => state.modal);
+  // const dispatch = useDispatch();
+  // const toggleModal = () => {
+  //   dispatch(modalToggle(!isModalOpen));
+  // };
 
-  //     children - сама форма
+  // та передати isModalOpen, toggleModal
+
+  // також потрібно передати onSubmit, де буде реалізована логіка, яка має виконуватись при натисканні на клавішу Готово, та очищення форми
+  // const onSubmit = (e) => {
+  //   let example = false;
+  //   e.preventDefault();
+  //   return example;
+  // };
+
+  // children - сама форма
 
   useEffect(() => {
-    openModal && addListener();
+    isModalOpen && addListener();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openModal]);
-    
+  }, [isModalOpen]);
+
   const confirmAction = (e) => {
     const result = onSubmit(e);
     result && closeModal();
@@ -36,13 +41,12 @@ const Modal = () => {
   const closeModal = () => {
     removeListener();
     toggleModal();
-    };
-       const handleKeyDown = (e) => {
-    // console.log("handleKeyDown e", e);
+  };
+  const handleKeyDown = (e) => {
     if (e.code === "Escape") {
       closeModal();
     }
-    return
+    return;
   };
   const addListener = () => {
     window.addEventListener("keydown", handleKeyDown);
@@ -53,13 +57,13 @@ const Modal = () => {
 
   return (
     <>
-      {/* видалити */}
-      <button type="button" onClick={toggleModal}>
+      {/* ДЛЯ ПЕРЕВІРКИ видалити */}
+      {/* <button type="button" onClick={toggleModal}>
         Modal
-      </button>
+      </button> */}
       {/* ==================================== */}
       <CSSTransition
-        in={openModal}
+        in={isModalOpen}
         timeout={400}
         classNames={modalTransition}
         unmountOnExit
@@ -75,11 +79,9 @@ const Modal = () => {
             >
               <div onClick={closeModal} className={style.modal__overlay}></div>
             </CSSTransition>
-
             <div className={style.modal__sidebar}>
               <button onClick={closeModal} className={style.button__close} />
-              {/* {children} */}
-
+              {children}
               <div className={style.button__wrapper}>
                 <button onClick={confirmAction} className={style.button__ready}>
                   Готово
