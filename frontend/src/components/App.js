@@ -1,29 +1,43 @@
-import React, { Suspense } from "react";
-import styles from "./App.module.css";
+import React, { Suspense, useEffect } from "react";
+import { Switch, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import routes from "../routes/routes";
+import authOperations from "../redux/operations/authOperations";
+import Loader from "./Loader/Loader";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
-import routes from "../routes/routes.js"
-import { Switch } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import PublicRoute from "./PublicRoute/PublicRoute";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, []);
+
   return (
-    <Container>
-      <Header />
-      <Suspense fallback={`<h1>Loading</h1>`}>
-        <Switch>
-          {routes.map((route) => {
-            return route.private ? (
-              <PrivateRoute key={route.label} {...route} />
-            ) : (
-                <PublicRoute key={route.label} {...route} />
-              );
-          })}
-        </Switch>
-      </Suspense>
-    </Container>
+    <div className="App">
+      <Container>
+        <Header />
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            {routes.map((route) =>
+              route.private ? (
+                <PrivateRoute key={route.label} {...route} />
+              ) : (
+                <PublicRoute
+                  key={route.label}
+                  {...route}
+                  restricted={route.restricted}
+                />
+              )
+            )}
+            <Redirect to="/registration"></Redirect>
+          </Switch>
+        </Suspense>
+      </Container>
+    </div>
   );
-}
+};
 
 export default App;
