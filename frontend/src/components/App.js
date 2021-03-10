@@ -17,8 +17,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
       <Container>
+        <Header />
         <Suspense fallback={<Loader />}>
           <Switch>
             {routes.map((route) =>
