@@ -1,3 +1,20 @@
+.mainProject{
+}
+
+.projectName{
+  display: flex;
+
+}
+
+.projectTitle{
+  margin: 0;
+  padding: 0;
+}
+
+.projectTitleImg{
+  margin-left: 20px;
+}
+
 .container {
   margin: 0 auto;
   padding-left: 15px;
@@ -25,8 +42,4 @@
     padding-right: 55px;
     width: 1280px;
   }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

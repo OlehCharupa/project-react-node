@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { Suspense } from "react";
 import styles from "./App.module.css";
 import Container from "../components/Container/Container";
@@ -26,6 +27,19 @@ function App() {
         </Switch>
       </Suspense>
     </Container>
+=======
+import styles from './App.module.css';
+import SprintPage from "./sprint-page/SprintPage.js";
+
+
+function App() {
+  return (
+    <>
+      <SprintPage />
+    <div className={styles}>
+    </div>
+    </>
+>>>>>>> Stashed changes
   );
 }
 
