@@ -8,6 +8,9 @@ import morgan from "morgan";
 import { getPaths } from "./helpers/utils.js";
 //import routes
 import routerUser from "./app/routes/routeUser.js";
+import routerProject from "./app/routes/routerProject.js";
+import routerSprint from "./app/routes/routerSprint.js";
+import routerTask from "./app/routes/routerTask.js";
 
 export class Server {
   constructor() {
@@ -64,6 +67,12 @@ export class Server {
   initRoutes() {
     // routers user // reg// login// logout
     this.server.use("/api/users/", routerUser);
+    // router project
+    this.server.use("/api/projects/", routerProject);
+    // router sprint
+    this.server.use("/api/sprints", routerSprint);
+    // router task
+    this.server.use("/api/tasks", routerTask);
   }
 
   initErrorHandling() {

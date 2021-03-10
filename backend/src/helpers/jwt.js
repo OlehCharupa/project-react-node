@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const User = require("./../app/models/userModel");
+import jwt from "jsonwebtoken";
+import User from "./../app/models/userModel.js";
 const authenticateJWT = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
@@ -22,4 +22,4 @@ const authenticateJWT = async (req, res, next) => {
     res.status(401).send({ message: "Not authorized" });
   }
 };
-exports.authenticateJWT = authenticateJWT;
+export default authenticateJWT;

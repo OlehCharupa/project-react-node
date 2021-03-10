@@ -12,7 +12,6 @@ import User from "./../models/userModel.js";
 import regEmail from "./../../helpers/emailVerif.js";
 //
 const schemaDataRegistration = Joi.object({
-  login: Joi.string(),
   email: Joi.string().email({ tlds: { allow: false } }),
   password: Joi.string().min(3).max(15).required(),
 });
@@ -24,7 +23,7 @@ const schemaDataLogin = Joi.object({
 const registerUser = async (req, res) => {
   try {
     const dataReq = await schemaDataRegistration.validateAsync(req.body);
-    const { login, email, password } = dataReq;
+    const { email, password } = dataReq;
     // res.json(dataReq);
     const saltRounds = 10;
     const saltPassword = await bcrypt.hash(password, saltRounds);
@@ -32,7 +31,6 @@ const registerUser = async (req, res) => {
     const tokenId = uuidv4();
     if (verifMail === null) {
       const user = new User({
-        login,
         email,
         password: saltPassword,
         verificationToken: tokenId,
@@ -85,7 +83,7 @@ const loginUser = async (req, res) => {
     });
   }
 };
-const authentUser = async (req, res) => {
+const authentUserMail = async (req, res) => {
   const token = req.params["verificationToken"];
   console.log(token);
   try {
@@ -118,4 +116,18 @@ const logoutUser = async (req, res) => {
     res.status(e.error).send({ message: e.ResponseBody });
   }
 };
-export { registerUser, loginUser, authentUser, logoutUser };
+const authentUser = async (req, res) => {
+  try {
+    const user = req.user;
+    // res.json(user);
+    const resultId = await User.findById(user._id);
+    if (resultId === null) {
+      throw { error: 401, ResponseBody: "Not authorized" };
+    } else {
+      res.json(user);
+    }
+  } catch (e) {
+    res.status(e.error).send({ message: e.ResponseBody });
+  }
+};
+export { registerUser, loginUser, authentUser, logoutUser, authentUserMail };

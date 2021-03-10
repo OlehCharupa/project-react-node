@@ -50,6 +50,7 @@ const Li = transition.li.attrs({
   background-color: #FFFFFF;
   box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
   border-radius: 5px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:enter { opacity: 0; 
     transform: translateX(-100%); }
@@ -75,6 +76,10 @@ const Li = transition.li.attrs({
     }
     @media (min-width: 1280px){
       align-items: center;
+    }
+
+    &:hover, &:focus{
+      transform: scale(1.02);
     }
 `;
 const LoaderDIV = styled.div`
