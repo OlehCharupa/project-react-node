@@ -3,6 +3,7 @@ import rootReducer from "./slice";
 import storage from "redux-persist/lib/storage";
 import sprintsReducer from "./reducers/sprintsReducer.js";
 import tasksReducer from "./reducers/tasksReducer.js";
+import projectsReducer from "./reducers/projectsReducer";
 import {
   persistStore,
   persistReducer,
@@ -24,6 +25,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: {
+    projects: projectsReducer,
     sprints: sprintsReducer,
     tasks: tasksReducer,
     auth: persistedReducer,

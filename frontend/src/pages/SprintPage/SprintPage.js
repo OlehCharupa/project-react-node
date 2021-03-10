@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import LeftSprintPage from "../../components/LeftSprintPage/LeftSprintPage.js";
-import MainSprintPage from "../../components/MainSprintPage/MainSprintPage.js";
+import ProjectSidebar from "../../components/ProjectSidebar/ProjectSidebar.js";
+import ProjectWrapper from "../../components/ProjectWrapper/ProjectWrapper.js";
 import style from "./SprintPage.module.css";
 import container from "../../components/Container/Container";
 
@@ -10,8 +10,8 @@ const SprintPage = () => {
   return (
     <>
       <div className={(container, style.MainPage)}>
-        <LeftSprintPage />
-        <MainSprintPage />
+        <ProjectSidebar />
+        <ProjectWrapper />
       </div>
     </>
   );

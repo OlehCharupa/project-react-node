@@ -1,8 +1,8 @@
 import React from "react";
-import style from "./LeftSprintPage.module.css";
+import style from "./ProjectSidebar.module.css";
 import { NavLink } from "react-router-dom";
 
-const LeftSprintPage = () => {
+const ProjectSidebar = () => {
   return (
     <div className={style.mainLeftSprint}>
       <NavLink className={style.link} to="/">
@@ -14,11 +14,11 @@ const LeftSprintPage = () => {
           }}
         >
           <img className={style.arrow} />
-          <p className={style.showProject}>Показати проэкт</p>
+          <p className={style.showProject}>Показати проєкт</p>
         </div>
       </NavLink>
     </div>
   );
 };
 
-export default LeftSprintPage;
+export default ProjectSidebar;

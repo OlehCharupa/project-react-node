@@ -1,17 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as ReactLogo } from "../../pages/ProjectPage/images/plus.svg";
-import style from "./MainSprintPage.module.css";
+import style from "./ProjectWrapper.module.css";
 import pen from "./images/pen.svg";
 import add from "./images/add.svg";
-// import SprintsList from "../SprintsList/SprinstList";
+import SprintsList from "../SprintsList/SprinstList";
 import container from "../Container/Container.module.css";
 
-const MainSprintPage = () => {
+const ProjectWrapper = () => {
   return (
     <>
       <div className={style.sprintSection}>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", marginBottom: "30px" }}>
           <div>
             <div className={style.titleSection}>
               <h1 className={style.title}>Project 1</h1>
@@ -35,10 +35,10 @@ const MainSprintPage = () => {
             </NavLink>
           </div>
         </div>
-        {/* <SprintsList /> */}
+        <SprintsList />
       </div>
     </>
   );
 };
 
-export default MainSprintPage;
+export default ProjectWrapper;

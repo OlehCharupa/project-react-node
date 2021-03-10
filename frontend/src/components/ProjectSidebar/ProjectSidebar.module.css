@@ -1,6 +1,6 @@
 .mainLeftSprint{
   position: relative;
-  width: 255px;
+  width: 2255px;
   min-height: 100%;
 }
 
@@ -8,7 +8,7 @@
   content: "";
   display: block;
   position: absolute;
-  height: 1000%;
+  height: 120%;
   width: 1px;
   background-color: rgba(24, 28, 39, 0.1);
   top: 0;
