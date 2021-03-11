@@ -10,6 +10,9 @@ const schemaDataSprint = Joi.object({
   description: Joi.string(),
   duration: Joi.number(),
 });
+const schemaDelete = Joi.object({
+  id: Joi.string(),
+});
 
 const createSprint = async (req, res) => {
   try {
@@ -45,4 +48,16 @@ const createSprint = async (req, res) => {
     });
   }
 };
-export { createSprint };
+const deleteSprint = async (req, res) => {
+  try {
+    const id = await schemaDelete.validateAsync({ id: req.params.sprintId });
+    const data = await Sprint.findByIdAndDelete(id.id);
+    console.log(id);
+    if (data !== null) {
+      res.status(200).send({ message: "sprint deleted" });
+    }
+  } catch (e) {
+    res.status(404).send({ message: "Not found" });
+  }
+};
+export { createSprint, deleteSprint };

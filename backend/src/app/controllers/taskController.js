@@ -6,6 +6,10 @@ const schemaDataTask = Joi.object({
   sprintId: Joi.string(),
   title: Joi.string(),
   hoursPlanned: Joi.number(),
+  hoursWasted: Joi.number(),
+});
+const schemaDelete = Joi.object({
+  id: Joi.string(),
 });
 
 const createTask = async (req, res) => {
@@ -30,4 +34,16 @@ const createTask = async (req, res) => {
     });
   }
 };
-export { createTask };
+const deleteTask = async (req, res) => {
+  try {
+    const id = await schemaDelete.validateAsync({ id: req.params.taskId });
+    const data = await Task.findByIdAndDelete(id.id);
+    console.log(id);
+    if (data !== null) {
+      res.status(200).send({ message: "task deleted" });
+    }
+  } catch (e) {
+    res.status(404).send({ message: "Not found" });
+  }
+};
+export { createTask, deleteTask };
