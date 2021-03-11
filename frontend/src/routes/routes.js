@@ -36,7 +36,12 @@ const routes = [
     path: paths.projects,
     label: "Projects",
     exact: true,
-    // component: lazy(() =>import("./Containers/Login/Login") /* webpackChunkName: "projects-page" */), //раскомментировать,  в импорт внести место и имя своего компонента
+    component: lazy(
+      () =>
+        import(
+          "../pages/ProjectPage/ProjectPage"
+        ) /* webpackChunkName: "projects-page" */
+    ),
     private: true,
     restricted: false,
   },
@@ -47,9 +52,9 @@ const routes = [
     component: lazy(
       () =>
         import(
-          "../components/Sprints/Sprints"
+          "../pages/SprintPage/SprintPage"
         ) /* webpackChunkName: "singleProject-page" */
-    ), //раскомментировать,  в импорт внести место и имя своего компонента
+    ),
     private: true,
     restricted: false,
   },

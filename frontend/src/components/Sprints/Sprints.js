@@ -373,7 +373,6 @@ const Sprints = () => {
   useEffect(() => {
     // fetch sprint tasks
     dispatch(tasksOperations.fetchTasks());
-    console.log(params);
   }, []);
 
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
