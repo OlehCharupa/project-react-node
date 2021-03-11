@@ -6,6 +6,9 @@ const schemaProject = Joi.object({
   title: Joi.string(),
   description: Joi.string(),
 });
+const schemaDelete = Joi.object({
+  id: Joi.string(),
+});
 
 const createProject = async (req, res) => {
   try {
@@ -34,4 +37,16 @@ const createProject = async (req, res) => {
     });
   }
 };
-export { createProject };
+const deleteProject = async (req, res) => {
+  try {
+    const id = await schemaDelete.validateAsync({ id: req.params.projectId });
+    const data = await Project.findByIdAndDelete(id.id);
+    console.log(id);
+    if (data !== null) {
+      res.status(200).send({ message: "project deleted" });
+    }
+  } catch (e) {
+    res.status(404).send({ message: "Not found" });
+  }
+};
+export { createProject, deleteProject };

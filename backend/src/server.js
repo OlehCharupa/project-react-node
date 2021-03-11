@@ -70,9 +70,9 @@ export class Server {
     // router project
     this.server.use("/api/projects/", routerProject);
     // router sprint
-    this.server.use("/api/sprints", routerSprint);
+    this.server.use("/api/sprints/", routerSprint);
     // router task
-    this.server.use("/api/tasks", routerTask);
+    this.server.use("/api/tasks/", routerTask);
   }
 
   initErrorHandling() {
