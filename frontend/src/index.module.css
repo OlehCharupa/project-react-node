@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 *,
 ::after,
 ::before {
@@ -29,29 +28,3 @@ img {
   width: 100%;
   height: auto;
 }
-=======
-html {
-  box-sizing: border-box;
-  width: 100vw;
-}
-
-*,
-*::before,
-*::after {
-  /* box-sizing: inherit; */
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Montserrat, sans-serif;
-  color: #212121;
-  background-color: #fff;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
->>>>>>> Stashed changes
