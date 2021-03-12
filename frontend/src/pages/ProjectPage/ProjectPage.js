@@ -7,12 +7,22 @@ import projectsOperations from "../../redux/operations/projectsOperations";
 import ProjectPageItem from "../../components/ProjectPageItem/ProjectPageItem";
 import style from "./ProjectPage.module.css";
 import container from "../../components/Container/Container.module.css";
+import plus from "./images/plus.svg";
+
+import { modalToggle } from "../../redux/actions/modalAction";
+import CreateProject from "../../components/CreateProject/CreateProject";
+import Modal from "../../components/Modal/Modal";
 
 const ProjectPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(projectsOperations.fetchProjects());
   }, []);
+
+  const isModalOpen = useSelector((state) => state.modal);
+  const toggleModal = () => {
+    dispatch(modalToggle(!isModalOpen));
+  };
 
   const projects = useSelector((state) => allProjectsSelector(state));
 
@@ -22,14 +32,19 @@ const ProjectPage = () => {
         <div>
           <h1 className={style.title}>Проекти</h1>
         </div>
-        <NavLink className={style.link} to="/">
-          <ReactLogo className={style.plusBtn} />
+        <div className={style.link} to="/">
+          <Modal children={<CreateProject/>} isModalOpen={isModalOpen} toggleModal={toggleModal}/>
+          <button className={style.plusBtn} type="button" onClick={toggleModal}>
+            <span style={{ display: "block" }}>
+              <img src={plus} />
+            </span>
+          </button>
           <div className={style.create}>Створити проект</div>
-        </NavLink>
+        </div>
       </div>
       <ul className={style.list}>
         {projects.map((project) => (
-          <ProjectPageItem {...project} key={project.id} />
+          <ProjectPageItem {...project} key={project.id} id={project.id} />
         ))}
       </ul>
     </>

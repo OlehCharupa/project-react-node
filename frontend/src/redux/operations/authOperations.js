@@ -1,7 +1,7 @@
 import axios from "axios";
 import authAction from "../actions/authAction";
 
-axios.defaults.baseURL = "back url"; //TODO вписать url бека
+axios.defaults.baseURL = "https://bc24.herokuapp.com/api"; //TODO вписать url бека
 
 const token = {
   set(token) {
@@ -12,10 +12,16 @@ const token = {
   },
 };
 
-const register = (credentials) => async (dispatch) => {
+export const register = (credentials) => async (dispatch) => {
   dispatch(authAction.registerRequest());
+  const {email, password} = credentials;
+  const state = {
+    email: email,
+    password: password
+  }
+  console.log("state", state);
   try {
-    const result = await axios.post("/users/signup", credentials);
+    const result = await axios.post("/users/register", state);
     token.set(result.data.token);
     dispatch(authAction.registerSuccess(result.data));
   } catch (error) {
@@ -23,7 +29,7 @@ const register = (credentials) => async (dispatch) => {
   }
 };
 
-const logIn = (credentials) => async (dispatch) => {
+export const logIn = (credentials) => async (dispatch) => {
   dispatch(authAction.loginRequest());
   try {
     const result = await axios.post("/users/login", credentials);
@@ -64,4 +70,4 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-export default { register, logIn, logOut, getCurrentUser };
+export default { logIn, logOut, getCurrentUser };
