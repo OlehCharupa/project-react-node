@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import signUp from './SignUp.module.css';
 // import BgImage from '../BgImage/BgImage';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
 
 const SignUp = () => {
+    
     const dispatch = useDispatch()
     const history = useHistory()
-    const location = useLocation()
+
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
