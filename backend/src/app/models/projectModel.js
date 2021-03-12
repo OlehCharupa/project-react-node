@@ -5,7 +5,6 @@ const project = new Schema({
   title: String,
   description: String,
   members: [String],
-  user_id: String,
   sprints: [
     {
       type: mongoose.Types.ObjectId,

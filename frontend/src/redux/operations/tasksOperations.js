@@ -31,6 +31,62 @@ const tasks = [
     wastedHoursPerDay: 3,
     wastedHours: 0,
   },
+  {
+    id: 5,
+    name: "KN-1 Configure project",
+    plannedHours: 8,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
+  {
+    id: 6,
+    name: "KN-2 Configure project",
+    plannedHours: 4,
+    wastedHoursPerDay: 2,
+    wastedHours: 0,
+  },
+  {
+    id: 7,
+    name: "KN-3 Configure project",
+    plannedHours: 8,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
+  {
+    id: 8,
+    name: "KN-4 Configure project",
+    plannedHours: 13,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
+  {
+    id: 9,
+    name: "KN-1 Configure project",
+    plannedHours: 8,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
+  {
+    id: 10,
+    name: "KN-2 Configure project",
+    plannedHours: 4,
+    wastedHoursPerDay: 2,
+    wastedHours: 0,
+  },
+  {
+    id: 11,
+    name: "KN-3 Configure project",
+    plannedHours: 8,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
+  {
+    id: 12,
+    name: "KN-4 Configure project",
+    plannedHours: 13,
+    wastedHoursPerDay: 3,
+    wastedHours: 0,
+  },
 ];
 
 const addTask = (name, plannedHours, wastedHoursPerDay, wastedHours) => (

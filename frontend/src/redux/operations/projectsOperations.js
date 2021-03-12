@@ -20,7 +20,7 @@ const projects = [
   },
   {
     id: 4,
-    name: "Project 1",
+    name: "Project 4",
     description: "Текст описание проекта",
   },
 ];

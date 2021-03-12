@@ -1,44 +1,117 @@
-.mainLeftSprint{
-  position: relative;
-  width: 2255px;
-  min-height: 100%;
-}
-
-.mainLeftSprint:after{
-  content: "";
-  display: block;
-  position: absolute;
-  height: 120%;
-  width: 1px;
-  background-color: rgba(24, 28, 39, 0.1);
-  top: 0;
-  left: 220px;
-}
-
 .arrow{
   content: url(./images/arrow.svg);
   width: 30px;
 }
 
-.showProject{
-  width: 100px;
-  margin-left: 20px;
+.showProjectContainer{
+  display: flex;
 }
 
-.link{
+
+
+.link, .linkAdd{
   text-decoration: none;
   color: #181C27;
 }
 
 @media screen and (max-width: 767px) {
+  
+  .sidebarList{
+    display: none;
+  }
+  
+  .showProject{
+    width: 150px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
   .mainLeftSprint{
     width: 216px;
     min-height: 100%;
   }
 
-  .mainLeftSprint{
+  .mainLeftSprint:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(24, 28, 39, 0.1);
+    top: 100px;
+    left: 0;
+  }
+
+  .linkAdd{
     display: none;
   }
 
+  
 }
+
+@media screen and (min-width: 768px) {
+
+  .sidebarList{
+    display: block;
+    list-style: none;
+    padding: 0;
+    height: 600px;
+  }
+
+  .showProjectContainer{
+    display: flex;
+    width: 100px;
+  }
+
+  .showProject{
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .mainLeftSprint{
+    position: relative;
+    width: 2255px;
+    min-height: 100%;
+  }
+  
+  .mainLeftSprint:after{
+    content: "";
+    display: block;
+    position: absolute;
+    height: 120%;
+    width: 1px;
+    background-color: rgba(24, 28, 39, 0.1);
+    top: 0;
+    left: 220px;
+  }
+
+  .linkAdd{
+    text-align: center;
+    display: table;
+    margin-left: 27px;
+  }
+  
+  
+  
+  .plusBtn{
+    margin: 0 auto;
+    padding-top: 5px;
+    transition: all .3s linear;
+    border-radius: 40px;
+    width: 44px;
+    height: 44px;
+    background-position: 50%;
+    background-color: #FF6B08;
+  }
+  
+  .linkAdd .plusBtn:hover,
+  .linkAdd .plusBtn:focus{
+    box-shadow: 0 0 10px 0 #FF6B08 inset, 0 0 10px 4px #FF6B08;
+  }
+  
+
+}
+

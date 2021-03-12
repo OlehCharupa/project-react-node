@@ -5,8 +5,8 @@ const sprint = new Schema({
   title: String,
   startDate: String,
   endDate: String,
-  description: string,
-  duraction: Number,
+  description: String,
+  duration: Number,
   tasks: [
     {
       type: mongoose.Types.ObjectId,

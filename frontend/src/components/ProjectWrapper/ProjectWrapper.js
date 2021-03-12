@@ -14,7 +14,7 @@ const ProjectWrapper = () => {
         <div style={{ display: "flex", marginBottom: "30px" }}>
           <div>
             <div className={style.titleSection}>
-              <h1 className={style.title}>Project 1</h1>
+              <h1 className={style.title}>Project 1 dfsgsdfg dfgdsfgsdfg</h1>
               <img src={pen} style={{ width: "20px", marginLeft: "20px" }} />
             </div>
             <div className={style.description}>
@@ -31,7 +31,7 @@ const ProjectWrapper = () => {
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
             <NavLink className={style.link} to="/">
               <ReactLogo className={style.plusBtn} />
-              <div className={style.create}>Створити проект</div>
+              <div className={style.create}>Створити спринт</div>
             </NavLink>
           </div>
         </div>
