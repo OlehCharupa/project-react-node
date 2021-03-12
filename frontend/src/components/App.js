@@ -8,9 +8,6 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
-import FF765F from "../pages/ProjectPage/ProjectPage.js";
-import SprintPage from "../pages/SprintPage/SprintPage.js";
-import ProjectPage from "../pages/ProjectPage/ProjectPage.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,9 +19,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Header />
-        {/* <ProjectPage /> */}
-        <SprintPage />
-        {/* <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             {routes.map((route) =>
               route.private ? (
@@ -39,7 +34,7 @@ const App = () => {
             )}
             <Redirect to="/registration"></Redirect>
           </Switch>
-        </Suspense> */}
+        </Suspense>
       </Container>
     </div>
   );
