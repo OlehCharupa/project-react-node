@@ -32,10 +32,15 @@ const Device = ({ children }) => {
 
 const SprintDIV = styled.div`
   padding-top: 20px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 
   @media (min-width: 768px) {
+    padding-left: 20px;
     width: calc(100% / 3 * 2);
+  }
+  @media (min-width: 1280px) {
+    width: 100%;
+    padding-left: 70px;
   }
 `;
 const DateDIV = styled.div`
@@ -129,7 +134,7 @@ const FilterINPUT = styled.input`
 
   color: #000000;
 
-  ${FieldDIV}:hover &, ${FieldDIV}:focus & {
+  ${FieldDIV}:hover &, ${FieldDIV}:focus &, &:focus, &:hover {
     border-bottom: 1px solid #ff6b08;
   }
 
@@ -295,7 +300,7 @@ const ShowDiagramBTN = styled(Button)`
     left: 20px;
   }
   @media (min-width: 768px) {
-    bottom: 60px;
+    bottom: 40px;
     right: 55px;
   }
 
@@ -324,7 +329,23 @@ const HeaderDIV = styled.div`
   margin-bottom: 20px;
   padding: 9px 20px;
 
-  border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+  &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -20px;
+    bottom: 0;
+
+    width: calc(100vw - 255px);
+    height: 1px;
+
+    background-color: rgba(24, 28, 39, 0.1);
+
+    @media (min-width: 1280px) {
+      left: -70px;
+      width: calc(100% + 50vw - 515px);
+    }
+  }
 `;
 const HeaderP = styled.p`
   font-weight: 400;

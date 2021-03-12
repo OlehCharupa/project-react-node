@@ -17,25 +17,6 @@ const DIV = styled.div`
   position: relative;
   min-height: 37px;
 
-  @media (min-width: 768px) {
-    position: sticky;
-    height: 100%;
-    width: calc(100% / 3);
-    padding-top: 20px;
-    padding-right: 47px;
-    top: 0;
-
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 1px;
-      height: calc(100vh - 80px);
-      background-color: rgba(24, 28, 39, 0.1);
-      top: 0;
-      right: 20px;
-    }
-  }
   @media (max-width: 767px) {
     display: flex;
     align-items: center;
@@ -50,6 +31,31 @@ const DIV = styled.div`
       bottom: 0;
       left: calc((-100vw + 100%) / 2);
     }
+  }
+
+  @media (min-width: 768px) {
+    position: sticky;
+    height: calc(100vh - 80px);
+    width: 216px;
+    padding-top: 20px;
+    padding-right: 27px;
+    top: 0;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 100vh;
+      background-color: rgba(24, 28, 39, 0.1);
+      top: 0;
+      right: 0px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    width: 200px;
+    padding-right: 30px;
   }
 `;
 const StyledLink = styled(Link)`
@@ -119,6 +125,60 @@ const LI = styled.li`
     margin-bottom: 30px;
   }
 `;
+const Button = styled.button`
+  display: block;
+  content: "";
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background-color: #ff6b08;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 43px;
+  line-height: 1.2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  letter-spacing: 0.04em;
+
+  transition: color 250ms linear, border 250ms linear,
+    background-color 250ms linear;
+
+  &:hover,
+  &:focus {
+    color: #ff6b08;
+    background-color: #ffffff;
+    border: 1px solid #ff6b08;
+  }
+`;
+const AddTaskBtnAndLabelDIV = styled.div`
+  position: absolute;
+  text-align: center;
+  bottom: 50px;
+`;
+const AddTaskLabelP = styled.p`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+
+  letter-spacing: 0.04em;
+
+  color: #181c27;
+`;
 
 const SprintsSidebar = () => {
   const dispatch = useDispatch();
@@ -142,6 +202,10 @@ const SprintsSidebar = () => {
             </LI>
           ))}
         </UL>
+        <AddTaskBtnAndLabelDIV>
+          <Button>+</Button>
+          <AddTaskLabelP>Створити спринт</AddTaskLabelP>
+        </AddTaskBtnAndLabelDIV>
       </Default>
     </DIV>
   );
