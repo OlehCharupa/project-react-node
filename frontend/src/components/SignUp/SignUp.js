@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import signUp from './SignUp.module.css';
 // import BgImage from '../BgImage/BgImage';
 import { Formik, Field, Form } from 'formik';
@@ -7,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
 
 const SignUp = () => {
+    const dispatch = useDispatch()
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
@@ -41,7 +43,7 @@ const SignUp = () => {
                         // same shape as initial values
 
                         setTimeout(() => {
-                            register(values);
+                            dispatch(register(values));
                             setSubmitting(false);
                         }, 500)
                     }}
