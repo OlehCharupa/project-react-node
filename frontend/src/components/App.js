@@ -8,8 +8,9 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
-import ProjectPage from "../pages/ProjectPage/ProjectPage.js";
+import FF765F from "../pages/ProjectPage/ProjectPage.js";
 import SprintPage from "../pages/SprintPage/SprintPage.js";
+import ProjectPage from "../pages/ProjectPage/ProjectPage.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Header />
+        {/* <ProjectPage /> */}
         <SprintPage />
         {/* <Suspense fallback={<Loader />}>
           <Switch>
