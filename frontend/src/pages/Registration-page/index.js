@@ -6,7 +6,7 @@ const index = () => {
     return (
         <>
            <SignUp /> 
-           <BgImage />
+           {/* <BgImage /> */}
         </>
     );
 };

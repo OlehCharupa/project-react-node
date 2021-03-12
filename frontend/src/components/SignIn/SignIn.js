@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import signIn from './SignIn.module.css';
+import { useDispatch } from 'react-redux';
 // import BgImage from '../BgImage/BgImage';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
+import { logIn } from '../../redux/operations/authOperations.js';
 
 const SignIn = () => {
+    const dispatch = useDispatch()
     const SigninSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
@@ -19,7 +22,6 @@ const SignIn = () => {
         email: '',
         password: '',
     }
-    const [regForm, setRegState] = useState(regState);
 
     return (
         <>
@@ -27,12 +29,17 @@ const SignIn = () => {
             <div className={signIn.registr__block}>
                 <h1 className={signIn.form__title}>Вхід</h1>
                 <Formik
-                    initialValues={regState}
+                    initialValues={{
+                        email: '',
+                        password: '',
+                    }}
                     validationSchema={SigninSchema}
-                    onSubmit={values => {
+                    onSubmit={(values, { setSubmitting }) => {
                         // same shape as initial values
-                        setRegState({ ...values })
-                        console.log(regForm);
+                        setTimeout(() => {
+                            dispatch(logIn(values));
+                            setSubmitting(false);
+                        }, 500)
                     }}
                 >
                     {({ errors, touched }) => (
