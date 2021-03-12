@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'
+import React from 'react';
 import signUp from './SignUp.module.css';
 // import BgImage from '../BgImage/BgImage';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
-// import { Registration } from '../../redux/operations/signUpOperation.js';
-
 
 const SignUp = () => {
-    const dispatch = useDispatch()
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
@@ -29,13 +25,6 @@ const SignUp = () => {
             .required('Required'),
 
     });
-    const regState = {
-        email: '',
-        password: '',
-        // repeatPassword: '',
-    }
-    const [regForm, setRegState] = useState(regState);
-    console.log('operation', register());
 
     return (
         <>
@@ -50,19 +39,9 @@ const SignUp = () => {
                     validationSchema={SignupSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         // same shape as initial values
-                        console.log('dispathOp', dispatch(register(values)));
 
                         setTimeout(() => {
-                            setRegState(values)
-                            console.log('regform', regForm);
-                            console.log('values', values);
-                            // register(()=>values);
-                            // console.log('dispath', register(regForm));
-                            // console.log('operation', register());
-                            // console.log('1', register(regForm));
-                            // console.log('dispath', register.register(regForm));
-                            // register.register(regForm);
-                            dispatch(register(values));
+                            register(values);
                             setSubmitting(false);
                         }, 500)
                     }}

@@ -6,9 +6,7 @@ import authAction from "../actions/authAction";
 const initialUserState = { email: null, password: null };
 
 const user = createReducer(initialUserState, {
-  [authAction.registerSuccess]: (_, { payload }) =>  console.log('payloadReg', payload.user),
-    // payload.user,
-   
+  [authAction.registerSuccess]: (_, { payload }) =>  payload.user,
   [authAction.loginSuccess]: (_, { payload }) => payload.user,
   [authAction.logoutSuccess]: () => initialUserState,
   [authAction.getCurrentUserSuccess]: (_, { payload }) => payload,
@@ -21,7 +19,7 @@ const token = createReducer(null, {
 });
 
 const error = createReducer(null, {
-  [authAction.registerError]: (_, { payload }) => console.log('payloadErr', payload),
+  [authAction.registerError]: (_, { payload }) => payload,
   [authAction.loginError]: (_, { payload }) => payload,
   [authAction.logoutError]: (_, { payload }) => payload,
   [authAction.getCurrentUserError]: (_, { payload }) => payload,

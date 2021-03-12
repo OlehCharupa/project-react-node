@@ -14,8 +14,14 @@ const token = {
 
 export const register = (credentials) => async (dispatch) => {
   dispatch(authAction.registerRequest());
+  const {email, password} = credentials;
+  const state = {
+    email: email,
+    password: password
+  }
+  console.log("state", state);
   try {
-    const result = await axios.post("/users/register", credentials);
+    const result = await axios.post("/users/register", state);
     token.set(result.data.token);
     dispatch(authAction.registerSuccess(result.data));
   } catch (error) {
@@ -23,7 +29,7 @@ export const register = (credentials) => async (dispatch) => {
   }
 };
 
-const logIn = (credentials) => async (dispatch) => {
+export const logIn = (credentials) => async (dispatch) => {
   dispatch(authAction.loginRequest());
   try {
     const result = await axios.post("/users/login", credentials);

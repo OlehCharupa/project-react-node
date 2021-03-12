@@ -38,7 +38,7 @@ const routes = [
     exact: true,
     // component: lazy(() =>import("./Containers/Login/Login") /* webpackChunkName: "projects-page" */), //раскомментировать,  в импорт внести место и имя своего компонента
     private: true,
-    restricted: false,
+    restricted: true,
   },
   {
     path: paths.projectId,
@@ -51,7 +51,7 @@ const routes = [
         ) /* webpackChunkName: "singleProject-page" */
     ), //раскомментировать,  в импорт внести место и имя своего компонента
     private: true,
-    restricted: false,
+    restricted: true,
   },
   {
     path: paths.sprintId,
@@ -64,7 +64,7 @@ const routes = [
         ) /* webpackChunkName: "singleSprint-page" */
     ),
     private: true,
-    restricted: false,
+    restricted: true,
   },
 ];
 export default routes;
