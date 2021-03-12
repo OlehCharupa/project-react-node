@@ -97,6 +97,8 @@ const INPUT = styled.input`
   border: none;
   border-bottom: 1px solid rgba(24, 28, 39, 0.2);
 
+  transition: border 250ms linear;
+
   outline: none;
   text-align: right;
 
@@ -105,6 +107,11 @@ const INPUT = styled.input`
   letter-spacing: 0.04em;
 
   color: #000000;
+
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid #ff6b08;
+  }
 `;
 const Button = styled.button`
   display: block;
