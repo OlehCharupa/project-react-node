@@ -4,6 +4,7 @@ import projectsReducer from "./reducers/projectsReducer.js";
 import tasksReducer from "./reducers/tasksReducer.js";
 import authReducer, { authPersistConfig } from "./reducers/authReducer";
 import modalReducer from "./reducers/modalReducer.js";
+import projectsReducer from "./reducers/projectsReducer";
 import {
   persistStore,
   persistReducer,
@@ -15,14 +16,13 @@ import {
   REGISTER,
 } from "redux-persist";
 
-
 export const store = configureStore({
   reducer: {
     projects: projectsReducer,
     sprints: sprintsReducer,
     tasks: tasksReducer,
     auth: persistReducer(authPersistConfig, authReducer),
-    modal:modalReducer,
+    modal: modalReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: {

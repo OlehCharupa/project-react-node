@@ -9,7 +9,7 @@ export default function (email, tokenId) {
     html: `
            <h1>вы успешно создали аккаунт </h1>
            <p>ваш email - ${email}</p>
-           <p>для верификации перейдите по ссылке <a href='${process.env.BASE_URL}/api/auth/verify/${tokenId}'>активировать</p>
+           <p>для верификации перейдите по ссылке <a href='${process.env.BASE_URL}/api/authent/${tokenId}'>активировать</p>
         `,
   };
 

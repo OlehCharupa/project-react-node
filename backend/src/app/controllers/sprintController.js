@@ -1,49 +1,63 @@
-//create token for user
-import jwt from "jsonwebtoken";
-
-//for password
-import bcrypt from "bcrypt";
-
-//validation data - Joi
 import Joi from "joi";
-import { v4 as uuidv4 } from "uuid";
-// import model
-import User from "../models/userModel.js";
-import regEmail from "../../helpers/emailVerif.js";
-//
-const schemaDataRegistration = Joi.object({
-  login: Joi.string(),
-  email: Joi.string().email({ tlds: { allow: false } }),
-  password: Joi.string().min(3).max(15).required(),
+import Project from "../models/projectModel.js";
+import Sprint from "../models/sprintModel.js";
+
+const schemaDataSprint = Joi.object({
+  projectId: Joi.string(),
+  title: Joi.string(),
+  startDate: Joi.string(),
+  endDate: Joi.string(),
+  description: Joi.string(),
+  duration: Joi.number(),
+});
+const schemaDelete = Joi.object({
+  id: Joi.string(),
 });
 
 const createSprint = async (req, res) => {
   try {
-    res.json("hello sprint");
-    // const dataReq = await schemaDataRegistration.validateAsync(req.body);
-    // const { login, email, password } = dataReq;
-    // // res.json(dataReq);
-    // const saltRounds = 10;
-    // const saltPassword = await bcrypt.hash(password, saltRounds);
-    // const verifMail = await User.findOne({ email });
-    // const tokenId = uuidv4();
-    // if (verifMail === null) {
-    //   const user = new User({
-    //     login,
-    //     email,
-    //     password: saltPassword,
-    //     verificationToken: tokenId,
-    //   });
-    //   const a = await user.save();
-    //   regEmail(email, tokenId);
-    //   res.json(a);
-    // } else {
-    //   throw { error: 409, ResponseBody: "Email in use" };
-    // }
+    const sprintReq = await schemaDataSprint.validateAsync(req.body);
+    const {
+      projectId,
+      title,
+      startDate,
+      endDate,
+      description,
+      duration,
+    } = sprintReq;
+    const newSprint = new Sprint({
+      title,
+      startDate,
+      endDate,
+      description,
+      duration,
+    });
+
+    let sprint = await newSprint.save().then((sprint) => sprint.toJSON());
+    await Project.updateOne(
+      { _id: projectId },
+      { $push: { sprints: sprint._id } }
+    );
+    const dataPopulate = await Project.findOne({ _id: projectId }).populate(
+      "sprints"
+    );
+    res.json(dataPopulate);
   } catch (e) {
-    // res.status(e.hasOwnProperty("error") ? e.error : 409).send({
-    //   message: e.hasOwnProperty("ResponseBody") ? e.ResponseBody : e.details,
-    // });
+    res.status(e.hasOwnProperty("error") ? e.error : 409).send({
+      message: e.hasOwnProperty("ResponseBody") ? e.ResponseBody : e.details,
+    });
   }
 };
-export { createSprint };
+const deleteSprint = async (req, res) => {
+  try {
+    const id = await schemaDelete.validateAsync({ id: req.params.sprintId });
+    const data = await Sprint.findByIdAndDelete(id.id);
+    console.log(id);
+    if (data !== null) {
+      res.status(200).send({ message: "sprint deleted" });
+    }
+  } catch (e) {
+    res.status(404).send({ message: "Not found" });
+  }
+};
+export { createSprint, deleteSprint };

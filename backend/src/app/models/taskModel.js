@@ -9,4 +9,5 @@ const task = new Schema({
     { currentDay: String, singleHoursWasted: Number, _id: false },
   ],
 });
+
 export default mongoose.model("Task", task);

@@ -19,6 +19,9 @@ const schemaDataLogin = Joi.object({
   email: Joi.string().email({ tlds: { allow: false } }),
   password: Joi.string().min(3).max(15).required(),
 });
+const schemaTokenEmail = Joi.object({
+  token: Joi.string().min(3).max(15).required(),
+});
 
 const registerUser = async (req, res) => {
   try {
@@ -51,7 +54,7 @@ const loginUser = async (req, res) => {
   try {
     const dataReq = await schemaDataLogin.validateAsync(req.body);
     const { email, password } = dataReq;
-    const dataUser = await User.findOne({ email: email });
+    const dataUser = await User.findOne({ email });
     if (dataUser === null) {
       throw { error: 401, ResponseBody: "Email or password is wrong" };
     } else {
@@ -70,7 +73,6 @@ const loginUser = async (req, res) => {
           token: `Bearer ${token}`,
           user: {
             email: dataUser.email,
-            subscription: "free",
           },
         });
       } else {
@@ -84,8 +86,11 @@ const loginUser = async (req, res) => {
   }
 };
 const authentUserMail = async (req, res) => {
-  const token = req.params["verificationToken"];
-  console.log(token);
+  const tokenMail = req.params["verificationToken"];
+  const dataReq = await schemaTokenEmail.validateAsync({
+    token: tokenMail,
+  });
+  const { token } = dataReq;
   try {
     const dataUser = await User.findOne({ verificationToken: token });
     if (dataUser === null) {
@@ -119,7 +124,6 @@ const logoutUser = async (req, res) => {
 const authentUser = async (req, res) => {
   try {
     const user = req.user;
-    // res.json(user);
     const resultId = await User.findById(user._id);
     if (resultId === null) {
       throw { error: 401, ResponseBody: "Not authorized" };

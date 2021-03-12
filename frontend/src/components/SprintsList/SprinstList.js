@@ -39,6 +39,7 @@ const Li = transition.li.attrs({
   padding: 20px 20px 40px 20px;
 
   cursor: pointer;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   background-color: #FFFFFF;
   box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
@@ -69,6 +70,10 @@ const Li = transition.li.attrs({
       margin: 15px;
       padding: 20px 30px 40px 20px;
   }
+
+    &:hover,&:focus{
+      transform: scale(1.02);
+  }
 `;
 
 const SprintsList = () => {
@@ -85,7 +90,7 @@ const SprintsList = () => {
     const { sprintId } = e.currentTarget.dataset;
     if (e.target.nodeName !== "BUTTON") {
       history.push({
-        pathname: `/${sprintId}`,
+        pathname: `${location.pathname}/${sprintId}`,
         from: location,
       });
     }

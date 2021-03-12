@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import style from "./Sprints.module.css";
 import sprite from "./images/sprite.svg";
@@ -33,6 +33,10 @@ const Device = ({ children }) => {
 const SprintDIV = styled.div`
   padding-top: 20px;
   padding-bottom: 80px;
+
+  @media (min-width: 768px) {
+    width: calc(100% / 3 * 2);
+  }
 `;
 const DateDIV = styled.div`
   display: flex;
@@ -364,8 +368,6 @@ const CurrentDateAndFilterDIV = styled.div`
 
 const Sprints = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const history = useHistory();
   const params = useParams();
 
   const filter = useSelector((state) => filterSelector(state));
@@ -373,7 +375,6 @@ const Sprints = () => {
   useEffect(() => {
     // fetch sprint tasks
     dispatch(tasksOperations.fetchTasks());
-    console.log(params);
   }, []);
 
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
@@ -413,13 +414,6 @@ const Sprints = () => {
       nameRef.classList.add(style.edit);
       window.removeEventListener("keydown", closeAndUpdateName);
     }
-  };
-  const goBack = () => {
-    const { state } = location;
-    if (state && state.from) {
-      return history.push(state.from);
-    }
-    history.push("/");
   };
   return (
     <SprintDIV>

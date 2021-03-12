@@ -11,7 +11,9 @@ import routerUser from "./app/routes/routeUser.js";
 import routerProject from "./app/routes/routerProject.js";
 import routerSprint from "./app/routes/routerSprint.js";
 import routerTask from "./app/routes/routerTask.js";
-
+// import swagger
+import swaggerUi from "swagger-ui-express";
+const swaggerDoc = require("../swagger.json");
 export class Server {
   constructor() {
     this.server = null;
@@ -70,9 +72,15 @@ export class Server {
     // router project
     this.server.use("/api/projects/", routerProject);
     // router sprint
-    this.server.use("/api/sprints", routerSprint);
+    this.server.use("/api/sprints/", routerSprint);
     // router task
-    this.server.use("/api/tasks", routerTask);
+    this.server.use("/api/tasks/", routerTask);
+    // swagger
+    this.server.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDoc)
+    );
   }
 
   initErrorHandling() {

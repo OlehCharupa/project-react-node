@@ -1,24 +1,30 @@
-html {
-  box-sizing: border-box;
-  width: 100vw;
-}
-
 *,
-*::before,
-*::after {
-  /* box-sizing: inherit; */
+::after,
+::before {
   box-sizing: border-box;
+  background-repeat: no-repeat;
 }
-
 body {
   margin: 0;
-  font-family: Montserrat, sans-serif;
-  color: #212121;
-  background-color: #fff;
+  font-family: "Montserrat", sans-serif;
+  background: #e5e5e5;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }

@@ -18,9 +18,15 @@ const ProjectSidebar = () => {
 
   return (
     <div className={style.mainLeftSprint}>
-      <NavLink className={style.link} to="/project">
-        <div className={ style.showProjectContainer}>
-          <img className={style.arrow} />
+      <NavLink className={style.link} to="/projects">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "20px",
+          }}
+        >
+          <img className={style.arrow} alt="back arrow" />
           <p className={style.showProject}>Показати проєкт</p>
         </div>
       </NavLink>
