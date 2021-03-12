@@ -3,10 +3,12 @@ import { createReducer } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import authAction from "../actions/authAction";
 
-const initialUserState = { name: null, email: null };
+const initialUserState = { email: null, password: null };
 
 const user = createReducer(initialUserState, {
-  [authAction.registerSuccess]: (_, { payload }) => payload.user,
+  [authAction.registerSuccess]: (_, { payload }) =>  console.log('payloadReg', payload.user),
+    // payload.user,
+   
   [authAction.loginSuccess]: (_, { payload }) => payload.user,
   [authAction.logoutSuccess]: () => initialUserState,
   [authAction.getCurrentUserSuccess]: (_, { payload }) => payload,
@@ -19,7 +21,7 @@ const token = createReducer(null, {
 });
 
 const error = createReducer(null, {
-  [authAction.registerError]: (_, { payload }) => payload,
+  [authAction.registerError]: (_, { payload }) => console.log('payloadErr', payload),
   [authAction.loginError]: (_, { payload }) => payload,
   [authAction.logoutError]: (_, { payload }) => payload,
   [authAction.getCurrentUserError]: (_, { payload }) => payload,
