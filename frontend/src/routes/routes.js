@@ -65,7 +65,7 @@ const routes = [
     component: lazy(
       () =>
         import(
-          "../components/Sprints/Sprints"
+          "../pages/SingleSprintPage/SingleSprintPage"
         ) /* webpackChunkName: "singleSprint-page" */
     ),
     private: true,
