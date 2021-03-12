@@ -37,6 +37,8 @@
 @media screen and (max-width: 767px){
 
   .title{
+    max-width: 150px;
+    margin: 0;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
@@ -76,6 +78,8 @@
   }
 
   .title{
+    max-width: 300px;
+    margin: 0;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;

@@ -1,9 +1,9 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import sprintsReducer from "./reducers/sprintsReducer.js";
+import projectsReducer from "./reducers/projectsReducer.js";
 import tasksReducer from "./reducers/tasksReducer.js";
 import authReducer, { authPersistConfig } from "./reducers/authReducer";
 import modalReducer from "./reducers/modalReducer.js";
-import projectsReducer from "./reducers/projectsReducer";
 import {
   persistStore,
   persistReducer,
