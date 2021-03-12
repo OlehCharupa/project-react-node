@@ -221,6 +221,40 @@ textarea:focus::-webkit-input-placeholder {
   margin: auto;
 }
 
+.button__wrapper{
+  padding: 40px 0;
+}
+
+.button__ready {
+  display: block;
+  margin: 0 auto;
+  width: 154px;
+  height: 44px;
+  font-family: "Montserrat";
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  border: transparent;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: all 0.25s linear;
+  font-style: normal;
+  font-weight: normal;
+}
+.button__ready {
+  color: #fff;
+  background: #ff6b08;
+  margin-bottom: 20px;
+}
+
+.button__ready:focus,
+.button__ready:hover {
+  color: #ff6b08;
+  background: #fff;
+  border: 2px solid #ff6b08;
+}
+
 @media screen and (min-width: 767px) {
   .wrapper {
     width: 512px;
