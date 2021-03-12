@@ -6,7 +6,7 @@ const Diagram = () => {
 
 
     const chartData = {
-        labels: "",// день
+        labels: "",// день (даты снизу диаграммы)
         datasets: [
             {
                 label: "Запланований залишок трудовитрат",
