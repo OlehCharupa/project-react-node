@@ -16,18 +16,6 @@ const ProjectPage = () => {
     }, []);
 
     const projects = useSelector((state) => allProjectsSelector(state));
-    const location = useLocation();
-    const history = useHistory();
-
-    const projectHandler = (e) => {
-      const { projectId } = e.currentTarget.dataset;
-      if (e.target.nodeName !== "BUTTON") {
-        history.push({
-          pathname: `/${projectId}`,
-          from: location,
-        });
-      }
-    };
 
   return (
     <>
@@ -41,8 +29,10 @@ const ProjectPage = () => {
         </NavLink>
       </div>
       <ul className={style.list}>
-          {projects.map((project) =>  <ProjectPageItem {...project} key={project.id} onClick={projectHandler}/>)}
-        </ul>
+        {projects.map((project) => (
+          <ProjectPageItem {...project} key={project.id} id={project.id} />
+        ))}
+      </ul>
     </>
   );
 };

@@ -26,6 +26,7 @@ const ProjectPageItem = ({ id, name, description, OnDeleteProject}) => {
   return (
     <>
       <li className={style.item} onClick={projectHandler} data-project-id={id}>
+        <NavLink to="/">
           <div className={style.overlay}>
             <h2 className={style.itemTitle}>{name}</h2>
             <p className={style.itemDescription}>{description}</p>
@@ -34,6 +35,7 @@ const ProjectPageItem = ({ id, name, description, OnDeleteProject}) => {
             type="button"
             onClick={() => { OnDeleteProject(id); }}>
             </button>
+        </NavLink>
       </li>
     </>
   );
