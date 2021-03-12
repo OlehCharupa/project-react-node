@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
+import ProjectPage from "../pages/ProjectPage/ProjectPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Header />
+        <ProjectPage/>
         <Suspense fallback={<Loader />}>
           <Switch>
             {routes.map((route) =>
