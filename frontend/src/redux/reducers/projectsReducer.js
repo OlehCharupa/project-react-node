@@ -18,7 +18,7 @@ const items = createReducer([], {
   [FETCH_PROJECTS_SUCCESS]: (state, { payload }) => payload,
   [ADD_PROJECT_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_PROJECT_SUCCESS]: (state, { payload }) =>
-    state.filter((sprint) => sprint.id !== payload),
+    state.filter((sprint) => sprint._id !== payload),
 });
 
 const error = createReducer("", {
