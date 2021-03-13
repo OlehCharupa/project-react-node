@@ -12,6 +12,9 @@ import { filterSelector } from "../../redux/selectors/tasks-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
 import TasksList from "../TasksList/TasksList";
 import { useMediaQuery } from "react-responsive";
+import { modalToggle } from "../../redux/actions/modalAction";
+import Modal from "../../components/Modal/Modal";
+import TaskCreator from "../../components/TaskCreator/TaskCreator";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
@@ -244,6 +247,7 @@ const Button = styled.button`
   border: 1px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 
   background-color: #ff6b08;
   color: #ffffff;
@@ -398,6 +402,11 @@ const Sprints = () => {
     dispatch(tasksOperations.fetchTasks());
   }, []);
 
+  const isModalOpen = useSelector((state) => state.modal);
+  const toggleModal = () => {
+    dispatch(modalToggle(!isModalOpen));
+  };
+
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
   const changeNameHandler = (e) => {
     const nameRef = document.querySelector("textarea");
@@ -438,8 +447,15 @@ const Sprints = () => {
   };
   return (
     <SprintDIV>
+      <Modal
+        children={<TaskCreator />}
+        isModalOpen={isModalOpen}
+        toggleModal={toggleModal}
+      />
       <Mobile>
-        <AddTaskBTN aria-label="create task">+</AddTaskBTN>
+        <AddTaskBTN aria-label="create task" onClick={toggleModal}>
+          +
+        </AddTaskBTN>
       </Mobile>
       <ShowDiagramBTN aria-label="show diagram">
         <DiagramSVG width="22" height="22">
@@ -485,7 +501,9 @@ const Sprints = () => {
           <SprintNameBTN onClick={changeNameHandler} />
         </SprintNameDIV>
         <AddTaskBtnAndLabelDIV>
-          <AddTaskBTN aria-label="create task">+</AddTaskBTN>
+          <AddTaskBTN aria-label="create task" onClick={toggleModal}>
+            +
+          </AddTaskBTN>
           <Desktop>
             <AddTaskLabelP>Створити задачу</AddTaskLabelP>
           </Desktop>

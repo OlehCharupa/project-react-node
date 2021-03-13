@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
@@ -7,6 +7,9 @@ import { allSprintsSelector } from "../../redux/selectors/sprints-selectors";
 import sprintsOperations from "../../redux/operations/sprintsOperations";
 import { useMediaQuery } from "react-responsive";
 import SprintsSidebarItem from "../SprintsSidebarItem/SprintsSidebarItem";
+import { modalToggle } from "../../redux/actions/modalAction";
+import Modal from "../Modal/Modal";
+import SprintCreator from "../SprintCreator/SprintCreator";
 
 const Default = ({ children }) => {
   const isNotMobile = useMediaQuery({ minWidth: 768 });
@@ -139,6 +142,7 @@ const Button = styled.button`
   border: 1px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 
   background-color: #ff6b08;
   color: #ffffff;
@@ -189,8 +193,22 @@ const SprintsSidebar = () => {
   const sprints = useSelector((state) => allSprintsSelector(state));
   const { projectId } = useParams();
 
+  const isModalOpen = useSelector((state) => state.modal);
+  const toggleModal = () => {
+    setModal(!isModalOpen);
+    dispatch(modalToggle(!isModalOpen));
+  };
+  const [modal, setModal] = useState(isModalOpen);
+
   return (
     <DIV>
+      {modal && (
+        <Modal
+          children={<SprintCreator />}
+          isModalOpen={isModalOpen}
+          toggleModal={toggleModal}
+        />
+      )}
       <StyledLink to={{ pathname: `/projects/${projectId}` }}>
         Показати спринти
       </StyledLink>
@@ -203,7 +221,7 @@ const SprintsSidebar = () => {
           ))}
         </UL>
         <AddTaskBtnAndLabelDIV>
-          <Button>+</Button>
+          <Button onClick={toggleModal}>+</Button>
           <AddTaskLabelP>Створити спринт</AddTaskLabelP>
         </AddTaskBtnAndLabelDIV>
       </Default>
