@@ -8,7 +8,7 @@ export default {
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "servers": [
-        { "url": "https://bc24.herokuapp.com/" },
+        { "url": "https://bc24.herokuapp.com" },
     ],
     "tags": [
         {
