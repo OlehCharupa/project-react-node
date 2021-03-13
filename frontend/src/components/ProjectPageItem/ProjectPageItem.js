@@ -5,7 +5,7 @@ import style from "./ProjectPageItem.module.css";
 import { useLocation, useHistory } from "react-router-dom";
 import projectsOperations from "../../redux/operations/projectsOperations";
 
-const ProjectPageItem = ({ id, name, description, OnDeleteProject }) => {
+const ProjectPageItem = ({ _id, title, description, OnDeleteProject }) => {
   const location = useLocation();
   const history = useHistory();
 
@@ -21,16 +21,16 @@ const ProjectPageItem = ({ id, name, description, OnDeleteProject }) => {
 
   return (
     <>
-      <li className={style.item} onClick={projectHandler} data-project-id={id}>
+      <li className={style.item} onClick={projectHandler} data-project-id={_id}>
         <div className={style.overlay}>
-          <h2 className={style.itemTitle}>{name}</h2>
+          <h2 className={style.itemTitle}>{title}</h2>
           <p className={style.itemDescription}>{description}</p>
         </div>
         <button
           className={style.deleteBtn}
           type="button"
           onClick={() => {
-            OnDeleteProject(id);
+            OnDeleteProject(_id);
           }}
         ></button>
       </li>
@@ -40,14 +40,14 @@ const ProjectPageItem = ({ id, name, description, OnDeleteProject }) => {
 
 const mapStateToProps = (state, ownProps) => {
   const item = state.projects.items.find(
-    (project) => project.id === ownProps.id
+    (project) => project._id === ownProps._id
   );
   return { ...item };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   OnDeleteProject: () =>
-    dispatch(projectsOperations.deleteProject(ownProps.id)),
+    dispatch(projectsOperations.deleteProject(ownProps._id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectPageItem);

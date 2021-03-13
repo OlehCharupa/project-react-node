@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import { allProjectsSelector } from "../../redux/selectors/projects-selectors";
 import projectsOperations from "../../redux/operations/projectsOperations";
-import ProjectSidebarList from "../ProjectSidebarItem/ProjectSidebarItem"
+import ProjectSidebarList from "../ProjectSidebarItem/ProjectSidebarItem";
 
 const ProjectSidebar = () => {
   const dispatch = useDispatch();
@@ -31,11 +31,13 @@ const ProjectSidebar = () => {
         </div>
       </NavLink>
       <ul className={style.sidebarList}>
-        {projects.map((project) => <ProjectSidebarList {...project} key={project.id} id={project.id}/>)}
-        </ul>
+        {projects.map((project) => (
+          <ProjectSidebarList {...project} key={project._id} id={project._id} />
+        ))}
+      </ul>
       <NavLink className={style.linkAdd} to="/">
         <ReactLogo className={style.plusBtn} />
-        <div style={{ marginTop: "15px"}} >Створити проєкт</div>
+        <div style={{ marginTop: "15px" }}>Створити проєкт</div>
       </NavLink>
     </div>
   );

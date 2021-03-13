@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { TransitionGroup } from "react-transition-group";
 import transition from "styled-transition-group";
@@ -75,11 +75,17 @@ const Li = transition.li.attrs({
       transform: scale(1.02);
   }
 `;
+const H2 = styled.h2`
+  text-align: center;
+  font-size: 24px;
+  color: rgba(24, 28, 39, 0.3);
+`;
 
 const SprintsList = () => {
+  const { projectId } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints());
+    dispatch(sprintsOperations.fetchSprints(projectId));
   }, []);
 
   const sprints = useSelector((state) => allSprintsSelector(state));
@@ -97,13 +103,25 @@ const SprintsList = () => {
   };
 
   return (
-    <TransitionGroup component={Ul}>
-      {sprints.map((sprint) => (
-        <Li key={sprint.id} data-sprint-id={sprint.id} onClick={sprintHandler}>
-          <SprintsListItem id={sprint.id} />
-        </Li>
-      ))}
-    </TransitionGroup>
+    <>
+      {Array.isArray(sprints) ? (
+        <TransitionGroup component={Ul}>
+          {sprints.map((sprint) => (
+            <Li
+              key={sprint._id}
+              data-sprint-id={sprint._id}
+              onClick={sprintHandler}
+            >
+              <SprintsListItem id={sprint._id} />
+            </Li>
+          ))}
+        </TransitionGroup>
+      ) : (
+        <H2>
+          Ваш проект не має спринтів, скористайтесь кнопкою "Створити спринт"
+        </H2>
+      )}
+    </>
   );
 };
 
