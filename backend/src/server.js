@@ -1,100 +1,85 @@
-import express from "express";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import express from "express";
 import mongoose from "mongoose";
-import morgan from "morgan";
-import { getPaths } from "./helpers/utils.js";
-//import routes
-import routerUser from "./app/routes/routeUser.js";
-import routerProject from "./app/routes/routerProject.js";
-import routerSprint from "./app/routes/routerSprint.js";
-import routerTask from "./app/routes/routerTask.js";
+import { getPaths } from "./helpers/utils.js"
+import dotenv from "dotenv"
+import authRouter from "./auth/auth.routes.js";
+import projectRouter from "./endpoints/project/project.routes.js";
+import sprintRouter from "./endpoints/sprint/sprint.routes.js";
+import taskRouter from "./endpoints/task/task.router.js";
 // import swagger
 import swaggerUi from "swagger-ui-express";
-const swaggerDoc = require("../swagger.json");
-export class Server {
-  constructor() {
-    this.server = null;
-  }
+import swaggerDocument from "../swagger.js";
 
-  async start() {
-    this.initServer();
-    this.initMiddlewares();
-    this.initConfig();
-    this.initRoutes();
-    await this.initDatabase();
-    this.initErrorHandling();
-    this.startListening();
-  }
 
-  initServer() {
-    this.server = express();
-  }
-
-  initConfig() {
-    const { __dirname } = getPaths(import.meta.url);
-    dotenv.config({ path: path.join(__dirname, "../.env") });
-  }
-
-  async initDatabase() {
-    try {
-      const { MONGODB_URL } = process.env;
-      await mongoose.connect(MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      });
-      console.log("Database connection successful");
-    } catch (arror) {
-      console.log(error);
-      process.exit(1);
+export default class Server {
+    constructor() {
+        this.server = null;
     }
-  }
 
-  initMiddlewares() {
-    this.server.use(express.json());
-    this.server.use(cors());
-    this.server.use(morgan("dev"));
-    this.server.use(bodyParser.json());
-    this.server.use(
-      bodyParser.urlencoded({
-        extended: true,
-      })
-    );
-  }
+    async start() {
+        this.initServer()
+        this.initMiddlewares();
+        this.initConfig()
+        this.initRoutes();
+        await this.initDataBase();
+        this.initErrorHandling();
+        this.initListening();
+    }
+    initServer() {
+        this.server = express()
+    }
+    initConfig() {
+        const { __dirname } = getPaths(import.meta.url);
+        dotenv.config({ path: path.join(__dirname, "../.env") });
+    }
 
-  initRoutes() {
-    // routers user // reg// login// logout
-    this.server.use("/api/users/", routerUser);
-    // router project
-    this.server.use("/api/projects/", routerProject);
-    // router sprint
-    this.server.use("/api/sprints/", routerSprint);
-    // router task
-    this.server.use("/api/tasks/", routerTask);
-    // swagger
-    this.server.use(
-      "/api-docs",
-      swaggerUi.serve,
-      swaggerUi.setup(swaggerDoc)
-    );
-  }
+    initMiddlewares() {
+        this.server.use(express.json());
+        this.server.use(cors());
+    }
 
-  initErrorHandling() {
-    this.server.use((err, req, res, next) => {
-      const statusCode = err.status || 500;
-      console.log(err);
-      res.status(statusCode).send(err.message);
-    });
-  }
+    async initDataBase() {
+        try {
+            await mongoose.connect(process.env.MONGODB_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false,
+                useCreateIndex: true,
+            });
+            console.log("Database connection is successful");
+        } catch (error) {
+            console.log("Database connection failed", error);
+            process.exit(1);
+        }
+    }
 
-  startListening() {
-    const { PORT } = process.env;
-    this.server.listen(PORT, () => {
-      console.log("Server started listening on port", PORT);
-    });
-  }
+    initRoutes() {
+        this.server.use("/auth", authRouter);
+        this.server.use("/project", projectRouter);
+        this.server.use("/sprint", sprintRouter);
+        this.server.use("/task", taskRouter);
+        this.server.use(
+            "/api-docs",
+            swaggerUi.serve,
+            swaggerUi.setup(swaggerDocument)
+        );
+    }
+
+    initErrorHandling() {
+        this.server.use(
+            (err, req, res, next) => {
+                let statusCode = err.status || 500;
+                console.log(err);
+                return res.status(statusCode).send(err.message);
+            }
+        );
+    }
+
+    initListening() {
+        this.server.listen(process.env.PORT || 5000, () =>
+            console.log("Started listening on port", process.env.PORT)
+        );
+    }
 }
