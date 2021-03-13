@@ -43,7 +43,7 @@ const routes = [
         ) /* webpackChunkName: "projects-page" */
     ),
     private: true,
-    restricted: true,
+    restricted: false,
   },
   {
     path: paths.projectId,
@@ -56,7 +56,7 @@ const routes = [
         ) /* webpackChunkName: "singleProject-page" */
     ),
     private: true,
-    restricted: true,
+    restricted: false,
   },
   {
     path: paths.sprintId,
@@ -69,7 +69,7 @@ const routes = [
         ) /* webpackChunkName: "singleSprint-page" */
     ),
     private: true,
-    restricted: true,
+    restricted: false,
   },
 ];
 export default routes;
