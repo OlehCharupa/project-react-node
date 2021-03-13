@@ -3,12 +3,12 @@ export default {
     "info": {
         "version": "2.0.0",
         "title": "Project Manager API docs",
-        "description": "API documentation. [Backend github repository](https://github.com/DanTsvirkun/SBC-backend)",
+        "description": "API documentation. [Backend github repository](https://github.com/OlehCharupa/project-react-node/tree/dev/backend)",
     },
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "servers": [
-        { "url": "https://localhost:5000" },
+        { "url": "https://bc24.herokuapp.com/" },
     ],
     "tags": [
         {
