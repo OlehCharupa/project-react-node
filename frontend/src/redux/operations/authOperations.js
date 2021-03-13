@@ -1,7 +1,7 @@
 import axios from "axios";
 import authAction from "../actions/authAction";
 
-axios.defaults.baseURL = "https://bc24.herokuapp.com/api"; //TODO вписать url бека
+axios.defaults.baseURL = "https://bc24.herokuapp.com/api";
 
 const token = {
   set(token) {
@@ -14,11 +14,11 @@ const token = {
 
 export const register = (credentials) => async (dispatch) => {
   dispatch(authAction.registerRequest());
-  const {email, password} = credentials;
+  const { email, password } = credentials;
   const state = {
     email: email,
-    password: password
-  }
+    password: password,
+  };
   console.log("state", state);
   try {
     const result = await axios.post("/users/register", state);
