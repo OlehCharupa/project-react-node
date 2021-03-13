@@ -19,6 +19,7 @@ const Default = ({ children }) => {
 const DIV = styled.div`
   position: relative;
   min-height: 37px;
+  z-index: 100;
 
   @media (max-width: 767px) {
     display: flex;
