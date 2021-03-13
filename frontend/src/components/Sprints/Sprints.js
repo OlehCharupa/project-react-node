@@ -404,8 +404,10 @@ const Sprints = () => {
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
+    setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
+  const [modal, setModal] = useState(isModalOpen);
 
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
   const changeNameHandler = (e) => {
@@ -447,11 +449,13 @@ const Sprints = () => {
   };
   return (
     <SprintDIV>
-      <Modal
-        children={<TaskCreator />}
-        isModalOpen={isModalOpen}
-        toggleModal={toggleModal}
-      />
+      {modal && (
+        <Modal
+          children={<TaskCreator />}
+          isModalOpen={isModalOpen}
+          toggleModal={toggleModal}
+        />
+      )}
       <Mobile>
         <AddTaskBTN aria-label="create task" onClick={toggleModal}>
           +
