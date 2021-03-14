@@ -3,7 +3,11 @@ import { Line } from "react-chartjs-2";
 
 const Diagram = () => {
 
+    const redLine = () => {
+    };
 
+    const blueLine = () => {
+    };
 
     const chartData = {
         labels: "",// день (даты снизу диаграммы)
@@ -120,7 +124,7 @@ const Diagram = () => {
         },
     };
     return (
-        <div className="">
+        <div className="contanerDiagram">
             <Line data={chartData} options={chartOptions} />
         </div>
     );

@@ -1,0 +1,46 @@
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modalOverlay.open{
+    height: 100%;
+    display: block;
+}
+
+.modalOverlay.close{
+    height: 0;
+    display: none;
+}
+
+.modalWindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  min-height: 461px;
+  width: 933px;
+  overflow: auto;
+}
+
+.modalWindow::-webkit-scrollbar {
+    /* color: #FF6B08; */
+    width: 0;
+    background: transparent;
+}
+.modalWindow {
+ -ms-overflow-style: none;
+ scrollbar-width: none;
+}
+
+.modal__close{
+     text-align: right;
+     margin-top: -15px;
+     font-size: 30px;
+     cursor: pointer;
+}
