@@ -75,7 +75,7 @@ const Button = styled.button`
 `;
 
 const SprintsListItem = ({
-  id,
+  _id,
   name,
   startDate,
   finishDate,
@@ -97,7 +97,7 @@ const SprintsListItem = ({
       <Button
         type="button"
         onClick={() => {
-          OnDeleteSprint(id);
+          OnDeleteSprint(_id);
         }}
       ></Button>
     </>
@@ -105,12 +105,14 @@ const SprintsListItem = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.sprints.items.find((sprint) => sprint.id === ownProps.id);
+  const item = state.sprints.items.find(
+    (sprint) => sprint._id === ownProps._id
+  );
   return { ...item };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps.id)),
+  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps._id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SprintsListItem);

@@ -1,0 +1,76 @@
+
+@media screen and (min-width: 768px) {
+.leftImg{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 60%;
+    z-index: -1;
+    background-position: bottom left;
+    background-size: contain;
+    background-image: url('image/laptop/Group6@1x.png');
+}
+.leftImgOrabge{
+    position: absolute;
+    bottom: 40px;
+    left: 0px;
+    width: 40%;
+    height: 27%;
+    z-index: 2;
+    background-position: bottom left;
+    background-size: contain;
+    opacity: 0.95;
+    filter: alpha(Opacity=85);
+    background-image: url('image/laptop/Ellipse2@1x.png');
+}
+.rightImg{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+    height: 85%;
+    z-index: -1;
+    background-position: bottom right;
+    background-size: contain;
+    background-image: url('image/laptop/Group258right@1x.png');
+}
+}
+
+@media screen and (min-width: 1170px) {
+    .leftImg{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+        height: 80%;
+        z-index: -1;
+        background-position: bottom left;
+        background-size: contain;
+        background-image: url('image/desktop/Group6@1x.png');
+    }
+    .leftImgOrabge{
+        position: absolute;
+        bottom: 0;
+        left: 7%;
+        width: 40%;
+        height: 37%;
+        z-index: 2;
+        background-position: bottom left;
+        background-size: contain;
+        opacity: 0.95;
+        filter: alpha(Opacity=85);
+        background-image: url('image/desktop/Ellipse2@1x.png');
+    }
+    .rightImg{
+        position: absolute;
+        top: 15%;
+        right: 0;
+        width: 40%;
+        height: 85%;
+        z-index: -1;
+        background-position: bottom right;
+        background-size: contain;
+        background-image: url('image/desktop/Group260right-@1x.png');
+    }
+    }

@@ -1,0 +1,156 @@
+.sprintSection{
+  padding-bottom: 60px;
+}
+
+
+.titleSection{
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.penImg{
+  width: 20px;
+  margin-left:20px;
+}
+
+.addPeople{
+  display: flex;
+  margin-top: 30px;
+}
+
+.plusBtn{
+  padding-top: 5px;
+  transition: all .3s linear;
+  border-radius: 40px;
+  width: 44px;
+  height: 44px;
+  background-position: 50%;
+  background-color: #FF6B08;
+}
+
+.link .plusBtn:hover,
+.link .plusBtn:focus{
+  box-shadow: 0 0 10px 0 #FF6B08 inset, 0 0 10px 4px #FF6B08;
+}
+
+@media screen and (max-width: 767px){
+
+  .title{
+    max-width: 150px;
+    margin: 0;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 32px;
+    letter-spacing: 0.04em;
+    
+    color: #181C27;
+  }
+  .description{
+    width: 280px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+  }
+
+  .plusBtn{
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+    z-index: 100;
+  }
+
+  .create{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .sprintSection{
+    position: relative;
+    padding-left:20px;
+  }
+
+  .title{
+    max-width: 300px;
+    margin: 0;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 44px;    
+    letter-spacing: 0.04em;
+    color: #181C27;
+  }
+
+  .description{
+    width: 452px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+  }
+
+  .plusBtn{
+    position: absolute;
+    right: 0;
+    top: 25px;
+  }
+
+  .create{
+    display: none;
+  }
+
+}
+
+@media screen and (min-width: 1280px) {
+
+  .sprintSection{
+    min-width: 954px;
+    padding-left:70px;
+  }
+
+  .description{
+    width: 400px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+  }
+
+  .link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:30px;
+    text-decoration: none;
+  }
+
+  .plusBtn{
+    position: relative;
+    right: 0;
+    top: 0px;
+  }
+
+  .create{
+    display: initial;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding-left: 20px;
+    color: #181C27;
+  }
+
+}

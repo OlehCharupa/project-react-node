@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import style from "./Sprints.module.css";
 import sprite from "./images/sprite.svg";
@@ -11,6 +12,9 @@ import { filterSelector } from "../../redux/selectors/tasks-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
 import TasksList from "../TasksList/TasksList";
 import { useMediaQuery } from "react-responsive";
+import { modalToggle } from "../../redux/actions/modalAction";
+import Modal from "../../components/Modal/Modal";
+import TaskCreator from "../../components/TaskCreator/TaskCreator";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
@@ -30,10 +34,17 @@ const Device = ({ children }) => {
 };
 
 const SprintDIV = styled.div`
-  width: 1026px;
-
   padding-top: 20px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
+
+  @media (min-width: 768px) {
+    padding-left: 20px;
+    width: calc(100% / 3 * 2);
+  }
+  @media (min-width: 1280px) {
+    width: 100%;
+    padding-left: 70px;
+  }
 `;
 const DateDIV = styled.div`
   display: flex;
@@ -126,7 +137,7 @@ const FilterINPUT = styled.input`
 
   color: #000000;
 
-  ${FieldDIV}:hover &, ${FieldDIV}:focus & {
+  ${FieldDIV}:hover &, ${FieldDIV}:focus &, &:focus, &:hover {
     border-bottom: 1px solid #ff6b08;
   }
 
@@ -236,6 +247,7 @@ const Button = styled.button`
   border: 1px solid transparent;
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 
   background-color: #ff6b08;
   color: #ffffff;
@@ -292,7 +304,7 @@ const ShowDiagramBTN = styled(Button)`
     left: 20px;
   }
   @media (min-width: 768px) {
-    bottom: 60px;
+    bottom: 40px;
     right: 55px;
   }
 
@@ -321,7 +333,23 @@ const HeaderDIV = styled.div`
   margin-bottom: 20px;
   padding: 9px 20px;
 
-  border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+  &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -20px;
+    bottom: 0;
+
+    width: calc(100vw - 255px);
+    height: 1px;
+
+    background-color: rgba(24, 28, 39, 0.1);
+
+    @media (min-width: 1280px) {
+      left: -70px;
+      width: calc(100% + 50vw - 515px);
+    }
+  }
 `;
 const HeaderP = styled.p`
   font-weight: 400;
@@ -334,6 +362,7 @@ const HeaderP = styled.p`
     width: calc((100% - 120px) / 4);
     &:not(:last-child) {
       margin-right: 30px;
+    }
   }
 `;
 const SprintNameAndAddBtnDIV = styled.div`
@@ -364,11 +393,21 @@ const CurrentDateAndFilterDIV = styled.div`
 
 const Sprints = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+
   const filter = useSelector((state) => filterSelector(state));
 
   useEffect(() => {
+    // fetch sprint tasks
     dispatch(tasksOperations.fetchTasks());
   }, []);
+
+  const isModalOpen = useSelector((state) => state.modal);
+  const toggleModal = () => {
+    setModal(!isModalOpen);
+    dispatch(modalToggle(!isModalOpen));
+  };
+  const [modal, setModal] = useState(isModalOpen);
 
   const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
   const changeNameHandler = (e) => {
@@ -381,6 +420,10 @@ const Sprints = () => {
       nameRef.setSelectionRange(nameRef.value.length, nameRef.value.length);
 
       window.addEventListener("keydown", closeAndUpdateName);
+    } else {
+      // update name query
+      nameRef.setAttribute("readonly", true);
+      nameRef.classList.add(style.edit);
     }
   };
   const sprintNameInputHandler = (e) => {
@@ -406,8 +449,17 @@ const Sprints = () => {
   };
   return (
     <SprintDIV>
+      {modal && (
+        <Modal
+          children={<TaskCreator />}
+          isModalOpen={isModalOpen}
+          toggleModal={toggleModal}
+        />
+      )}
       <Mobile>
-        <AddTaskBTN aria-label="create task">+</AddTaskBTN>
+        <AddTaskBTN aria-label="create task" onClick={toggleModal}>
+          +
+        </AddTaskBTN>
       </Mobile>
       <ShowDiagramBTN aria-label="show diagram">
         <DiagramSVG width="22" height="22">
@@ -453,7 +505,9 @@ const Sprints = () => {
           <SprintNameBTN onClick={changeNameHandler} />
         </SprintNameDIV>
         <AddTaskBtnAndLabelDIV>
-          <AddTaskBTN aria-label="create task">+</AddTaskBTN>
+          <AddTaskBTN aria-label="create task" onClick={toggleModal}>
+            +
+          </AddTaskBTN>
           <Desktop>
             <AddTaskLabelP>Створити задачу</AddTaskLabelP>
           </Desktop>

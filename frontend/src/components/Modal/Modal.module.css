@@ -1,0 +1,115 @@
+.modal__wrapper {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+.modal__overlay {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: rgba(24, 28, 39, 0.25);
+}
+.modal__sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding-top: 120px;
+}
+.button__wrapper {
+  padding: 40px 0;
+}
+.button__cancel,
+.button__ready {
+  display: block;
+  margin: 0 auto;
+  width: 154px;
+  height: 44px;
+  font-family: "Montserrat";
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  border: transparent;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: all 0.25s linear;
+  font-style: normal;
+  font-weight: normal;
+}
+.button__ready {
+  color: #fff;
+  background: #ff6b08;
+  margin-bottom: 20px;
+}
+.button__cancel {
+  color: rgba(24, 28, 39, 0.6);
+  background: #fff;
+  text-decoration-line: underline;
+}
+.button__ready:focus,
+.button__ready:hover {
+  color: #ff6b08;
+  background: #fff;
+  border: 2px solid #ff6b08;
+}
+.button__cancel:focus,
+.button__cancel:hover {
+  color: #000;
+  border: 2px solid #ff6b08;
+  text-decoration-line: none;
+}
+.button__close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: no-repeat center url("./images/close.svg");
+  border: none;
+  outline: none;
+  transition: all 0.2s linear;
+}
+.button__close:hover {
+  background: no-repeat center url("./images/close-white.svg") #ff6b08;
+}
+
+@media screen and (min-width: 480px) {
+}
+
+@media screen and (min-width: 768px) {
+  .modal__wrapper {
+    top: 0;
+  }
+  .modal__sidebar {
+    width: 512px;
+  }
+
+  .modal__overlay {
+    visibility: visible;
+  }
+  .button__close {
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .modal__sidebar {
+    width: 530px;
+  }
+}
+
+.isOpen {
+  overflow: hidden;
+}

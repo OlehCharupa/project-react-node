@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { TransitionGroup } from "react-transition-group";
 import transition from "styled-transition-group";
@@ -39,6 +39,7 @@ const Li = transition.li.attrs({
   padding: 20px 20px 40px 20px;
 
   cursor: pointer;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   background-color: #FFFFFF;
   box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
@@ -69,12 +70,22 @@ const Li = transition.li.attrs({
       margin: 15px;
       padding: 20px 30px 40px 20px;
   }
+
+    &:hover,&:focus{
+      transform: scale(1.02);
+  }
+`;
+const H2 = styled.h2`
+  text-align: center;
+  font-size: 24px;
+  color: rgba(24, 28, 39, 0.3);
 `;
 
 const SprintsList = () => {
+  const { projectId } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints());
+    dispatch(sprintsOperations.fetchSprints(projectId));
   }, []);
 
   const sprints = useSelector((state) => allSprintsSelector(state));
@@ -85,20 +96,32 @@ const SprintsList = () => {
     const { sprintId } = e.currentTarget.dataset;
     if (e.target.nodeName !== "BUTTON") {
       history.push({
-        pathname: `/${sprintId}`,
+        pathname: `${location.pathname}/${sprintId}`,
         from: location,
       });
     }
   };
 
   return (
-    <TransitionGroup component={Ul}>
-      {sprints.map((sprint) => (
-        <Li key={sprint.id} data-sprint-id={sprint.id} onClick={sprintHandler}>
-          <SprintsListItem id={sprint.id} />
-        </Li>
-      ))}
-    </TransitionGroup>
+    <>
+      {Array.isArray(sprints) ? (
+        <TransitionGroup component={Ul}>
+          {sprints.map((sprint) => (
+            <Li
+              key={sprint._id}
+              data-sprint-id={sprint._id}
+              onClick={sprintHandler}
+            >
+              <SprintsListItem id={sprint._id} />
+            </Li>
+          ))}
+        </TransitionGroup>
+      ) : (
+        <H2>
+          Ваш проект не має спринтів, скористайтесь кнопкою "Створити спринт"
+        </H2>
+      )}
+    </>
   );
 };
 
