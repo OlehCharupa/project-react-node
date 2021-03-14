@@ -33,7 +33,11 @@ const ProjectPage = () => {
           <h1 className={style.title}>Проекти</h1>
         </div>
         <div className={style.link} to="/">
-          <Modal children={<CreateProject/>} isModalOpen={isModalOpen} toggleModal={toggleModal}/>
+          <Modal
+            children={<CreateProject />}
+            isModalOpen={isModalOpen}
+            toggleModal={toggleModal}
+          />
           <button className={style.plusBtn} type="button" onClick={toggleModal}>
             <span style={{ display: "block" }}>
               <img src={plus} />
@@ -42,11 +46,18 @@ const ProjectPage = () => {
           <div className={style.create}>Створити проект</div>
         </div>
       </div>
-      <ul className={style.list}>
-        {projects.map((project) => (
-          <ProjectPageItem {...project} key={project.id} id={project.id} />
-        ))}
-      </ul>
+      {Array.isArray(projects) ? (
+        <ul className={style.list}>
+          {projects.map((project) => (
+            <ProjectPageItem {...project} key={project._id} id={project._id} />
+          ))}
+        </ul>
+      ) : (
+        <h2>
+          Ваша колекція проектів порожня, скористайтесь кнопкою "Створити
+          проект"
+        </h2>
+      )}
     </>
   );
 };

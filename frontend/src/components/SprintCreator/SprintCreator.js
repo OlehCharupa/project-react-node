@@ -141,7 +141,7 @@ const SprintCreator = () => {
                 placeholderText="Дата початку"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                selected={ifIsWeekEnd(startDate)}
+                // selected={ifIsWeekEnd(startDate)}
                 filterDate={isWeekday}
                 minDate={!hidePastDays && moment().toDate()}
                 className={styles.date_picker}

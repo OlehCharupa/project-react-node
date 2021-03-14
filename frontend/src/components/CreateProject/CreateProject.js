@@ -3,10 +3,9 @@ import styles from "./CreateProject.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import projectsOperations from "../../redux/operations/projectsOperations";
 
 import { modalToggle } from "../../redux/actions/modalAction";
-
-//  2) Вытянуть операцию на создание проекта
 
 const CreateProject = () => {
   const SignupSchema = Yup.object().shape({
@@ -30,9 +29,8 @@ const CreateProject = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(value) => {
-          console.log(value);
           toggleModal();
-          // Отдаём аргумент в операцию добавления
+          dispatch(projectsOperations.addProject(value));
         }}
       >
         {({ errors, touched }) => (
