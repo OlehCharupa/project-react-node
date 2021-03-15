@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./TaskCreator.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
+import taskOperations from '../../redux/operations/tasksOperations'
 import { modalToggle } from "../../redux/actions/modalAction";
 
-//  2) Вытянуть операцию на создание проекта
-
 const TaskCreator = () => {
+  const location = useLocation();
+  let sprintId;
+
+  useEffect(() => {
+    sprintId = location.pathname.substr(35);
+  });
+
   const SignupSchema = Yup.object().shape({
-    taskName: Yup.string().min(1).required("Будь ласка, введіть назву."),
-    duration: Yup.number().typeError('Значення має бути числом.').min(1).required("Будь ласка, введіть час."),
+    title: Yup.string().min(1).required("Будь ласка, введіть назву."),
+    hoursPlanned: Yup.number().typeError('Значення має бути числом.').min(1).required("Будь ласка, введіть час."),
   });
 
   const isModalOpen = useSelector((state) => state.modal);
@@ -25,45 +32,45 @@ const TaskCreator = () => {
       <h2 className={styles.form_title}>Створення задачі</h2>
       <Formik
         initialValues={{
-          taskName: "",
-          duration: "",
+          title: "",
+          hoursPlanned: "",
         }}
         validationSchema={SignupSchema}
-        onSubmit={(value) => {
-          console.log(value);
+        onSubmit={(values) => {
+          const {title, hoursPlanned} = values;
+          dispatch(taskOperations.addTask({sprintId, title, hoursPlanned: Number(...hoursPlanned)}))
           toggleModal();
-          // Отдаём аргумент в операцию добавления
         }}
       >
         {({ errors, touched }) => (
           <Form className={styles.neon_border}>
             <div className={styles.form_item}>
               <Field
-                name="taskName"
+                name="title"
                 placeholder=" "
-                id="taskName"
+                id="title"
                 className={styles.input}
               />
-              <label className={styles.label} htmlFor="taskName">
+              <label className={styles.label} htmlFor="title">
                 Назва задачі
               </label>
-              {errors.taskName && touched.taskName ? (
-                <div className={styles.errorDiv}>{errors.taskName}</div>
+              {errors.title && touched.title ? (
+                <div className={styles.errorDiv}>{errors.title}</div>
               ) : null}
             </div>
 
             <div className={styles.form_item}>
               <Field
-                name="duration"
+                name="hoursPlanned"
                 placeholder=" "
-                id="duration"
+                id="hoursPlanned"
                 className={styles.input}
               />
-              <label className={styles.label} htmlFor="duration">
+              <label className={styles.label} htmlFor="hoursPlanned">
                 Заплановано годин
               </label>
-              {errors.duration && touched.duration ? (
-                <div className={styles.errorDiv}>{errors.duration}</div>
+              {errors.hoursPlanned && touched.hoursPlanned ? (
+                <div className={styles.errorDiv}>{errors.hoursPlanned}</div>
               ) : null}
             </div>
             <div className={styles.button__wrapper}>

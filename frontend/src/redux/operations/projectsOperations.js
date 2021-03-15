@@ -30,8 +30,20 @@ const deleteProject = (id) => (dispatch) => {
     .catch((error) => dispatch(projectsAction.deleteProjectError(error)));
 };
 
+const addProjectMember = (id, value) => (dispatch) => {
+  dispatch(projectsAction.addProjectRequest());
+
+  axios
+    .patch(`project/contributor/${id}`, value)
+    .then(({ data }) => {
+      dispatch(projectsAction.addMemberSuccess({ ...data, _id: data.id }));
+    })
+    .catch((error) => dispatch(projectsAction.addMemberError(error)));
+};
+
 export default {
   addProject,
   fetchProjects,
   deleteProject,
+  addProjectMember
 };
