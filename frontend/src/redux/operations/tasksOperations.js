@@ -89,15 +89,15 @@ const tasks = [
   },
 ];
 
-const addTask = (name, plannedHours, wastedHoursPerDay, wastedHours) => (
+const addTask = ({sprintId, title, hoursPlanned}) => (
   dispatch
 ) => {
-  dispatch(tasksAction.addSprintRequest());
+  dispatch(tasksAction.addTaskRequest());
 
   axios
-    .post("tasks", { name, plannedHours, wastedHoursPerDay, wastedHours })
-    .then(({ data }) => dispatch(tasksAction.addSprintSuccess(data)))
-    .catch((error) => dispatch(tasksAction.addSprintError(error)));
+    .post(`task/${sprintId}`, { title, hoursPlanned})
+    .then(({ data }) => dispatch(tasksAction.addTaskSuccess(data)))
+    .catch((error) => dispatch(tasksAction.addTaskError(error)));
 };
 
 const fetchTasks = () => (dispatch) => {

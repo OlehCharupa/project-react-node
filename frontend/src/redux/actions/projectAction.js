@@ -10,6 +10,9 @@ import {
   DELETE_PROJECT_ERROR,
   DELETE_PROJECT_REQUEST,
   DELETE_PROJECT_SUCCESS,
+  ADD_MEMBER_REQUEST,
+  ADD_MEMBER_SUCCESS,
+  ADD_MEMBER_ERROR,
   CHANGE_ERROR,
 } from "../constants/projectsConstans.js";
 
@@ -25,6 +28,10 @@ const deleteProjectRequest = createAction(DELETE_PROJECT_REQUEST);
 const deleteProjectSuccess = createAction(DELETE_PROJECT_SUCCESS);
 const deleteProjectError = createAction(DELETE_PROJECT_ERROR);
 
+const addMemberRequest = createAction(ADD_MEMBER_REQUEST)
+const addMemberSuccess = createAction(ADD_MEMBER_SUCCESS)
+const addMemberError = createAction(ADD_MEMBER_ERROR)
+
 const changeError = createAction(CHANGE_ERROR);
 
 export default {
@@ -37,5 +44,8 @@ export default {
   deleteProjectRequest,
   deleteProjectSuccess,
   deleteProjectError,
+  addMemberRequest,
+  addMemberSuccess,
+  addMemberError,
   changeError,
 };

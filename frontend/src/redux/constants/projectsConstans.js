@@ -10,4 +10,8 @@ export const DELETE_PROJECT_REQUEST = "projects/deleteProjectRequest";
 export const DELETE_PROJECT_SUCCESS = "projects/deleteProjectSuccess";
 export const DELETE_PROJECT_ERROR = "projects/deleteProjectError";
 
+export const ADD_MEMBER_REQUEST = "project/addMemberRequest";
+export const ADD_MEMBER_SUCCESS = "project/addMemberSuccess";
+export const ADD_MEMBER_ERROR = "project/addMemberError";
+
 export const CHANGE_ERROR = "error/change";
