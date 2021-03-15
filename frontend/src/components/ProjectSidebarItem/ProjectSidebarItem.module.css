@@ -1,12 +1,11 @@
+
+
 .link{
   text-decoration: none;
-}
-
-.item{
   display: flex;
   align-items: center;
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   margin-top: 16px;
 }
 
@@ -16,43 +15,12 @@
 }
 
 .title{
-  margin-left: 15px;
+  margin-left: 45px;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.04em;
+  color:#181C27;
 }
-
-.colorItem:nth-child(8n + 1) {
-  background-color: #8C72DF;
-}
-
-.colorItem:nth-child(8n + 2) {
-  background-color: #FF765F;
-}
-
-.colorItem:nth-child(8n + 3) {
-  background-color: #72df87;
-}
-
-.colorItem:nth-child(8n + 4) {
-  background-color: #f78336;
-}
-
-.colorItem:nth-child(8n + 5) {
-  background-color: #f3be2f;
-}
-
-.colorItem:nth-child(8n + 6) {
-  background-color: #e46dde;
-}
-
-.colorItem:nth-child(8n + 7) {
-  background-color: #4594f1;
-}
-
-.colorItem:nth-child(8n + 8) {
-  background-color: #d45535;
-} 

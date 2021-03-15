@@ -4,14 +4,37 @@
 
 
 .titleSection{
+  position: relative;
   display: flex;
   margin-top: 30px;
   margin-bottom: 20px;
+  width: 200px;
+}
+
+.projectChangeNameBtn{
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  background-image: url(./images/pen.svg);
+  background-size: cover;
+  padding: 0;
+
+  display: block;
+  position: absolute;
+  top: 6px;
+  right: 0;
+
+  content: "";
+  width: 20px;
+  height: 20px;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .penImg{
   width: 20px;
-  margin-left:20px;
 }
 
 .addPeople{
@@ -34,20 +57,14 @@
   box-shadow: 0 0 10px 0 #FF6B08 inset, 0 0 10px 4px #FF6B08;
 }
 
+.edit {
+  background-color: transparent;
+}
+
+
+
 @media screen and (max-width: 767px){
 
-  .title{
-    max-width: 150px;
-    margin: 0;
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 32px;
-    letter-spacing: 0.04em;
-    
-    color: #181C27;
-  }
   .description{
     width: 280px;
     font-family: "Montserrat";
@@ -75,6 +92,7 @@
   .sprintSection{
     position: relative;
     padding-left:20px;
+    width: 470px;
   }
 
   .title{

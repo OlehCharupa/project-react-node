@@ -7,7 +7,7 @@
   margin-top: 20px;
   margin-bottom: 36px;
 }
-.plusBtn{
+.mainplusBtn{
   padding: 0 ;
   /* padding-top: 2px; */
   border: none; outline: none;
@@ -17,18 +17,10 @@
   background-color: #FF6B08;
 }
 
-.link .plusBtn:hover,
-.link .plusBtn:focus{
+.mainplusBtn:hover,
+.mainplusBtn:focus{
   box-shadow: 0 0 5px 0 #FF6B08 inset, 0 0 5px 4px #FF6B08;
 }
-
-/* .list {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  padding: 0 9px 60px 9px;
-} */
 
 
 @media screen and (max-width: 767px) {
@@ -40,7 +32,7 @@
     padding: 0 0px 60px 0px;
   }
 
-  .plusBtn{
+  .mainplusBtn{
     padding:0;
     bottom: 20px;
     right: 20px;
