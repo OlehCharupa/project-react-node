@@ -21,13 +21,13 @@ export const addTask = async (req, res) => {
     const hoursWastedPerDay = [];
     const startDateArr = sprint.startDate.split("-");
     const startDateObj = DateTime.local(
-        Number(startDateArr[0]),
+        Number(startDateArr[2]),
         Number(startDateArr[1]),
-        Number(startDateArr[2])
+        Number(startDateArr[0])
     );
     for (let i = 0; i < sprint.duration; i++) {
         hoursWastedPerDay.push({
-            currentDay: startDateObj.plus({ days: i }).toFormat("yyyy-MM-dd"),
+            currentDay: startDateObj.plus({ days: i }).toFormat("dd-MM-yyyy"),
             singleHoursWasted: 0,
         });
     }

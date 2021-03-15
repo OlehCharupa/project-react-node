@@ -14,13 +14,14 @@ import {
 
 const addSprintSchema = Joi.object({
     title: Joi.string().required(),
-    endDate: Joi.string()
+    startDate: Joi.string()
         .custom((value, helpers) => {
-            const dateRegex = /^\d{4}\-([1-9]|1[012])\-([1-9]|[12][0-9]|3[01])$/;
+            console.log(typeof value);
+            const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
             const isValidDate = dateRegex.test(value);
             if (!isValidDate) {
                 return helpers.message({
-                    custom: "Invalid 'date'. Please, use YYYY-MM-DD string format",
+                    custom: "Invalid 'date'. Please, use DD-MM-YYYY string format",
                 });
             }
             return value;

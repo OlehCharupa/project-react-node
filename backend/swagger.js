@@ -248,7 +248,7 @@ export default {
             }
         },
         "/project/contributor/{projectId}": {
-            "post": {
+            "patch": {
                 "tags": ["Project"],
                 "summary": "Add members to a project",
                 "security": [{ "Bearer": [] }],
@@ -862,12 +862,12 @@ export default {
                                                     "startDate": {
                                                         "type": "string",
                                                         "description": "Sprint's start date",
-                                                        "example": "2020-12-31"
+                                                        "example": "30-12-2020"
                                                     },
                                                     "endDate": {
                                                         "type": "string",
                                                         "description": "Sprint's end date",
-                                                        "example": "2021-1-1"
+                                                        "example": "31-12-2020"
                                                     },
                                                     "tasks": {
                                                         "type": "array",
@@ -902,7 +902,7 @@ export default {
                                                                             "currentDay": {
                                                                                 "type": "string",
                                                                                 "description": "Day's date",
-                                                                                "example": "2020-12-31"
+                                                                                "example": "31-12-2020"
                                                                             },
                                                                             "singleHoursWasted": {
                                                                                 "type": "integer",
@@ -1009,7 +1009,7 @@ export default {
                                                         "date": {
                                                             "type": "string",
                                                             "description": "Day's date",
-                                                            "example": "2020-12-31"
+                                                            "example": "31-12-2020"
                                                         },
                                                         "isCompleted": {
                                                             "type": "string",
@@ -1289,7 +1289,7 @@ export default {
                 }
             },
             "SprintRequest": {
-                "required": ["title", "endDate", "duration"],
+                "required": ["title", "startDate", "duration"],
                 "type": "object",
                 "properties": {
                     "title": {
@@ -1297,10 +1297,10 @@ export default {
                         "description": "Sprint's title",
                         "example": "Sprint 1"
                     },
-                    "endDate": {
+                    "startDate": {
                         "type": "string",
                         "description": "Sprint's end date",
-                        "example": "2020-12-31"
+                        "example": "30-12-2020"
                     },
                     "duration": {
                         "type": "integer",
@@ -1321,12 +1321,12 @@ export default {
                     "startDate": {
                         "type": "string",
                         "description": "Sprint's start date",
-                        "example": "2020-12-30"
+                        "example": "30-12-2020"
                     },
                     "endDate": {
                         "type": "string",
                         "description": "Sprint's end date",
-                        "example": "2020-12-31"
+                        "example": "31-12-2020"
                     },
                     "duration": {
                         "type": "integer",
@@ -1354,12 +1354,12 @@ export default {
                         "startDate": {
                             "type": "string",
                             "description": "Sprint's start date",
-                            "example": "2020-12-30"
+                            "example": "30-12-2020"
                         },
                         "endDate": {
                             "type": "string",
                             "description": "Sprint's end date",
-                            "example": "2020-12-31"
+                            "example": "31-12-2020"
                         },
                         "duration": {
                             "type": "integer",
@@ -1440,7 +1440,7 @@ export default {
                                 "currentDay": {
                                     "type": "string",
                                     "description": "Day's date",
-                                    "example": "2020-12-31"
+                                    "example": "31-12-2020"
                                 },
                                 "singleHoursWasted": {
                                     "type": "integer",
@@ -1487,7 +1487,7 @@ export default {
                                     "currentDay": {
                                         "type": "string",
                                         "description": "Day's date",
-                                        "example": "2020-12-31"
+                                        "example": "31-12-2020"
                                     },
                                     "singleHoursWasted": {
                                         "type": "integer",
@@ -1515,7 +1515,7 @@ export default {
                     "date": {
                         "type": "string",
                         "description": "Day's date",
-                        "example": "2020-12-31"
+                        "example": "31-12-2020"
                     },
                     "hours": {
                         "type": "integer",
@@ -1536,7 +1536,7 @@ export default {
                             "currentDay": {
                                 "type": "string",
                                 "description": "Day's date",
-                                "example": "2020-12-31"
+                                "example": "31-12-2020"
                             },
                             "singleHoursWasted": {
                                 "type": "integer",
