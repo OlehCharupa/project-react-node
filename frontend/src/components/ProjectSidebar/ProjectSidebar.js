@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import { allProjectsSelector } from "../../redux/selectors/projects-selectors";
 import projectsOperations from "../../redux/operations/projectsOperations";
-import ProjectSidebarList from "../ProjectSidebarItem/ProjectSidebarItem"
+import ProjectSidebarList from "../ProjectSidebarItem/ProjectSidebarItem";
 
 const ProjectSidebar = () => {
   const dispatch = useDispatch();

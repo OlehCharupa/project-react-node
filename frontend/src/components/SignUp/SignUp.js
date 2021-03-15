@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import signUp from './SignUp.module.css';
 // import BgImage from '../BgImage/BgImage';
+import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
-
-
+import { register } from '../../redux/operations/authOperations.js';
 
 const SignUp = () => {
+    
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
@@ -27,12 +31,10 @@ const SignUp = () => {
             .required('Required'),
 
     });
-    const regState = {
-        email: '',
-        password: '',
-        repeatPassword: '',
-    }
-    const [regForm, setRegState] = useState(regState);
+    const openPage = () => {
+		history.push('/login')
+
+	}
     return (
         <>
 
@@ -42,13 +44,16 @@ const SignUp = () => {
                     initialValues={{
                         email: '',
                         password: '',
-                        repeatPassword: '',
                     }}
                     validationSchema={SignupSchema}
-                    onSubmit={values => {
+                    onSubmit={(values, { setSubmitting }) => {
                         // same shape as initial values
-                        setRegState({ ...values })
-                        console.log(regForm);
+
+                        dispatch(register(values));
+                        setTimeout(() => {
+                            history.push('/login')
+                            setSubmitting(false);
+                        }, 500)
                     }}
                 >
                     {({ errors, touched }) => (

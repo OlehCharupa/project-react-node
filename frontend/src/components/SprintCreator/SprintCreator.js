@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./SprintCreator.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import momentDays from "moment-business-days";
@@ -8,7 +9,9 @@ import uk from "date-fns/locale/uk";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import addSprint from "../../redux/operations/sprintsOperations";
+import { modalToggle } from "../../redux/actions/modalAction";
+
+// import addSprint from "../../redux/operations/sprintsOperations";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./bashStyles.css";
@@ -20,6 +23,12 @@ const SprintCreator = () => {
 
   const pastDaysToggle = () => {
     setHidePastDays((state) => !state);
+  };
+
+  const isModalOpen = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const toggleModal = () => {
+    dispatch(modalToggle(!isModalOpen));
   };
 
   const CreateSchema = Yup.object().shape({
@@ -82,11 +91,12 @@ const SprintCreator = () => {
             duration: duration,
           };
 
-          addSprint(reqBody);
+          // addSprint(reqBody);
 
           console.log(hidePastDays, reqBody);
 
           setStartDate(Date.now());
+          toggleModal();
         }}
       >
         {({ errors, touched }) => (
@@ -131,12 +141,14 @@ const SprintCreator = () => {
                 placeholderText="Дата початку"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                selected={ifIsWeekEnd(startDate)}
+                // selected={ifIsWeekEnd(startDate)}
                 filterDate={isWeekday}
                 minDate={!hidePastDays && moment().toDate()}
                 className={styles.date_picker}
               />
-              <div className={`${styles.formItem}  ${styles.duration_container}`}>
+              <div
+                className={`${styles.formItem}  ${styles.duration_container}`}
+              >
                 <Field
                   className={styles.input}
                   id="duration"
@@ -152,11 +164,11 @@ const SprintCreator = () => {
               </div>
             </div>
 
-            {/* <div className={styles.button_container}>
-              <button type="submit" className={styles.button}>
-                Submit
+            <div className={styles.button__wrapper}>
+              <button type="submit" className={styles.button__ready}>
+                Готово
               </button>
-            </div> */}
+            </div>
           </Form>
         )}
       </Formik>

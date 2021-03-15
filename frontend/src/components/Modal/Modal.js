@@ -8,12 +8,12 @@ import overlayTransition from "./CSSTransition/OverlayTransition.module.css";
 import style from "./Modal.module.css";
 
 const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
-// const Modal = () => {
+  // const Modal = () => {
 
   // в компоненті, який викликає модальне вікно потрібно прописати :
 
-// import { modalToggle } from "../../redux/actions/modalAction";
-  
+  // import { modalToggle } from "../../redux/actions/modalAction";
+
   // const isModalOpen = useSelector((state) => state.modal);
   // const dispatch = useDispatch();
   // const toggleModal = () => {
@@ -31,10 +31,12 @@ const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
 
   // children - сама форма
 
-
+  const body = document.querySelector("body");
 
   useEffect(() => {
-      isModalOpen && addListener();
+    isModalOpen && addListener();
+    isModalOpen && body.classList.add(style.isOpen);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
@@ -44,6 +46,7 @@ const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
   };
   const closeModal = () => {
     removeListener();
+    body.classList.remove(style.isOpen);
     toggleModal();
   };
   const handleKeyDown = (e) => {

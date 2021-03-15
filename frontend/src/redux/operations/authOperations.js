@@ -1,7 +1,7 @@
 import axios from "axios";
 import authAction from "../actions/authAction";
 
-axios.defaults.baseURL = "back url"; //TODO вписать url бека
+axios.defaults.baseURL = "https://bc24.herokuapp.com/";
 
 const token = {
   set(token) {
@@ -12,10 +12,16 @@ const token = {
   },
 };
 
-const register = (credentials) => async (dispatch) => {
+export const register = (credentials) => async (dispatch) => {
   dispatch(authAction.registerRequest());
+  const { email, password } = credentials;
+  const state = {
+    email: email,
+    password: password,
+  };
+  console.log("state", state);
   try {
-    const result = await axios.post("/users/signup", credentials);
+    const result = await axios.post("/auth/register", state);
     token.set(result.data.token);
     dispatch(authAction.registerSuccess(result.data));
   } catch (error) {
@@ -23,11 +29,11 @@ const register = (credentials) => async (dispatch) => {
   }
 };
 
-const logIn = (credentials) => async (dispatch) => {
+export const logIn = (credentials) => async (dispatch) => {
   dispatch(authAction.loginRequest());
   try {
-    const result = await axios.post("/users/login", credentials);
-    token.set(result.data.token);
+    const result = await axios.post("/auth/login", credentials);
+    token.set(result.data.accessToken);
     dispatch(authAction.loginSuccess(result.data));
   } catch (error) {
     dispatch(authAction.loginError(error));
@@ -37,7 +43,7 @@ const logIn = (credentials) => async (dispatch) => {
 const logOut = () => async (dispatch) => {
   dispatch(authAction.logoutRequest());
   try {
-    await axios.post("/users/logout");
+    await axios.post("/auth/logout");
     token.unset();
     dispatch(authAction.logoutSuccess());
   } catch (error) {
@@ -56,12 +62,12 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   token.set(persistedToken);
   dispatch(authAction.getCurrentUserRequest());
-  try {
-    const result = await axios.get("/users/current");
-    dispatch(authAction.getCurrentUserSuccess(result.data));
-  } catch (error) {
-    dispatch(authAction.getCurrentUserError(error));
-  }
+  // try {
+  //   const result = await axios.get("/users/current");
+  //   dispatch(authAction.getCurrentUserSuccess(result.data));
+  // } catch (error) {
+  //   dispatch(authAction.getCurrentUserError(error));
+  // }
 };
 
-export default { register, logIn, logOut, getCurrentUser };
+export default { logIn, logOut, getCurrentUser };
