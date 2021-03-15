@@ -51,7 +51,7 @@ export const login = async (req, res, next) => {
     });
     const accessToken = jwt.sign(
         { uid: user._id, sid: newSession._id },
-        process.env.JWT_SECRET, // должна быть строка
+        process.env.JWT_SECRET,
         {
             expiresIn: process.env.JWT_ACCESS_EXPIRE_TIME,
         }

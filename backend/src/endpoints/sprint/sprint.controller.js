@@ -7,7 +7,7 @@ const DateTime = luxon.DateTime
 
 export const addSprint = async (req, res) => {
     const user = req.user;
-    const { title, endDate, duration } = req.body;
+    const { title, startDate, duration } = req.body;
     const { projectId } = req.params;
     const project = await ProjectModel.findById(projectId);
     if (
@@ -18,15 +18,15 @@ export const addSprint = async (req, res) => {
     ) {
         return res.status(404).send({ message: "Project not found" });
     }
-    const endDateArr = endDate.split("-");
-    const endDateObj = DateTime.local(
-        Number(endDateArr[0]),
-        Number(endDateArr[1]),
-        Number(endDateArr[2])
+    const startDateArr = startDate.split("-");
+    const startDateObj = DateTime.local(
+        Number(startDateArr[2]),
+        Number(startDateArr[1]),
+        Number(startDateArr[0])
     );
-    const startDate = endDateObj
-        .minus({ days: duration - 1 })
-        .toFormat("yyyy-MM-dd");
+    const endDate = startDateObj
+        .plus({ days: duration - 1 })
+        .toFormat("dd-MM-yyyy");
     const sprint = await SprintModel.create({
         title,
         startDate,
