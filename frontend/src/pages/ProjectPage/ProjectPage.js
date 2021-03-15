@@ -24,15 +24,17 @@ const ProjectPage = () => {
           <h1 className={style.title}>Проекти</h1>
         </div>
         <div className={style.link} to="/">
-          <button className={style.plusBtn}  type="button">
-            <span style={{display:"block"}}><img src={plus} /></span>
+          <button className={style.plusBtn} type="button">
+            <span style={{ display: "block" }}>
+              <img src={plus} />
+            </span>
           </button>
           <div className={style.create}>Створити проект</div>
         </div>
       </div>
       <ul className={style.list}>
         {projects.map((project) => (
-          <ProjectPageItem {...project} key={project.id} id={project.id}/>
+          <ProjectPageItem {...project} key={project.id} id={project.id} />
         ))}
       </ul>
     </>

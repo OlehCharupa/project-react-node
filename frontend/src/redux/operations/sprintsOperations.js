@@ -31,6 +31,48 @@ const sprints = [
     finishDate: "22.06.2020",
     duration: 12,
   },
+  {
+    id: 5,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
+  {
+    id: 6,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
+  {
+    id: 7,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
+  {
+    id: 8,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
+  {
+    id: 9,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
+  {
+    id: 10,
+    name: "Sprint Burndown Chart 5",
+    startDate: "10.06.2020",
+    finishDate: "22.06.2020",
+    duration: 12,
+  },
 ];
 
 const addSprint = (name, startDate, finishDate, duration) => (dispatch) => {

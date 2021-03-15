@@ -7,8 +7,6 @@
   display: flex;
 }
 
-
-
 .link, .linkAdd{
   text-decoration: none;
   color: #181C27;
@@ -51,6 +49,17 @@
 }
 
 @media screen and (min-width: 768px) {
+  .mainLeftSprint{
+    display: block;
+    position: sticky;
+    top:0;
+    width: 600px;
+    height: 100%;
+  }
+
+  .showProjectMain{
+    width: 150px;
+  }
 
   .sidebarList{
     display: block;
@@ -71,30 +80,29 @@
     margin-bottom: 20px;
   }
 
-  .mainLeftSprint{
-    position: relative;
-    width: 2255px;
-    min-height: 100%;
-  }
   
   .mainLeftSprint:after{
     content: "";
     display: block;
     position: absolute;
-    height: 120%;
+    height: 200%;
     width: 1px;
     background-color: rgba(24, 28, 39, 0.1);
     top: 0;
-    left: 220px;
+    left: 208px;
   }
 
   .linkAdd{
+    margin-top: 200px;
     text-align: center;
     display: table;
-    margin-left: 27px;
   }
   
-  
+  .container{
+    overflow: auto;
+    padding-right: 42px;
+    height: 600px;
+  }
   
   .plusBtn{
     margin: 0 auto;

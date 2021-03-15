@@ -23,6 +23,81 @@ const projects = [
     name: "Project 4",
     description: "Текст описание проекта",
   },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
+  {
+    id: 4,
+    name: "Project 4",
+    description: "Текст описание проекта",
+  },
 ];
 
 const addProject = (name, description) => (dispatch) => {
