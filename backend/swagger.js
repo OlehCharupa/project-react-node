@@ -248,7 +248,7 @@ export default {
             }
         },
         "/project/contributor/{projectId}": {
-            "post": {
+            "patch": {
                 "tags": ["Project"],
                 "summary": "Add members to a project",
                 "security": [{ "Bearer": [] }],
