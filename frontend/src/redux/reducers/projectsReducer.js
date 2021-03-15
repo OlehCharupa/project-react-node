@@ -11,12 +11,16 @@ import {
   DELETE_PROJECT_ERROR,
   DELETE_PROJECT_REQUEST,
   DELETE_PROJECT_SUCCESS,
+  ADD_MEMBER_REQUEST,
+  ADD_MEMBER_SUCCESS,
+  ADD_MEMBER_ERROR,
   CHANGE_ERROR,
 } from "../constants/projectsConstans.js";
 
 const items = createReducer([], {
   [FETCH_PROJECTS_SUCCESS]: (state, { payload }) => payload,
   [ADD_PROJECT_SUCCESS]: (state, { payload }) => [...state, payload],
+  [ADD_MEMBER_SUCCESS]: (state, {payload}) => [...state, payload],
   [DELETE_PROJECT_SUCCESS]: (state, { payload }) =>
     state.filter((sprint) => sprint._id !== payload),
 });
@@ -35,6 +39,9 @@ const loading = createReducer(false, {
   [DELETE_PROJECT_REQUEST]: () => true,
   [DELETE_PROJECT_SUCCESS]: () => false,
   [DELETE_PROJECT_ERROR]: () => false,
+  [ADD_MEMBER_REQUEST]: () => true,
+  [ADD_MEMBER_SUCCESS]: () => false,
+  [ADD_MEMBER_ERROR]: () => false,
 });
 
 export default combineReducers({

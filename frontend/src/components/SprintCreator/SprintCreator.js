@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./SprintCreator.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
@@ -11,7 +12,7 @@ import * as Yup from "yup";
 
 import { modalToggle } from "../../redux/actions/modalAction";
 
-// import addSprint from "../../redux/operations/sprintsOperations";
+import sprintOperations from "../../redux/operations/sprintsOperations";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./bashStyles.css";
@@ -20,6 +21,13 @@ const SprintCreator = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [hidePastDays, setHidePastDays] = useState(false);
   registerLocale("uk", uk);
+
+  const location = useLocation();
+  let projectId;
+
+  useEffect(() => {
+    projectId = location.pathname.substr(10);
+  });
 
   const pastDaysToggle = () => {
     setHidePastDays((state) => !state);
@@ -72,8 +80,8 @@ const SprintCreator = () => {
         validationSchema={CreateSchema}
         onSubmit={({ sprintName, duration }) => {
           const StartDate = new Date(startDate);
-          const formatedStartDate = moment(StartDate, "DD.MM.YYYY").format(
-            "DD.MM.YYYY"
+          const formatedStartDate = moment(StartDate, "DD-MM-YYYY").format(
+            "DD-MM-YYYY"
           );
 
           const endDate = momentDays(
@@ -85,16 +93,15 @@ const SprintCreator = () => {
           );
 
           const reqBody = {
-            sprintName: sprintName,
+            projectId,
+            title: sprintName,
             startDate: formatedStartDate,
             endDate: formatedEndDate,
-            duration: duration,
+            duration: Number(duration),
           };
 
-          // addSprint(reqBody);
-
-          console.log(hidePastDays, reqBody);
-
+          dispatch(sprintOperations.addSprint(reqBody));
+          
           setStartDate(Date.now());
           toggleModal();
         }}
