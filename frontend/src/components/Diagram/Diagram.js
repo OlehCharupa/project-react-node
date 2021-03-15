@@ -1,16 +1,36 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import style from './Diagram.module.css'
 
 const Diagram = () => {
+    const duration = useSelector(state => state)
+    const hoursPlanned = useSelector(state => state)
+    const arrDaysPlan = useSelector(state => state)
 
-    const redLine = () => {
+
+    const redLine = (timesOnSprints, duration) => {
+        let allHoursOnSprint
+        for (let key in timesOnSprints) {
+            allHoursOnSprint += key
+        }
+        const arrTimeOfProgect = [hoursPlanned];
+        const sprintHoursPerDay = hoursPlanned / duration;
+        let remainingHours = hoursPlanned;
+
+        for (let key of duration) {
+            arrTimeOfProgect.push((remainingHours - sprintHoursPerDay).toFixed(2));
+            remainingHours -= sprintHoursPerDay;
+        }
+        return arrTimeOfProgect;
     };
 
     const blueLine = () => {
+
     };
 
     const chartData = {
-        labels: "",// день (даты снизу диаграммы)
+        labels: ['1 апр', '2 апр', '3 апр', '4 апр', '5 апр', '6 апр'],// дени (даты снизу диаграммы) mb arrDays
         datasets: [
             {
                 label: "Запланований залишок трудовитрат",
@@ -18,15 +38,15 @@ const Diagram = () => {
                 lineTension: 0,
                 borderColor: "rgb(255, 0, 0)",
                 backgroundColor: "rgb(255, 0, 0)",
-                data: [], // массив времени
+                data: [250, 188, 125, 63, 0], // массив времени
             },
             {
                 label: "Актуальний залишок трудовитрат",
                 fill: false,
-                lineTension: 0.3,
+                lineTension: 0.4,
                 borderColor: "rgb(0, 89, 255)",
                 backgroundColor: "rgb(0, 89, 255)",
-                data: [], // массив времени
+                data: [250, 180, 125, 115, 100, 0], // массив времени
             },
         ],
     }
@@ -43,7 +63,7 @@ const Diagram = () => {
         responsive: true,
         title: {
             display: true,
-            text: "", // sprinta заголовок
+            text: "Burndown Chart(Calendar Team)",
             fontColor: "#181C27",
             fontFamily: "'Montserrat', 'sans-serif'",
             fontSize: 20,
@@ -76,6 +96,13 @@ const Diagram = () => {
             caretPadding: 5,
             caretSize: 10,
             cornerRadius: 6,
+            callbacks: {
+                label: (tooltipItem) => {
+                    let label = tooltipItem.value;
+                    label = "  " + label;
+                    return label;
+                },
+            },
         },
         scales: {
             yAxes: [
@@ -124,9 +151,9 @@ const Diagram = () => {
         },
     };
     return (
-        <div className="contanerDiagram">
+        <div className={style.contanerDiagram}>
             <Line data={chartData} options={chartOptions} />
-        </div>
+        </div >
     );
 };
 
