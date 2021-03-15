@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import DiagramModalWind from "../DiagramModalWind/DiagramModalWind"
-import styles from './Index.module.css'
+import styles from './DiagramBtn.module.css'
 
-const Index = () => {
+const DiagramBtn = () => {
     const [isModal, setIsModal] = useState(false)
+
     return (
         <>
             <button
@@ -17,4 +18,4 @@ const Index = () => {
 
 }
 
-export default Index
+export default DiagramBtn

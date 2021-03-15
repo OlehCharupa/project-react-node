@@ -1,36 +1,89 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import { hoursPlannedSelector, sprintDurationSelector, daysSelector } from "../../redux/selectors/diagramSelectors";
+import { allTasksSelector } from "../../redux/selectors/tasks-selectors";
 import style from './Diagram.module.css'
 
 const Diagram = () => {
-    const duration = useSelector(state => state)
-    const hoursPlanned = useSelector(state => state)
-    const arrDaysPlan = useSelector(state => state)
+    const allTasks = useSelector(allTasksSelector(state));
+    const duration = useSelector(sprintDurationSelector(state))
+    const hoursPlanned = useSelector(hoursPlannedSelector(state))
+    const days = useSelector(daysSelector(state))
 
 
-    const redLine = (timesOnSprints, duration) => {
-        let allHoursOnSprint
-        for (let key in timesOnSprints) {
-            allHoursOnSprint += key
-        }
+    const redLine = (hoursPlanned, duration) => {
         const arrTimeOfProgect = [hoursPlanned];
         const sprintHoursPerDay = hoursPlanned / duration;
         let remainingHours = hoursPlanned;
 
-        for (let key of duration) {
+        for (let i of duration) {
             arrTimeOfProgect.push((remainingHours - sprintHoursPerDay).toFixed(2));
             remainingHours -= sprintHoursPerDay;
         }
         return arrTimeOfProgect;
     };
 
-    const blueLine = () => {
+    const blueLine = (hoursPlanned, duration, allTasks) => {
+        const getSumArrOfHoursPerDay = () => {
+            const arrSumOfPerDay = [];
+            const corrHoursArrChecker = (item) => {
+                const itemHoursPlanned = item.hoursPlanned;
+                const itemHoursWasted = item.hoursWasted;
+                let correctArrHoursWastedPerDay = null;
+                if (itemHoursPlanned >= itemHoursWasted) {
+                    correctArrHoursWastedPerDay = item.hoursWastedPerDay;
+                } else {
+                    correctArrHoursWastedPerDay = item.hoursWastedPerDay.map((el) => ({
+                        ...el,
+                        singleHoursWasted:
+                            (itemHoursPlanned / itemHoursWasted) * el.singleHoursWasted,
+                    }));
+                }
+                return correctArrHoursWastedPerDay;
+            };
+            const singleHoursWasted = (item, i) => {
+                const result = +(corrHoursArrChecker(item)[i].singleHoursWasted)
+                return result
+            }
+            for (let i = 0; i < duration; i += 1) {
+                let total = 0;
+                for (let item of allTasks) {
+                    total += singleHoursWasted(item, i);
+                }
+                arrSumOfPerDay.push(total);
+            }
+            return arrSumOfPerDay;
+        };
+        const arrOftotalHoursPerDay = getSumArrOfHoursPerDay(duration, allTasks);
 
+        const arrTimes = [];
+        const startPoint = hoursPlanned
+        for (let arg = 0; arg < arrOftotalHoursPerDay; arg += 1) {
+            arrTimes.push((startPoint - arg).toFixed(2));
+            startPoint -= arg
+        }
+
+        return arrTimes
+    };
+
+    const formatDate = (days) => {
+        const conversionDate = (day) => {
+            const newDate = moment(day)
+                .locale("uk")
+                .format("DD MMM");
+            newDate.split("");
+            const firstLetterToUppercase = newDate[3].toUpperCase();
+            newDate.splice(3, 1, firstLetterToUppercase);
+            return newDate.join("");
+        }
+        const result = days.map((day) => conversionDate(day))
+
+        return result
     };
 
     const chartData = {
-        labels: ['1 апр', '2 апр', '3 апр', '4 апр', '5 апр', '6 апр'],// дени (даты снизу диаграммы) mb arrDays
+        labels: formatDate(days), // дени (даты снизу диаграммы) arrDays
         datasets: [
             {
                 label: "Запланований залишок трудовитрат",
@@ -38,7 +91,7 @@ const Diagram = () => {
                 lineTension: 0,
                 borderColor: "rgb(255, 0, 0)",
                 backgroundColor: "rgb(255, 0, 0)",
-                data: [250, 188, 125, 63, 0], // массив времени
+                data: redLine(hoursPlanned, duration), // массив времени
             },
             {
                 label: "Актуальний залишок трудовитрат",
@@ -46,7 +99,7 @@ const Diagram = () => {
                 lineTension: 0.4,
                 borderColor: "rgb(0, 89, 255)",
                 backgroundColor: "rgb(0, 89, 255)",
-                data: [250, 180, 125, 115, 100, 0], // массив времени
+                data: blueLine(hoursPlanned, duration, allTasks), // массив времени
             },
         ],
     }
@@ -98,8 +151,7 @@ const Diagram = () => {
             cornerRadius: 6,
             callbacks: {
                 label: (tooltipItem) => {
-                    let label = tooltipItem.value;
-                    label = "  " + label;
+                    let label = `  ${tooltipItem.value}`;
                     return label;
                 },
             },
