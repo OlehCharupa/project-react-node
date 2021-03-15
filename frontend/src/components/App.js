@@ -8,9 +8,6 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
-import SprintPage from "../pages/SprintPage/SprintPage";
-import ProjectPage from "../pages/ProjectPage/ProjectPage";
-import SingleSprintPage from "../pages/SingleSprintPage/SingleSprintPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,10 +19,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Header />
-        {/* <SingleSprintPage /> */}
-        {/* <ProjectPage /> */}
-        <SprintPage />
-        {/* <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             {routes.map((route) =>
               route.private ? (
@@ -40,7 +34,7 @@ const App = () => {
             )}
             <Redirect to="/registration"></Redirect>
           </Switch>
-        </Suspense> */}
+        </Suspense>
       </Container>
     </div>
   );

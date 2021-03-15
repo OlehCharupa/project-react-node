@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { ReactComponent as ReactLogo } from "../../pages/ProjectPage/images/plus.svg";
 import projectsOperations from "../../redux/operations/projectsOperations";
 import style from "./ProjectWrapper.module.css";
@@ -15,7 +14,6 @@ import Modal from "../Modal/Modal";
 import SprintCreator from "../SprintCreator/SprintCreator";
 
 const ProjectWrapper = () => {
-
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -66,7 +64,6 @@ const ProjectWrapper = () => {
     }
   };
 
-  const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
     setModal(!isModalOpen);
@@ -118,8 +115,6 @@ const ProjectWrapper = () => {
               ></button>
             </div>
             <div className={style.description}>
-              Короткий опис проекту, якщо він є, розміщуєтсья тут. Ширина
-              тектового блоку.
             </div>
             <div className={style.addPeople}>
               <img src={add} style={{ width: "20px", marginRight: "10px" }} />
@@ -130,6 +125,7 @@ const ProjectWrapper = () => {
           </div>
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
             <button
+              style={{backgroundColor:"transparent" }}
               type="button"
               aria-label="create sprint"
               className={style.link}

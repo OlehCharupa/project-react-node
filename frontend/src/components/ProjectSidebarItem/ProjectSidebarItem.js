@@ -4,19 +4,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import style from "./ProjectSidebarItem.module.css";
 
-const ProjectSidebarItem = ({ id, name }) => {
+const ProjectSidebarItem = ({ id, title }) => {
   const { projectId } = useParams();
 
   return (
     <>
-      <li className={style.item}>
-        <NavLink
-          to={{ pathname: `/projects/${projectId}/${id}` }}
-          className={style.link}
-        >
-          <span className={style.title}>{name}</span>
-        </NavLink>
-      </li>
+      <NavLink
+        to={{ pathname: `/projects/${projectId}/${id}` }}
+        className={style.link}
+      >
+        <span className={style.title}>{title}</span>
+      </NavLink>
     </>
   );
 };
