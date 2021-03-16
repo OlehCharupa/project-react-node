@@ -11,12 +11,12 @@ const SignIn = () => {
     const dispatch = useDispatch()
     const SigninSchema = Yup.object().shape({
         email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
+            .email('Неправильна електронна адреса')
+            .required("Обов'язковий"),
         password: Yup.string()
-            .min(6, "Too Short! Min 6")
-            .max(20, 'Max 20')
-            .required('Required'),
+            .min(6, "Занадто короткий! Мінімум 6")
+            .max(20, 'Макс 20')
+            .required("Обов'язковий"),
     });
     const regState = {
         email: '',
@@ -48,14 +48,14 @@ const SignIn = () => {
                                 <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" />
                                 {errors.email && touched.email ? (
                                     <label className={signIn.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (<label className={signIn.label} htmlFor='email' >Email*</label>)}
+                                ) : (<label className={signIn.label} htmlFor='email' >Електронна пошта*</label>)}
                             </div>
 
                             <div className={signIn.form__item}>
                                 <Field name="password" type="password" id='pass' className={signIn.input} placeholder="Password" />
                                 {errors.password && touched.password ? (
                                     <label className={signIn.labelError} htmlFor='password' >{errors.password}</label>
-                                ) : (<label htmlFor='pass' className={signIn.label} >Password*</label>)}
+                                ) : (<label htmlFor='pass' className={signIn.label} >Пароль*</label>)}
                             </div>
                             <button type='submit' className={signIn.btn}>Увійти</button>
                             <p className={signIn.form__text}>Немає акаунту? <NavLink to="/registration" exact className={signIn.form__link} >Зареєструватись</NavLink></p>                        </Form>
