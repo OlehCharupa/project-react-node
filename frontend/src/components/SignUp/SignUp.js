@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import signUp from './SignUp.module.css';
-// import BgImage from '../BgImage/BgImage';
 import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
-// import { errorSelector } from '../../redux/selectors/tasks-selectors';
+
 const SignUp = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const error = useSelector(state => state.auth.error || null);
-    useEffect(() => {
-        if (error === "The email address is already in use by another account.") {
-          emailInput.current.firstChild.control.focus();
-        } else if (error === "The email address is badly formatted.") {
-          emailInput.current.firstChild.control.focus();
-        } else if (error === "Password should be at least 6 characters") {
-          passwordInput.current.children[0].control.focus();
-        }
-        return () => {
-          dispatch(errorOff());
-        };
-      }, []);
-    // console.log('errorState', !!(errorState.indexOf('409')+1));
+    const errorState = useSelector(state => state.auth.error.message);
+
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Неправильна електронна адреса')
@@ -53,15 +40,17 @@ const SignUp = () => {
                         email: '',
                         password: '',
                     }}
-                    // initialErrors={{errors: `${errorState}`}}
                     validationSchema={SignupSchema}
-                    onSubmit={(values, { setSubmitting, setErrors, getState }) => {
+                    onSubmit={(values, { setSubmitting }) => {
                         // same shape as initial values
+                        if(!!(errorState)){
+                            setTimeout(() => {
+                                history.push('/login')
+                                setSubmitting(false);
+                            }, 500)
+                        }   
                         dispatch(register(values));
-                        setTimeout(() => {
-                            // history.push('/login')
-                            setSubmitting(false);
-                        }, 500)
+                        
 
                     }}
                 >
@@ -72,7 +61,8 @@ const SignUp = () => {
 
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (!!(error.indexOf('409') + 1)   ?  <label className={signUp.label} htmlFor='email' >Такой email уже зарегестрирован!</label>:<label className={signUp.label} htmlFor='email' >Електронна пошта*</label>)}
+                                ) : (!!(errorState.indexOf('409')+1)?<label className={signUp.label} htmlFor='email' >Таку електронну адресу вже зареєстровано!</label>
+                                : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>)}
                             </div>
 
                             <div className={signUp.form__item}>

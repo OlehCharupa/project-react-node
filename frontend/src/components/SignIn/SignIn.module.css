@@ -65,7 +65,7 @@
     box-shadow: none;
 }
 .input:focus + .label, .input:not(:placeholder-shown) + .label{
-    top: 45px;
+    top: 30px;
     font-size: 14px;
     line-height: 17px;
     color: #FF6B08;
@@ -76,7 +76,7 @@
 
 }
 .input:focus + .labelError, .input:not(:placeholder-shown) + .labelError{
-    top: 45px;
+    top: 30px;
     font-size: 14px;
     font-weight: 800;
     line-height: 17px;

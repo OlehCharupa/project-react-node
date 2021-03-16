@@ -36,7 +36,7 @@
     transition: top 0.5s;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.04em;
     color: rgba(24, 28, 39, 0.6);
@@ -64,7 +64,7 @@
     box-shadow: none;
 }
 .input:focus + .label, .input:not(:placeholder-shown) + .label,.input:checked{
-    top: 25px;
+    top: 20px;
     font-size: 14px;
     line-height: 17px;
     color: #FF6B08;
@@ -79,7 +79,7 @@
     }
 } */
 .input:focus + .labelError, .input:not(:placeholder-shown) + .labelError{
-    top: 25px;
+    top: 20px;
     font-size: 14px;
     font-weight: 800;
     line-height: 17px;
