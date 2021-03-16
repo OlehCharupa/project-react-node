@@ -9,8 +9,11 @@ export const loaderSelector = (state) => tasksSelector(state).loading;
 export const getVisibleTasks = createSelector(
   [allTasksSelector, filterSelector],
   (tasks, filter) => {
+    if (tasks.message) {
+      return [];
+    }
     return tasks.filter((task) =>
-      task.name.toLowerCase().includes(filter.toLowerCase())
+      task.title.toLowerCase().includes(filter.toLowerCase())
     );
   }
 );

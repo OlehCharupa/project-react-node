@@ -112,7 +112,7 @@ const SprintsList = () => {
               data-sprint-id={sprint._id}
               onClick={sprintHandler}
             >
-              <SprintsListItem {...sprint} id={sprint._id} />
+              <SprintsListItem id={sprint._id} />
             </Li>
           ))}
         </TransitionGroup>

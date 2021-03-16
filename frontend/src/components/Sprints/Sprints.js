@@ -9,15 +9,14 @@ import arrowRight from "./images/arrow-right.svg";
 import edit from "./images/edit.svg";
 import tasksAction from "../../redux/actions/tasksAction";
 import { filterSelector } from "../../redux/selectors/tasks-selectors";
-import { allSprintsSelector } from "../../redux/selectors/sprints-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
-import sprintsOperations from "../../redux/operations/sprintsOperations";
-
 import TasksList from "../TasksList/TasksList";
 import { useMediaQuery } from "react-responsive";
 import { modalToggle } from "../../redux/actions/modalAction";
 import Modal from "../../components/Modal/Modal";
 import TaskCreator from "../../components/TaskCreator/TaskCreator";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
@@ -394,28 +393,24 @@ const CurrentDateAndFilterDIV = styled.div`
   }
 `;
 
-const Sprints = () => {
+const Sprints = ({ id, title, duration, endDate }) => {
   const dispatch = useDispatch();
-  const { projectId, sprintId } = useParams();
+  const { sprintId } = useParams();
   const filter = useSelector((state) => filterSelector(state));
-  const sprints = useSelector((state) => allSprintsSelector(state));
 
   useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints(projectId));
     dispatch(tasksOperations.fetchTasks(sprintId));
-  }, []);
+  }, [sprintId]);
 
-  const currentSprint = sprints.find((sprint) => sprint._id === sprintId);
-  const { title, duration, endDate } = currentSprint;
-
-  const endDateFormat = endDate.split("-").reverse();
-  const endDateUnix = new Date(endDateFormat);
   const date = new Date();
   const dateUnix = new Date(
     date.getFullYear(),
     date.getMonth(),
     date.getDate()
   );
+
+  const endDateFormat = endDate ? endDate.split("-").reverse() : dateUnix;
+  const endDateUnix = new Date(endDateFormat);
 
   const options = {
     day: "numeric",
@@ -427,6 +422,8 @@ const Sprints = () => {
   const currentIndex =
     duration - Math.ceil(Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24));
   const [currentDay, setCurrentDay] = useState(localeDate);
+
+  console.log(currentIndex);
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -497,7 +494,10 @@ const Sprints = () => {
           <CurrentDateDIV>
             <PrevBtn aria-label="previous day" />
             <CurrentDateP>
-              <CurrentDateSPAN>{currentIndex}</CurrentDateSPAN>/{duration}
+              <CurrentDateSPAN>
+                {currentIndex ? currentIndex : 1}
+              </CurrentDateSPAN>
+              /{duration}
             </CurrentDateP>
             <NextBtn aria-label="next day" />
           </CurrentDateDIV>
@@ -524,7 +524,7 @@ const Sprints = () => {
           <SprintNameINPUT
             className={style.edit}
             maxLength="20"
-            value={sprintName}
+            value={title}
             readOnly
             onChange={sprintNameInputHandler}
           />
@@ -576,9 +576,18 @@ const Sprints = () => {
           </Desktop>
         </HeaderDIV>
       </Default>
-      <TasksList currentIndex={currentIndex} />
+      <TasksList />
     </SprintDIV>
   );
 };
 
-export default Sprints;
+const mapStateToProps = (state, ownProps) => {
+  const item = state.sprints.items.find((sprint) => sprint._id === ownProps.id);
+  return { ...item };
+};
+
+export default connect(mapStateToProps)(Sprints);
+
+Sprints.propTypes = {
+  id: PropTypes.string.isRequired,
+};

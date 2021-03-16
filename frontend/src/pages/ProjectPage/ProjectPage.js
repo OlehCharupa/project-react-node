@@ -51,7 +51,7 @@ const ProjectPage = () => {
           <div className={style.create}>Створити проект</div>
         </div>
       </div>
-      {Array.isArray(projects) ? (
+      {projects.length ? (
         <ul className={style.list}>
           {projects.map((project) => (
             <ProjectPageItem key={project._id} id={project._id} />
