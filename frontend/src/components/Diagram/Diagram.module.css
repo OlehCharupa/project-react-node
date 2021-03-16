@@ -6,6 +6,7 @@
     padding-top: 5px;
   }
 }
+
 @media screen and (min-width: 768px) {
   .contanerDiagram {
     width: 600px;
@@ -25,17 +26,3 @@
   }
   
 }
-
-/*
-@media screen and (max-width: 767px) {
-
-} 
-
-@media screen and (min-width: 768px) {
-
-}
-
-@media screen and (min-width: 1170px) {
-
-} 
-*/

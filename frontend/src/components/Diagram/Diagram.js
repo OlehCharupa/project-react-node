@@ -18,7 +18,7 @@ const Diagram = () => {
         const sprintHoursPerDay = hoursPlanned / duration;
         let remainingHours = hoursPlanned;
 
-        for (let i of duration) {
+        for (let i = 0; i < duration; i += 1) {
             arrTimeOfProgect.push((remainingHours - sprintHoursPerDay).toFixed(2));
             remainingHours -= sprintHoursPerDay;
         }
@@ -82,9 +82,8 @@ const Diagram = () => {
 
         return result
     };
-
     const chartData = {
-        // labels: [1, 2, 3],
+        // labels: ["1 Dec", "2 Dec", "3 Dec"],
         labels: formatDays(days), // дени (даты снизу диаграммы) arrDays
         datasets: [
             {
@@ -154,12 +153,12 @@ const Diagram = () => {
             caretPadding: 5,
             caretSize: 10,
             cornerRadius: 6,
-            callbacks: {
-                label: (tooltipItem) => {
-                    let label = `  ${tooltipItem.value}`;
-                    return label;
-                },
-            },
+            // callbacks: {
+            //     label: (tooltipItem) => {
+            //         let label = `  ${tooltipItem.value}`;
+            //         return label;
+            //     },
+            // },
         },
         scales: {
             yAxes: [

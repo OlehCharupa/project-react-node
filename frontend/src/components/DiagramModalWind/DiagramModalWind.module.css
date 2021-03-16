@@ -6,7 +6,6 @@
     left: 0;
   }
 
-
   .modalOverlay__close{
     display: none;
   } 
@@ -18,36 +17,36 @@
     transform: translate(0, 60px);
     background-color: #FFF;
     min-height: 461px;
-    width: 950px;
+    width: 100vh;
     border-radius: 10px;
-    padding: 10px;
-    overflow-y: scroll;
+    padding: 0, 10px, 10px;
+    overflow-x: scroll;
   }
 
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  ::-webkit-scrollbar-track{
-  background: transparent;
-  box-shadow: #F1F2F7;
+  .modalWindow::-webkit-scrollbar {
+    height: 10px;
 
   }
 
-  ::-webkit-scrollbar-thumb{
-  background: #FF6B08;
-  border-radius: 8px;
+  .modalWindow::-webkit-scrollbar-track{
+    background: transparent;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+
+  .modalWindow::-webkit-scrollbar-thumb{
+    background: #FF6B08;
+    border-radius: 8px;
   }
 
   .body{
     position: relative;
-    width: 100%;
-  } 
+    width: 900px;
+  }
 
   .modal__close{
     position: sticky;
-    top: 0;
-    left: 460px;
+    top: 15px;
+    left: 440px;
     font-size: 20px;
     background-color: #FFF;
     border: none;
@@ -81,6 +80,9 @@
     height: 340px;
     border-radius: 10px;
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
+  
   }
 
   .body{
@@ -124,6 +126,8 @@
     width: 950px;
     border-radius: 10px;
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
   }
 
   .modalWindow {

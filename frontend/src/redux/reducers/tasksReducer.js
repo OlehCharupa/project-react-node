@@ -18,7 +18,19 @@ import {
   CHANGE_ERROR,
 } from "../constants/tasksConstants.js";
 
-const items = createReducer([], {
+const initiallState = {
+  "title": null,
+  "hoursPlanned": null,
+  "hoursWasted": null,
+  "hoursWastedPerDay": [
+    {
+      "currentDay": null,
+      "singleHoursWasted": null
+    }
+  ],
+};
+
+const items = createReducer([initiallState], {
   [FETCH_TASKS_SUCCESS]: (state, { payload }) => payload,
   [ADD_TASK_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_TASK_SUCCESS]: (state, { payload }) =>
