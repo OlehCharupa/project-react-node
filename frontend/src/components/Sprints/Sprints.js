@@ -9,7 +9,10 @@ import arrowRight from "./images/arrow-right.svg";
 import edit from "./images/edit.svg";
 import tasksAction from "../../redux/actions/tasksAction";
 import { filterSelector } from "../../redux/selectors/tasks-selectors";
+import { allSprintsSelector } from "../../redux/selectors/sprints-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
+import sprintsOperations from "../../redux/operations/sprintsOperations";
+
 import TasksList from "../TasksList/TasksList";
 import { useMediaQuery } from "react-responsive";
 import { modalToggle } from "../../redux/actions/modalAction";
@@ -393,14 +396,37 @@ const CurrentDateAndFilterDIV = styled.div`
 
 const Sprints = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-
+  const { projectId, sprintId } = useParams();
   const filter = useSelector((state) => filterSelector(state));
+  const sprints = useSelector((state) => allSprintsSelector(state));
 
   useEffect(() => {
-    // fetch sprint tasks
-    dispatch(tasksOperations.fetchTasks());
+    dispatch(sprintsOperations.fetchSprints(projectId));
+    dispatch(tasksOperations.fetchTasks(sprintId));
   }, []);
+
+  const currentSprint = sprints.find((sprint) => sprint._id === sprintId);
+  const { title, duration, endDate } = currentSprint;
+
+  const endDateFormat = endDate.split("-").reverse();
+  const endDateUnix = new Date(endDateFormat);
+  const date = new Date();
+  const dateUnix = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+
+  const options = {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  };
+  const localeDate = date.toLocaleString("Uk-uk", options);
+
+  const currentIndex =
+    duration - Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24);
+  const [currentDay, setCurrentDay] = useState(localeDate);
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -409,7 +435,7 @@ const Sprints = () => {
   };
   const [modal, setModal] = useState(isModalOpen);
 
-  const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
+  const [sprintName, setSprintName] = useState(title);
   const changeNameHandler = (e) => {
     const nameRef = document.querySelector("textarea");
     if (nameRef.hasAttribute("readonly")) {
@@ -435,7 +461,7 @@ const Sprints = () => {
     const { keyCode } = e;
 
     if (keyCode === 27) {
-      nameRef.value = "Sprint Burndown Chart 1";
+      nameRef.value = sprintName;
       nameRef.setAttribute("readonly", true);
       nameRef.classList.add(style.edit);
       window.removeEventListener("keydown", closeAndUpdateName);
@@ -471,11 +497,11 @@ const Sprints = () => {
           <CurrentDateDIV>
             <PrevBtn aria-label="previous day" />
             <CurrentDateP>
-              <CurrentDateSPAN>2</CurrentDateSPAN>/12
+              <CurrentDateSPAN>{currentIndex}</CurrentDateSPAN>/{duration}
             </CurrentDateP>
             <NextBtn aria-label="next day" />
           </CurrentDateDIV>
-          <DateP>08.08.2020</DateP>
+          <DateP>{currentDay}</DateP>
         </DateDIV>
         <Device>
           <FieldDIV>
@@ -550,7 +576,7 @@ const Sprints = () => {
           </Desktop>
         </HeaderDIV>
       </Default>
-      <TasksList />
+      <TasksList currentIndex={currentIndex} />
     </SprintDIV>
   );
 };

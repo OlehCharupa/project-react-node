@@ -76,20 +76,20 @@ const Button = styled.button`
 
 const SprintsListItem = ({
   _id,
-  name,
+  title,
   startDate,
-  finishDate,
+  endDate,
   duration,
   OnDeleteSprint,
 }) => {
   return (
     <>
-      <Title>{name}</Title>
+      <Title>{title}</Title>
       <P>
         Дата початку<SPAN>{startDate}</SPAN>
       </P>
       <P>
-        Дата закінченя<SPAN>{finishDate}</SPAN>
+        Дата закінченя<SPAN>{endDate}</SPAN>
       </P>
       <P>
         Тривалість<SPAN>{duration}</SPAN>
@@ -118,6 +118,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(SprintsListItem);
 
 SprintsListItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
   OnDeleteSprint: PropTypes.func.isRequired,
 };

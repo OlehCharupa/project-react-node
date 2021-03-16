@@ -83,14 +83,14 @@ const H2 = styled.h2`
 
 const SprintsList = () => {
   const { projectId } = useParams();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints(projectId));
-  }, []);
-
   const sprints = useSelector((state) => allSprintsSelector(state));
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sprintsOperations.fetchSprints(projectId));
+  }, []);
 
   const sprintHandler = (e) => {
     const { sprintId } = e.currentTarget.dataset;
@@ -104,7 +104,7 @@ const SprintsList = () => {
 
   return (
     <>
-      {Array.isArray(sprints) ? (
+      {sprints.length ? (
         <TransitionGroup component={Ul}>
           {sprints.map((sprint) => (
             <Li
@@ -112,7 +112,7 @@ const SprintsList = () => {
               data-sprint-id={sprint._id}
               onClick={sprintHandler}
             >
-              <SprintsListItem id={sprint._id} />
+              <SprintsListItem {...sprint} id={sprint._id} />
             </Li>
           ))}
         </TransitionGroup>

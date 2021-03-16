@@ -16,9 +16,9 @@ import {
 
 const items = createReducer([], {
   [FETCH_SPRINTS_SUCCESS]: (state, { payload }) => payload,
-  [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, ...payload],
+  [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_SPRINT_SUCCESS]: (state, { payload }) =>
-    state.filter((sprint) => sprint.id !== payload),
+    state.filter((sprint) => sprint._id !== payload),
 });
 
 const error = createReducer("", {
