@@ -8,7 +8,6 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
-import DiagramBtn from "./DiagramBtn/DiagramBtn";
 
 const App = () => {
   const dispatch = useDispatch();
