@@ -21,7 +21,6 @@ const ProjectSidebar = () => {
   }, []);
 
   const projects = useSelector((state) => allProjectsSelector(state));
-  console.log(projects);
   const { projectId } = useParams();
 
   const isModalOpen = useSelector((state) => state.modal);
@@ -29,14 +28,14 @@ const ProjectSidebar = () => {
     setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
-  
+
   const [modal, setModal] = useState(isModalOpen);
 
   return (
     <div className={style.mainLeftSprint}>
-      <NavLink className={style.link} to={{pathname: `/projects`}}>
+      <NavLink className={style.link} to={{ pathname: `/projects` }}>
         <div
-          className={ style.showProjectMain}
+          className={style.showProjectMain}
           style={{
             display: "flex",
             alignItems: "center",
@@ -47,29 +46,33 @@ const ProjectSidebar = () => {
         </div>
       </NavLink>
       <div className={style.container}>
+        {Array.isArray(projects) ? (
         <ul className={style.sidebarList}>
-          {projects && projects.map((project) => (
-            <li className={style.item} key={project.id}>
-              <ProjectSidebarItem id={project.id} />
-            </li>
+          {projects.map((project) => (
+            <ProjectSidebarItem {...project} key={project._id} id={project._id} />
           ))}
         </ul>
+      ) : (
+        <h2>
+          Ваша 
+        </h2>
+      )}
       </div>
       <div className={style.linkAdd}>
-      {modal && (
-        <Modal
-          children={<CreateProject />}
-          isModalOpen={isModalOpen}
-          toggleModal={toggleModal}
-        />
-      )}
-          <button className={style.plusBtn} type="button" onClick={toggleModal}>
-            <span style={{ display: "block" }}>
-              <img src={plus} />
-            </span>
+        {modal && (
+          <Modal
+            children={<CreateProject />}
+            isModalOpen={isModalOpen}
+            toggleModal={toggleModal}
+          />
+        )}
+        <button className={style.plusBtn} type="button" onClick={toggleModal}>
+          <span style={{ display: "block" }}>
+            <img src={plus} />
+          </span>
         </button>
-          <div className={style.createProject}>Створити проєкт</div>
-        </div>
+        <div className={style.createProject}>Створити проєкт</div>
+      </div>
     </div>
   );
 };

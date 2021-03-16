@@ -6,12 +6,15 @@ import { ReactComponent as ReactLogo } from "../../pages/ProjectPage/images/plus
 import projectsOperations from "../../redux/operations/projectsOperations";
 import style from "./ProjectWrapper.module.css";
 import pen from "./images/pen.svg";
-import add from "./images/add.svg";
-import SprintsList from "../SprintsList/SprinstList";
 import container from "../Container/Container.module.css";
+
+import SprintsList from "../SprintsList/SprinstList";
+import AddPeopleProjectWrapper from "./AddPeopleProjectWrapper/AddPeopleProjectWrapper"
+
 import { modalToggle } from "../../redux/actions/modalAction";
 import Modal from "../Modal/Modal";
 import SprintCreator from "../SprintCreator/SprintCreator";
+import AddProjectMembers from "../AddProjectMembers/AddProjectMembers";
 
 const ProjectWrapper = () => {
   const dispatch = useDispatch();
@@ -69,7 +72,9 @@ const ProjectWrapper = () => {
     setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
+  
   const [modal, setModal] = useState(isModalOpen);
+
   return (
     <>
       {modal && (
@@ -114,18 +119,12 @@ const ProjectWrapper = () => {
                 onClick={changeNameHandler}
               ></button>
             </div>
-            <div className={style.description}>
-            </div>
-            <div className={style.addPeople}>
-              <img src={add} style={{ width: "20px", marginRight: "10px" }} />
-              <NavLink to="/">
-                <span style={{ color: "#181C27" }}>Додати людей</span>
-              </NavLink>
-            </div>
+            <div className={style.description}></div>
+            <AddPeopleProjectWrapper />
           </div>
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
             <button
-              style={{backgroundColor:"transparent" }}
+              style={{ backgroundColor: "transparent" }}
               type="button"
               aria-label="create sprint"
               className={style.link}
