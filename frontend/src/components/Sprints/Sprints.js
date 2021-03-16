@@ -425,7 +425,7 @@ const Sprints = () => {
   const localeDate = date.toLocaleString("Uk-uk", options);
 
   const currentIndex =
-    duration - Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24);
+    duration - Math.ceil(Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24));
   const [currentDay, setCurrentDay] = useState(localeDate);
 
   const isModalOpen = useSelector((state) => state.modal);
