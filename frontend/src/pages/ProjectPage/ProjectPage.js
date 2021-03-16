@@ -36,10 +36,10 @@ const ProjectPage = () => {
             isModalOpen={isModalOpen}
             toggleModal={toggleModal}
           />
-          <button className={style.mainplusBtn} style={{width:"44px", height:"44px"}}  type="button" onClick={toggleModal}>
+          <button className={style.plusBtn} style={{ width: "44px", height: "44px", display: "flex", whiteSpace: "nowrap", alignItems: 'center', heigth:"44px"}}  type="button" onClick={toggleModal}>
               <img src={plus} style={{width:"44px", height:"44px", margin:'0'}} />
+              <div className={style.create}>Створити проект</div>
           </button>
-          <div className={style.create}>Створити проект</div>
         </div>
       </div>
       {Array.isArray(projects) ? (

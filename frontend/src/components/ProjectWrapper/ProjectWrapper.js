@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { ReactComponent as ReactLogo } from "../../pages/ProjectPage/images/plus.svg";
 import projectsOperations from "../../redux/operations/projectsOperations";
 import style from "./ProjectWrapper.module.css";
 import pen from "./images/pen.svg";
+import plus from "../../pages/ProjectPage/images/plus.svg"
 import container from "../Container/Container.module.css";
 
 import SprintsList from "../SprintsList/SprinstList";
@@ -123,14 +123,20 @@ const ProjectWrapper = () => {
             <AddPeopleProjectWrapper />
           </div>
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
-            <button
-              style={{ backgroundColor: "transparent" }}
+            <button 
+              style={{
+                backgroundColor: "transparent",
+                display: "flex",
+                whiteSpace: "nowrap",
+                alignItems: "center",
+                height:"44px"
+              }}
               type="button"
               aria-label="create sprint"
               className={style.link}
               onClick={toggleModal}
             >
-              <ReactLogo className={style.plusBtn} />
+              <img src={plus} className={style.plusBtn} style={{width:"52px", height:"52px", margin:'0'}} />
               <div className={style.create}>Створити спринт</div>
             </button>
           </div>

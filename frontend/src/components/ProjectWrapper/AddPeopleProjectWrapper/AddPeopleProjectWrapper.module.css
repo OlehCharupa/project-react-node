@@ -1,6 +1,7 @@
 .addPeople{
   display: flex;
   margin-top: 30px;
-  width: 147px;
+  width: 177px;
+  white-space: nowrap;
 }
 
