@@ -7,9 +7,8 @@
   margin-top: 20px;
   margin-bottom: 36px;
 }
-.mainplusBtn{
+.plusBtn{
   padding: 0 ;
-  /* padding-top: 2px; */
   border: none; outline: none;
   transition: all .3s linear;
   border-radius: 40px;
@@ -17,8 +16,8 @@
   background-color: #FF6B08;
 }
 
-.mainplusBtn:hover,
-.mainplusBtn:focus{
+.plusBtn:hover,
+.plusBtn:focus{
   box-shadow: 0 0 5px 0 #FF6B08 inset, 0 0 5px 4px #FF6B08;
 }
 
@@ -32,7 +31,7 @@
     padding: 0 0px 60px 0px;
   }
 
-  .mainplusBtn{
+  .plusBtn{
     padding:0;
     bottom: 20px;
     right: 20px;
@@ -106,7 +105,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    padding-top:13px;
     padding-left:20px;
   }
 

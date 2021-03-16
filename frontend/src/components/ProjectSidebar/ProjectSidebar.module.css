@@ -1,3 +1,5 @@
+
+
 .mainLeftSprint{
   z-index: 100;
 }
@@ -59,23 +61,27 @@
 
 @media screen and (min-width: 768px) {
   .mainLeftSprint{
-    display: block;
     position: sticky;
-    top:20px;
-    width: 600px;
-    height: 100%;
+    height: calc(100vh - 80px);
+    width: 216px;
+    padding-top: 20px;
+    padding-right: 27px;
+    top: 0;
+  }
+
+  .mainLeftSprint:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 100vh;
+    background-color: rgba(24, 28, 39, 0.1);
+    top: 0;
+    right: 0px;
   }
 
   .showProjectMain{
     width: 150px;
-  }
-
-  .sidebarList{
-    display: block;
-    list-style: none;
-    padding: 0;
-    width: 170px;
-    height: 500px;
   }
 
   .showProjectContainer{
@@ -90,31 +96,24 @@
     margin-bottom: 20px;
   }
 
-  
-  .mainLeftSprint:after{
-    content: "";
-    display: block;
-    position: absolute;
-    height: 110%;
-    width: 1px;
-    background-color: rgba(24, 28, 39, 0.1);
-    top: 0;
-    left: 208px;
+  .sidebarList{
+    width: 170px; 
   }
 
   .linkAdd{
-    margin-top: 200px;
+    position: absolute;
     text-align: center;
-    display: table;
+    bottom: 90px;
+    left: 30px;
   }
   
   .container{
     overflow: auto;
-    padding-right: 42px;
-    height: 600px;
+    max-height: 400px;
   }
   
   .plusBtn{
+    background-color: transparent;
     margin: 0 auto;
     padding-top: 5px;
     transition: all .3s linear;
@@ -130,16 +129,24 @@
     box-shadow: 0 0 10px 0 #FF6B08 inset, 0 0 10px 4px #FF6B08;
   }
   .createProject{
-    margin-top: 20px;
-    text-align: center;
+    margin-top: 15px;
     font-family: "Montserrat";
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.04em;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #181C27;
   }
   
+
+}
+@media screen and (min-width: 1280px) {
+
+  .container{
+    position: absolute;
+    max-height: 500px;
+    top: 30%;
+  }
 
 }
 

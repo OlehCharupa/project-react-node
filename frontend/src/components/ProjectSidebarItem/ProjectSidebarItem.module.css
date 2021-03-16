@@ -49,8 +49,6 @@
 .link{
   text-decoration: none;
   display: flex;
-  align-items: center;
-  text-align: center;
   margin-bottom: 40px;
   margin-top: 16px;
 }
@@ -61,6 +59,9 @@
 }
 
 .title{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   margin-left: 45px;
   font-family: "Montserrat";
   font-style: normal;

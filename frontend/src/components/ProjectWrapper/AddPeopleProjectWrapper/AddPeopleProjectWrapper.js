@@ -35,7 +35,17 @@ const AddPeopleProjectWrapper = () => {
           aria-label="add members"
           onClick={toggleModal}
         >
-          <span style={{ color: "#181C27", textDecoration: "underline" }}>
+          <span
+            style={{
+              color: "#181C27",
+              textDecoration: "underline",
+              fontFamily: "Montserrat",
+              fontStyle: "normal",
+              fontWeight: "500",
+              fontSize: "18px",
+              lineHeight: "22px",
+            }}
+          >
             Додати людей
           </span>
         </button>
