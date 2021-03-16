@@ -9,12 +9,11 @@ const ProjectSidebarItem = ({ id, title }) => {
 
   return (
     <>
-      <NavLink
-        to={{ pathname: `/projects/${projectId}/${id}` }}
-        className={style.link}
-      >
-        <span className={style.title}>{title}</span>
-      </NavLink>
+      <li className={style.item}>
+        <NavLink to={{ pathname: `/projects/${id}` }} className={style.link}>
+          <p className={style.title}>{title}</p>
+        </NavLink>
+      </li>
     </>
   );
 };
