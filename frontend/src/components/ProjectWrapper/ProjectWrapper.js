@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as ReactLogo } from "../../pages/ProjectPage/images/plus.svg";
@@ -15,12 +15,6 @@ import SprintCreator from "../SprintCreator/SprintCreator";
 
 const ProjectWrapper = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-
-  useEffect(() => {
-    // fetch sprint tasks
-    dispatch(projectsOperations.fetchProjects());
-  }, []);
 
   const [projectName, setProjectName] = useState("Project 1");
 
@@ -114,8 +108,7 @@ const ProjectWrapper = () => {
                 onClick={changeNameHandler}
               ></button>
             </div>
-            <div className={style.description}>
-            </div>
+            <div className={style.description}></div>
             <div className={style.addPeople}>
               <img src={add} style={{ width: "20px", marginRight: "10px" }} />
               <NavLink to="/">
@@ -125,7 +118,7 @@ const ProjectWrapper = () => {
           </div>
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
             <button
-              style={{backgroundColor:"transparent" }}
+              style={{ backgroundColor: "transparent" }}
               type="button"
               aria-label="create sprint"
               className={style.link}
