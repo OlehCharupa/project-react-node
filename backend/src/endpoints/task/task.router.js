@@ -46,9 +46,9 @@ const taskIdSchema = Joi.object({
         .required(),
 });
 
-const taskQuerySchema = Joi.object({
-    search: Joi.string(),
-});
+// const taskQuerySchema = Joi.object({
+//     search: Joi.string(),
+// });
 
 const taskHoursSchema = Joi.object({
     date: Joi.string()
@@ -79,7 +79,7 @@ router.get(
     "/:sprintId",
     asyncWrapper(authorize),
     validate(addTaskIdSchema, "params"),
-    validate(taskQuerySchema, "query"),
+    // validate(taskQuerySchema, "query"),
     asyncWrapper(loadTasks)
 );
 router.patch(
