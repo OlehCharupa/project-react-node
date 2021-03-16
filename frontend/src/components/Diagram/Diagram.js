@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
@@ -6,10 +7,10 @@ import { allTasksSelector } from "../../redux/selectors/tasks-selectors";
 import style from './Diagram.module.css'
 
 const Diagram = () => {
-    const allTasks = useSelector(allTasksSelector(state));
-    const duration = useSelector(sprintDurationSelector(state))
-    const hoursPlanned = useSelector(hoursPlannedSelector(state))
-    const days = useSelector(daysSelector(state))
+    const allTasks = useSelector(state => allTasksSelector(state));
+    const duration = useSelector(state => sprintDurationSelector(state))
+    const hoursPlanned = useSelector(state => hoursPlannedSelector(state))
+    const days = useSelector(state => daysSelector(state))
 
 
     const redLine = (hoursPlanned, duration) => {
@@ -67,23 +68,24 @@ const Diagram = () => {
         return arrTimes
     };
 
-    const formatDate = (days) => {
-        const conversionDate = (day) => {
-            const newDate = moment(day)
+    const formatDays = (days) => {
+        const conversionDay = (day) => {
+            const newDay = moment(day)
                 .locale("uk")
                 .format("DD MMM");
-            newDate.split("");
-            const firstLetterToUppercase = newDate[3].toUpperCase();
-            newDate.splice(3, 1, firstLetterToUppercase);
-            return newDate.join("");
+            let dayToUp = newDay.split("");
+            const firstLetterToUpp = dayToUp[3].toUpperCase();
+            dayToUp.splice(3, 1, firstLetterToUpp);
+            return dayToUp.join("");
         }
-        const result = days.map((day) => conversionDate(day))
+        const result = days.map((day) => conversionDay(day))
 
         return result
     };
 
     const chartData = {
-        labels: formatDate(days), // дени (даты снизу диаграммы) arrDays
+        // labels: [1, 2, 3],
+        labels: formatDays(days), // дени (даты снизу диаграммы) arrDays
         datasets: [
             {
                 label: "Запланований залишок трудовитрат",
@@ -91,6 +93,7 @@ const Diagram = () => {
                 lineTension: 0,
                 borderColor: "rgb(255, 0, 0)",
                 backgroundColor: "rgb(255, 0, 0)",
+                // data: [4, 2, 0]
                 data: redLine(hoursPlanned, duration), // массив времени
             },
             {
@@ -99,6 +102,7 @@ const Diagram = () => {
                 lineTension: 0.4,
                 borderColor: "rgb(0, 89, 255)",
                 backgroundColor: "rgb(0, 89, 255)",
+                // data: [5, 1, 1, 0]
                 data: blueLine(hoursPlanned, duration, allTasks), // массив времени
             },
         ],
@@ -116,11 +120,12 @@ const Diagram = () => {
         responsive: true,
         title: {
             display: true,
-            text: "Burndown Chart(Calendar Team)",
+            text: "Burndown Chart(Calendar Team)                                                          ",
             fontColor: "#181C27",
             fontFamily: "'Montserrat', 'sans-serif'",
-            fontSize: 20,
+            fontSize: 23,
             padding: 0,
+            position: "top",
         },
         elements: {
             line: {
@@ -138,10 +143,10 @@ const Diagram = () => {
         },
         tooltips: {
             mode: "index",
-            titleFontSize: 14,
+            titleFontSize: 16,
             titleMarginBottom: 10,
             bodyFontFamily: "'Montserrat', 'sans-serif'",
-            bodyFontSize: 14,
+            bodyFontSize: 16,
             bodySpacing: 5,
             bodyAlign: "center",
             xPadding: 8,
@@ -163,7 +168,7 @@ const Diagram = () => {
                         display: true,
                         labelString: "Людино-години",
                         fontFamily: "'Montserrat', 'sans-serif'",
-                        fontSize: 14,
+                        fontSize: 16,
                         fontColor: "#181C27",
                     },
                     ticks: {
@@ -195,13 +200,14 @@ const Diagram = () => {
             labels: {
                 fontColor: "#181C27",
                 fontFamily: "'Montserrat', 'sans-serif'",
-                fontSize: 14,
+                fontSize: 12,
                 boxWidth: 5,
                 usePointStyle: true,
                 padding: 20,
             },
         },
     };
+
     return (
         <div className={style.contanerDiagram}>
             <Line data={chartData} options={chartOptions} />

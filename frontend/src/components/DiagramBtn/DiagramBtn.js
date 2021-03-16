@@ -4,7 +4,6 @@ import styles from './DiagramBtn.module.css'
 
 const DiagramBtn = () => {
     const [isModal, setIsModal] = useState(false)
-
     return (
         <>
             <button
