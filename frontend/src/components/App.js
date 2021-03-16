@@ -8,35 +8,37 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
+import DiagramBtn from "./DiagramBtn/DiagramBtn";
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(authOperations.getCurrentUser());
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(authOperations.getCurrentUser());
+  // }, []);
 
   return (
-    <div className="App">
-      <Container>
-        <Header />
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            {routes.map((route) =>
-              route.private ? (
-                <PrivateRoute key={route.label} {...route} />
-              ) : (
-                <PublicRoute
-                  key={route.label}
-                  {...route}
-                  restricted={route.restricted}
-                />
-              )
-            )}
-            <Redirect to="/registration"></Redirect>
-          </Switch>
-        </Suspense>
-      </Container>
-    </div>
+    <DiagramBtn />
+    // <div className="App">
+    //   <Container>
+    //     <Header />
+    //     <Suspense fallback={<Loader />}>
+    //       <Switch>
+    //         {routes.map((route) =>
+    //           route.private ? (
+    //             <PrivateRoute key={route.label} {...route} />
+    //           ) : (
+    //             <PublicRoute
+    //               key={route.label}
+    //               {...route}
+    //               restricted={route.restricted}
+    //             />
+    //           )
+    //         )}
+    //         <Redirect to="/registration"></Redirect>
+    //       </Switch>
+    //     </Suspense>
+    //   </Container>
+    // </div>
   );
 };
 

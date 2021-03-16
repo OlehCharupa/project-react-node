@@ -22,12 +22,7 @@ const initiallState = {
   "title": null,
   "hoursPlanned": null,
   "hoursWasted": null,
-  "hoursWastedPerDay": [
-    {
-      "currentDay": null,
-      "singleHoursWasted": null
-    }
-  ],
+  "hoursWastedPerDay": [],
 };
 
 const items = createReducer([initiallState], {
