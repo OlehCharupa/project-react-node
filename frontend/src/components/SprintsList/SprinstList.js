@@ -90,7 +90,7 @@ const SprintsList = () => {
 
   useEffect(() => {
     dispatch(sprintsOperations.fetchSprints(projectId));
-  });
+  }, [projectId]);
 
   const sprintHandler = (e) => {
     const { sprintId } = e.currentTarget.dataset;
