@@ -38,8 +38,10 @@ const updateSprint = (id, title) => (dispatch) => {
   dispatch(sprintsAction.updateSprintRequest());
 
   axios
-    .patch(`sprint/${id}`, { title })
-    .then(() => dispatch(sprintsAction.updateSprintSuccess(id)))
+    .patch(`sprint/title/${id}`, { title })
+    .then(({ data }) =>
+      dispatch(sprintsAction.updateSprintSuccess({ id, ...data }))
+    )
     .catch((error) => dispatch(sprintsAction.updateSprintError(error)));
 };
 

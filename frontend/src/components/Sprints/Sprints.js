@@ -423,7 +423,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
         </Device>
       </CurrentDateAndFilterDIV>
       <SprintNameAndAddBtnDIV>
-        {title && <SprintName title={title} />}
+        {title && <SprintName id={id} title={title} />}
         <AddTaskBtnAndLabelDIV>
           <AddTaskBTN aria-label="create task" onClick={toggleModal}>
             +

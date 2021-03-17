@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import sprintsOperations from "../../redux/operations/sprintsOperations";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import sprite from "../Sprints/images/sprite.svg";
 
@@ -87,32 +89,18 @@ const SVG = styled.svg`
   fill: #fff;
 `;
 
-const SprintName = ({ title }) => {
+const SprintName = ({ id, title }) => {
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [sprintName, setSprintName] = useState(title);
 
   const changeNameHandler = (e) => {
+    isEdit && dispatch(sprintsOperations.updateSprint(id, sprintName));
     setIsEdit(!isEdit);
-    isEdit
-      ? window.removeEventListener("keydown", closeAndUpdateName)
-      : window.addEventListener("keydown", closeAndUpdateName);
   };
   const sprintNameInputHandler = (e) => {
     const { value } = e.target;
     setSprintName(value);
-  };
-  const closeAndUpdateName = (e) => {
-    const { keyCode } = e;
-    if (keyCode === 27) {
-      e.target.value = sprintName;
-      setIsEdit(false);
-      window.removeEventListener("keydown", closeAndUpdateName);
-    }
-    if (keyCode === 13) {
-      //update query name
-      setIsEdit(false);
-      window.removeEventListener("keydown", closeAndUpdateName);
-    }
   };
   return (
     <SprintNameDIV>
