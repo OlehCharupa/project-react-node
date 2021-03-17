@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProjectMembers.module.css";
@@ -7,38 +7,36 @@ import * as Yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
 import { modalToggle } from "../../redux/actions/modalAction";
-import {projectsSelector} from "../../redux/selectors/projects-selectors";
-import {getUserEmail} from "../../redux/selectors/authSelectors";
+import { projectsSelector } from "../../redux/selectors/projects-selectors";
+import { getUserEmail } from "../../redux/selectors/authSelectors";
 import projectsOperations from "../../redux/operations/projectsOperations";
-
-
-// TODO: 1) Вытянуть селектор редакс состояния с участниками проекта и текущего юзера
-
-const reduxProjectMembers = [
-  "asfaasf@a.com",
-  "asfasfsaf@a.com",
-  "asfasdfasfsaf@a.com",
-]; // Заглушка для map
 
 const AddProjectMembers = () => {
   const location = useLocation();
-  let projectId;
+  let projectId = location.pathname.substr(10);
 
-  useEffect(() => {
-    projectId = location.pathname.substr(10);
-  });
+  // useEffect(() => {
+  //   projectId = location.pathname.substr(10);
+  // });
+
+  const usersProjects = useSelector((state) => projectsSelector(state));
+  const currentUser = useSelector((state) => getUserEmail(state));
+  const currentProject = usersProjects.items.find(
+    (project) => project._id === projectId
+  );
+  const currentProjectUsers = currentProject.members;
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
-    .email("Введіть існуючий e-mail.")
-    .required("Будь ласка, введіть e-mail користувача.")
-    .test(
-      "includes",
-      "Користувач вже є учасником проекту.",
-      function (value) {
-        const { path, createError } = this;
-        if (reduxProjectMembers.includes(value) || currentUser === value) {
-          console.log(reduxProjectMembers.includes(value));
+      .email("Введіть існуючий e-mail.")
+      .required("Будь ласка, введіть e-mail користувача.")
+      .test(
+        "includes",
+        "Користувач вже є учасником проекту.",
+        function (value) {
+          const { path, createError } = this;
+          if (currentProjectUsers.includes(value) || currentUser === value) {
+            console.log(currentProjectUsers.includes(value));
             return createError({
               path,
               message: "Користувач вже є учасником проекту.",
@@ -47,13 +45,8 @@ const AddProjectMembers = () => {
           return true;
         }
       ),
-    });
-    
-    const usersProjects = useSelector(state => projectsSelector(state)); // масив проэктов
-    const currentUser = useSelector(state=> getUserEmail(state)); // текущий юзера
-    const currentProject = usersProjects.items.find(project => project.id === projectId);
-    const currentProjectUsers = currentProject.members
-    
+  });
+
   const isModalOpen = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const toggleModal = () => {
@@ -90,31 +83,23 @@ const AddProjectMembers = () => {
                 <div className={styles.errorDiv}>{errors.email}</div>
               ) : null}
             </div>
-            <div className={styles.button__wrapper}>
-              <button type="submit" className={styles.button__ready}>
-                Готово
-              </button>
-            </div>
           </Form>
         )}
       </Formik>
       <div className={styles.members_list}>
         <h3>Додані користувачі:</h3>
         <ul>
-          {/* <li className={styles.members_item}>
-            <p>{currentUser}</p>
-          </li> */}
           {currentProjectUsers.map((email) => (
             <li key={uuidv4()} className={styles.members_item}>
               <p>{email}</p>
-              {/* <button
-                onClick={() => console.log(`btn`)}
-                data-email={email}
-                className={styles.delete_button}
-              ></button> */}
             </li>
           ))}
         </ul>
+      </div>
+      <div className={styles.button__wrapper}>
+        <button type="submit" className={styles.button__ready}>
+          Готово
+        </button>
       </div>
     </div>
   );

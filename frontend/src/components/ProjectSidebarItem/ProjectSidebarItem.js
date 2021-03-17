@@ -1,24 +1,40 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import style from "./ProjectSidebarItem.module.css";
+import styled from "styled-components";
+
+const activeClassName = "nav-item-active";
+
+const StyledLink = styled(NavLink).attrs({ activeClassName })`
+  padding-left: 50px;
+
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+
+  color: #181c27;
+
+  &.${activeClassName} {
+    font-weight: 700;
+  }
+`;
 
 const ProjectSidebarItem = ({ id, title }) => {
   return (
     <>
-      <li className={style.item}>
-        <NavLink to={{ pathname: `/projects/${id}` }} className={style.link}>
-          <p className={style.title}>{title}</p>
-        </NavLink>
-      </li>
+      <StyledLink to={{ pathname: `/projects/${id}` }} className={style.link}>
+        {title}
+      </StyledLink>
     </>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
   const item = state.projects.items.find(
-    (project) => project.id === ownProps.id
+    (project) => project._id === ownProps.id
   );
   return { ...item };
 };

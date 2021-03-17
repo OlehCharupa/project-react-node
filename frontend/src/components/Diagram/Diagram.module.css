@@ -1,0 +1,28 @@
+@media screen and (max-width: 767px) {
+  .contanerDiagram {
+    width: 830px;
+    height: auto;
+    margin: auto;
+    padding-top: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .contanerDiagram {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    padding-top: 5px;
+  
+  }
+}
+
+@media screen and (min-width: 1170px) {
+  .contanerDiagram {
+    width: 900px;
+    height: auto;
+    margin: auto;
+    padding-top: 5px;
+  }
+  
+}

@@ -47,9 +47,9 @@ export const addContributor = async (req, res) => {
 export const loadUsersProjects = async (req, res) => {
     const user = req.user;
     const projects = await ProjectModel.find({ members: user.email });
-    if (!projects.length) {
-        return res.status(200).send({ message: "No projects found" });
-    }
+    // if (!projects.length) {
+    //     return res.status(200).send({ message: "No projects found" });
+    // }
     return res.status(200).send(projects);
 };
 

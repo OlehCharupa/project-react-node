@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import style from "./ProjectSidebar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { allProjectsSelector } from "../../redux/selectors/projects-selectors";
-import projectsOperations from "../../redux/operations/projectsOperations";
 import ProjectSidebarItem from "../ProjectSidebarItem/ProjectSidebarItem";
 
 import { modalToggle } from "../../redux/actions/modalAction";
@@ -14,9 +13,6 @@ import plus from "../../pages/ProjectPage/images/plus.svg";
 
 const ProjectSidebar = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(projectsOperations.fetchProjects());
-  }, []);
 
   const projects = useSelector((state) => allProjectsSelector(state));
 
@@ -43,19 +39,13 @@ const ProjectSidebar = () => {
         </div>
       </NavLink>
       <div className={style.container}>
-        {Array.isArray(projects) ? (
-          <ul className={style.sidebarList}>
-            {projects.map((project) => (
-              <ProjectSidebarItem
-                {...project}
-                key={project._id}
-                id={project._id}
-              />
-            ))}
-          </ul>
-        ) : (
-          <h2>Ваша</h2>
-        )}
+        <ul className={style.sidebarList}>
+          {projects.map((project) => (
+            <li className={style.item} key={project._id}>
+              <ProjectSidebarItem id={project._id} />
+            </li>
+          ))}
+        </ul>
       </div>
       <div className={style.linkAdd}>
         {modal && (
@@ -70,17 +60,18 @@ const ProjectSidebar = () => {
             backgroundColor: "transparent",
             whiteSpace: "nowrap",
             alignItems: "center",
-            height:"44px"
+            height: "44px",
           }}
-          
           type="button"
-          onClick={toggleModal}>
-            <img
-              src={plus}
-              className={style.plusBtn}
-              style={{ width: "52px", height: "52px",}}
-            />
-        <div className={style.createProject}>Створити проєкт</div>
+          onClick={toggleModal}
+        >
+          <img
+            src={plus}
+            className={style.plusBtn}
+            style={{ width: "52px", height: "52px" }}
+            alt="create project"
+          />
+          <div className={style.createProject}>Створити проєкт</div>
         </button>
       </div>
     </div>

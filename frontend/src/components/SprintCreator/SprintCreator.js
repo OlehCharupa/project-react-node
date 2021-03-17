@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./SprintCreator.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,11 +23,11 @@ const SprintCreator = () => {
   registerLocale("uk", uk);
 
   const location = useLocation();
-  let projectId;
+  let projectId = location.pathname.substr(10);
 
-  useEffect(() => {
-    projectId = location.pathname.substr(10);
-  });
+  // useEffect(() => {
+  //   projectId = location.pathname.substr(10);
+  // });
 
   const pastDaysToggle = () => {
     setHidePastDays((state) => !state);
@@ -42,27 +42,16 @@ const SprintCreator = () => {
   const CreateSchema = Yup.object().shape({
     sprintName: Yup.string()
       .min(2, "Будь ласка, введіть коректну назву спринту.")
-      .max(16, "Будь ласка, введіть коректну назву спринту.")
+      .max(30, "Будь ласка, введіть коректну назву спринту.")
       .required("Будь ласка, введіть назву спринту."),
     duration: Yup.number()
       .typeError(`Введите число!`)
       .positive("Число должно быть положительным!")
       .integer("Число должно быть целым!")
       .min(1, "Будь ласка, оберіть тривалість спринта.")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("Будь ласка, оберіть тривалість спринта."),
   });
-
-  const ifIsWeekEnd = (date) => {
-    const dateToFormat = new Date(date);
-    const day = dateToFormat.getDay();
-    if (day === 6) {
-      return date + 172800000;
-    } else if (day === 0) {
-      return date + 86400000;
-    }
-    return date;
-  };
 
   const isWeekday = (date) => {
     const day = date.getDay();
@@ -101,7 +90,7 @@ const SprintCreator = () => {
           };
 
           dispatch(sprintOperations.addSprint(reqBody));
-          
+
           setStartDate(Date.now());
           toggleModal();
         }}
@@ -148,7 +137,6 @@ const SprintCreator = () => {
                 placeholderText="Дата початку"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                // selected={ifIsWeekEnd(startDate)}
                 filterDate={isWeekday}
                 minDate={!hidePastDays && moment().toDate()}
                 className={styles.date_picker}

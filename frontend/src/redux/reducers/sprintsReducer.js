@@ -11,14 +11,27 @@ import {
   DELETE_SPRINT_ERROR,
   DELETE_SPRINT_REQUEST,
   DELETE_SPRINT_SUCCESS,
+  UPDATE_SPRINT_ERROR,
+  UPDATE_SPRINT_SUCCESS,
+  UPDATE_SPRINT_REQUEST,
   CHANGE_ERROR,
 } from "../constants/sprintsConstants.js";
 
 const items = createReducer([], {
   [FETCH_SPRINTS_SUCCESS]: (state, { payload }) => payload,
-  [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, ...payload],
+  [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_SPRINT_SUCCESS]: (state, { payload }) =>
-    state.filter((sprint) => sprint.id !== payload),
+    state.filter((sprint) => sprint._id !== payload),
+  [UPDATE_SPRINT_SUCCESS]: (state, { payload }) => {
+    console.dir(payload);
+    return [
+      ...state.filter((sprint) => sprint._id !== payload.id),
+      {
+        ...state.find((sprint) => sprint._id === payload.id),
+        title: payload.newTitle,
+      },
+    ];
+  },
 });
 
 const error = createReducer("", {
@@ -35,6 +48,9 @@ const loading = createReducer(false, {
   [DELETE_SPRINT_REQUEST]: () => true,
   [DELETE_SPRINT_SUCCESS]: () => false,
   [DELETE_SPRINT_ERROR]: () => false,
+  [UPDATE_SPRINT_REQUEST]: () => true,
+  [UPDATE_SPRINT_SUCCESS]: () => false,
+  [UPDATE_SPRINT_ERROR]: () => false,
 });
 
 export default combineReducers({

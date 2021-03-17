@@ -10,4 +10,8 @@ export const DELETE_SPRINT_REQUEST = "sprints/deleteSprintRequest";
 export const DELETE_SPRINT_SUCCESS = "sprints/deleteSprintSuccess";
 export const DELETE_SPRINT_ERROR = "sprints/deleteSprintError";
 
+export const UPDATE_SPRINT_REQUEST = "sprints/updateSprintRequest";
+export const UPDATE_SPRINT_SUCCESS = "sprints/updateSprintSuccess";
+export const UPDATE_SPRINT_ERROR = "sprints/updateSprintError";
+
 export const CHANGE_ERROR = "error/change";

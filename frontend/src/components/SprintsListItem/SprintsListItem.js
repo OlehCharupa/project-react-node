@@ -75,21 +75,31 @@ const Button = styled.button`
 `;
 
 const SprintsListItem = ({
-  _id,
-  name,
+  id,
+  title,
   startDate,
-  finishDate,
+  endDate,
   duration,
   OnDeleteSprint,
 }) => {
+  const startDateUnix = new Date(...startDate.split("-").reverse());
+  const endDateUnix = new Date(...endDate.split("-").reverse());
+
+  const options = {
+    day: "numeric",
+    month: "2-digit",
+  };
+  const startDateFormat = startDateUnix.toLocaleString("Uk-uk", options);
+  const endDateFormat = endDateUnix.toLocaleString("Uk-uk", options);
+
   return (
     <>
-      <Title>{name}</Title>
+      <Title>{title}</Title>
       <P>
-        Дата початку<SPAN>{startDate}</SPAN>
+        Дата початку<SPAN>{startDateFormat}</SPAN>
       </P>
       <P>
-        Дата закінченя<SPAN>{finishDate}</SPAN>
+        Дата закінченя<SPAN>{endDateFormat}</SPAN>
       </P>
       <P>
         Тривалість<SPAN>{duration}</SPAN>
@@ -97,7 +107,7 @@ const SprintsListItem = ({
       <Button
         type="button"
         onClick={() => {
-          OnDeleteSprint(_id);
+          OnDeleteSprint(id);
         }}
       ></Button>
     </>
@@ -105,14 +115,12 @@ const SprintsListItem = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.sprints.items.find(
-    (sprint) => sprint._id === ownProps._id
-  );
+  const item = state.sprints.items.find((sprint) => sprint._id === ownProps.id);
   return { ...item };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps._id)),
+  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SprintsListItem);
