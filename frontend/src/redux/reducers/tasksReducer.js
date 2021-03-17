@@ -29,9 +29,9 @@ const items = createReducer([initiallState], {
   [FETCH_TASKS_SUCCESS]: (state, { payload }) => payload,
   [ADD_TASK_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_TASK_SUCCESS]: (state, { payload }) =>
-    state.filter((task) => task.id !== payload),
+    state.filter((task) => task._id !== payload),
   [UPDATE_TASK_SUCCESS]: (state, { payload }) => [
-    ...state.filter((task) => task.id !== payload.id),
+    ...state.filter((task) => task._id !== payload.id),
     ...payload,
   ],
 });

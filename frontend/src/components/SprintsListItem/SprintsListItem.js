@@ -75,21 +75,21 @@ const Button = styled.button`
 `;
 
 const SprintsListItem = ({
-  _id,
-  name,
+  id,
+  title,
   startDate,
-  finishDate,
+  endDate,
   duration,
   OnDeleteSprint,
 }) => {
   return (
     <>
-      <Title>{name}</Title>
+      <Title>{title}</Title>
       <P>
         Дата початку<SPAN>{startDate}</SPAN>
       </P>
       <P>
-        Дата закінченя<SPAN>{finishDate}</SPAN>
+        Дата закінченя<SPAN>{endDate}</SPAN>
       </P>
       <P>
         Тривалість<SPAN>{duration}</SPAN>
@@ -97,7 +97,7 @@ const SprintsListItem = ({
       <Button
         type="button"
         onClick={() => {
-          OnDeleteSprint(_id);
+          OnDeleteSprint(id);
         }}
       ></Button>
     </>
@@ -105,14 +105,12 @@ const SprintsListItem = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.sprints.items.find(
-    (sprint) => sprint._id === ownProps._id
-  );
+  const item = state.sprints.items.find((sprint) => sprint._id === ownProps.id);
   return { ...item };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps._id)),
+  OnDeleteSprint: () => dispatch(sprintsOperations.deleteSprint(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SprintsListItem);

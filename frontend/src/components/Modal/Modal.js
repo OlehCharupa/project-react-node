@@ -43,6 +43,7 @@ const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
   const confirmAction = (e) => {
     const result = onSubmit(e);
     result && closeModal();
+    result && body.classList.remove(style.isOpen);
   };
   const closeModal = () => {
     removeListener();

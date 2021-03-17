@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import style from "./Sprints.module.css";
 import sprite from "./images/sprite.svg";
 import arrowLeft from "./images/arrow-left.svg";
 import arrowRight from "./images/arrow-right.svg";
-import edit from "./images/edit.svg";
 import tasksAction from "../../redux/actions/tasksAction";
 import { filterSelector } from "../../redux/selectors/tasks-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
@@ -15,6 +13,9 @@ import { useMediaQuery } from "react-responsive";
 import { modalToggle } from "../../redux/actions/modalAction";
 import Modal from "../../components/Modal/Modal";
 import TaskCreator from "../../components/TaskCreator/TaskCreator";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import SprintName from "../SprintName/SprintName";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
@@ -175,65 +176,6 @@ const SVG = styled.svg`
     right: 10px;
   }
 `;
-const SprintNameDIV = styled.div`
-  position: relative;
-  @media (max-width: 767px) {
-    margin-bottom: 30px;
-  }
-`;
-const SprintNameINPUT = styled.textarea`
-  width: 100%;
-  min-height: 64px;
-
-  resize: none;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  cursor: default;
-
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 1.23;
-
-  letter-spacing: 0.04em;
-  color: #181c27;
-
-  @media (min-width: 768px) {
-    min-height: 88px;
-    font-size: 36px;
-  }
-
-  @media (min-width: 1280px) {
-    min-height: 75px;
-  }
-`;
-const SprintNameBTN = styled.button`
-  display: block;
-  position: absolute;
-  top: 6px;
-  right: 0;
-
-  content: "";
-  width: 20px;
-  height: 20px;
-
-  border: 1px solid transparent;
-  border-radius: 50%;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    border: 1px solid #ff6b08;
-  }
-
-  background-color: transparent;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(${edit});
-`;
 const Button = styled.button`
   display: block;
   position: fixed;
@@ -366,6 +308,9 @@ const HeaderP = styled.p`
   }
 `;
 const SprintNameAndAddBtnDIV = styled.div`
+  @media (max-width: 767px) {
+    margin-bottom: 30px;
+  }
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
@@ -391,16 +336,35 @@ const CurrentDateAndFilterDIV = styled.div`
   }
 `;
 
-const Sprints = () => {
+const Sprints = ({ id, title, duration, endDate }) => {
   const dispatch = useDispatch();
-  const params = useParams();
-
+  const { sprintId } = useParams();
   const filter = useSelector((state) => filterSelector(state));
 
   useEffect(() => {
-    // fetch sprint tasks
-    dispatch(tasksOperations.fetchTasks());
-  }, []);
+    dispatch(tasksOperations.fetchTasks(sprintId));
+  }, [sprintId]);
+
+  const date = new Date();
+  const dateUnix = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+
+  const endDateFormat = endDate ? endDate.split("-").reverse() : dateUnix;
+  const endDateUnix = new Date(endDateFormat);
+
+  const options = {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  };
+  const localeDate = date.toLocaleString("Uk-uk", options);
+
+  const currentIndex =
+    duration - Math.ceil(Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24));
+  const [currentDay, setCurrentDay] = useState(localeDate);
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -409,44 +373,6 @@ const Sprints = () => {
   };
   const [modal, setModal] = useState(isModalOpen);
 
-  const [sprintName, setSprintName] = useState("Sprint Burndown Chart 1");
-  const changeNameHandler = (e) => {
-    const nameRef = document.querySelector("textarea");
-    if (nameRef.hasAttribute("readonly")) {
-      nameRef.removeAttribute("readonly");
-      nameRef.classList.remove(style.edit);
-
-      nameRef.focus();
-      nameRef.setSelectionRange(nameRef.value.length, nameRef.value.length);
-
-      window.addEventListener("keydown", closeAndUpdateName);
-    } else {
-      // update name query
-      nameRef.setAttribute("readonly", true);
-      nameRef.classList.add(style.edit);
-    }
-  };
-  const sprintNameInputHandler = (e) => {
-    const { value } = e.target;
-    setSprintName(value);
-  };
-  const closeAndUpdateName = (e) => {
-    const nameRef = document.querySelector("textarea");
-    const { keyCode } = e;
-
-    if (keyCode === 27) {
-      nameRef.value = "Sprint Burndown Chart 1";
-      nameRef.setAttribute("readonly", true);
-      nameRef.classList.add(style.edit);
-      window.removeEventListener("keydown", closeAndUpdateName);
-    }
-    if (keyCode === 13) {
-      //update query name
-      nameRef.setAttribute("readonly", true);
-      nameRef.classList.add(style.edit);
-      window.removeEventListener("keydown", closeAndUpdateName);
-    }
-  };
   return (
     <SprintDIV>
       {modal && (
@@ -471,11 +397,14 @@ const Sprints = () => {
           <CurrentDateDIV>
             <PrevBtn aria-label="previous day" />
             <CurrentDateP>
-              <CurrentDateSPAN>2</CurrentDateSPAN>/12
+              <CurrentDateSPAN>
+                {currentIndex ? currentIndex : 1}
+              </CurrentDateSPAN>
+              /{duration}
             </CurrentDateP>
             <NextBtn aria-label="next day" />
           </CurrentDateDIV>
-          <DateP>08.08.2020</DateP>
+          <DateP>{currentDay}</DateP>
         </DateDIV>
         <Device>
           <FieldDIV>
@@ -494,16 +423,7 @@ const Sprints = () => {
         </Device>
       </CurrentDateAndFilterDIV>
       <SprintNameAndAddBtnDIV>
-        <SprintNameDIV>
-          <SprintNameINPUT
-            className={style.edit}
-            maxLength="20"
-            value={sprintName}
-            readOnly
-            onChange={sprintNameInputHandler}
-          />
-          <SprintNameBTN onClick={changeNameHandler} />
-        </SprintNameDIV>
+        {title && <SprintName title={title} />}
         <AddTaskBtnAndLabelDIV>
           <AddTaskBTN aria-label="create task" onClick={toggleModal}>
             +
@@ -555,4 +475,13 @@ const Sprints = () => {
   );
 };
 
-export default Sprints;
+const mapStateToProps = (state, ownProps) => {
+  const item = state.sprints.items.find((sprint) => sprint._id === ownProps.id);
+  return { ...item };
+};
+
+export default connect(mapStateToProps)(Sprints);
+
+Sprints.propTypes = {
+  id: PropTypes.string.isRequired,
+};

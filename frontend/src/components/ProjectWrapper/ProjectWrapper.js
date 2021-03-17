@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import projectsOperations from "../../redux/operations/projectsOperations";
 import style from "./ProjectWrapper.module.css";
 import pen from "./images/pen.svg";
-import plus from "../../pages/ProjectPage/images/plus.svg"
+import plus from "../../pages/ProjectPage/images/plus.svg";
 import container from "../Container/Container.module.css";
 
 import SprintsList from "../SprintsList/SprinstList";
-import AddPeopleProjectWrapper from "./AddPeopleProjectWrapper/AddPeopleProjectWrapper"
+import AddPeopleProjectWrapper from "./AddPeopleProjectWrapper/AddPeopleProjectWrapper";
 
 import { modalToggle } from "../../redux/actions/modalAction";
 import Modal from "../Modal/Modal";
@@ -18,12 +18,6 @@ import AddProjectMembers from "../AddProjectMembers/AddProjectMembers";
 
 const ProjectWrapper = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-
-  useEffect(() => {
-    // fetch sprint tasks
-    dispatch(projectsOperations.fetchProjects());
-  }, []);
 
   const [projectName, setProjectName] = useState("Project 1");
 
@@ -72,7 +66,7 @@ const ProjectWrapper = () => {
     setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
-  
+
   const [modal, setModal] = useState(isModalOpen);
 
   return (
@@ -123,20 +117,25 @@ const ProjectWrapper = () => {
             <AddPeopleProjectWrapper />
           </div>
           <div style={{ width: "300px", position: "absolute", right: "0" }}>
-            <button 
+            <button
               style={{
                 backgroundColor: "transparent",
                 display: "flex",
                 whiteSpace: "nowrap",
                 alignItems: "center",
-                height:"44px"
+                height: "44px",
               }}
               type="button"
               aria-label="create sprint"
               className={style.link}
               onClick={toggleModal}
             >
-              <img src={plus} className={style.plusBtn} style={{width:"52px", height:"52px", margin:'0'}} />
+              <img
+                src={plus}
+                className={style.plusBtn}
+                style={{ width: "52px", height: "52px", margin: "0" }}
+                alt="add sprint"
+              />
               <div className={style.create}>Створити спринт</div>
             </button>
           </div>

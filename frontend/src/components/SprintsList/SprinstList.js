@@ -50,8 +50,8 @@ const Li = transition.li.attrs({
   &:enter-active {
     opacity: 1;
     transform: translateX(0);
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms -bezier(0.4, 0, 0.2, 1);
+  }cubic
   &:exit { opacity: 1;
   transform: translateX(0); }
   &:exit-active {
@@ -83,14 +83,14 @@ const H2 = styled.h2`
 
 const SprintsList = () => {
   const { projectId } = useParams();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints(projectId));
-  }, []);
-
   const sprints = useSelector((state) => allSprintsSelector(state));
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sprintsOperations.fetchSprints(projectId));
+  }, [projectId]);
 
   const sprintHandler = (e) => {
     const { sprintId } = e.currentTarget.dataset;
@@ -104,7 +104,7 @@ const SprintsList = () => {
 
   return (
     <>
-      {Array.isArray(sprints) ? (
+      {sprints.length ? (
         <TransitionGroup component={Ul}>
           {sprints.map((sprint) => (
             <Li

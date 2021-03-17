@@ -36,16 +36,32 @@ const ProjectPage = () => {
             isModalOpen={isModalOpen}
             toggleModal={toggleModal}
           />
-          <button className={style.plusBtn} style={{ width: "44px", height: "44px", display: "flex", whiteSpace: "nowrap", alignItems: 'center', heigth:"44px"}}  type="button" onClick={toggleModal}>
-              <img src={plus} style={{width:"44px", height:"44px", margin:'0'}} />
-              <div className={style.create}>Створити проект</div>
+          <button
+            className={style.plusBtn}
+            style={{
+              width: "44px",
+              height: "44px",
+              display: "flex",
+              whiteSpace: "nowrap",
+              alignItems: "center",
+              heigth: "44px",
+            }}
+            type="button"
+            onClick={toggleModal}
+          >
+            <img
+              src={plus}
+              style={{ width: "44px", height: "44px", margin: "0" }}
+              alt="add project"
+            />
+            <div className={style.create}>Створити проект</div>
           </button>
         </div>
       </div>
-      {Array.isArray(projects) ? (
+      {projects.length ? (
         <ul className={style.list}>
           {projects.map((project) => (
-            <ProjectPageItem {...project} key={project._id} id={project._id} />
+            <ProjectPageItem key={project._id} id={project._id} />
           ))}
         </ul>
       ) : (
