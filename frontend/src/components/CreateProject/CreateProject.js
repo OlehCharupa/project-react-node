@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./CreateProject.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
