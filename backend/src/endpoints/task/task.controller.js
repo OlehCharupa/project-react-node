@@ -71,9 +71,9 @@ export const loadTasks = async (req, res, next) => {
             if (err) {
                 next();
             }
-            if (!data.tasks.length) {
-                return res.status(200).send({ message: "No tasks found" });
-            }
+            // if (!data.tasks.length) {
+            //     return res.status(200).send({ message: "No tasks found" });
+            // }
             return res.status(200).send(data.tasks);
         });
 };
