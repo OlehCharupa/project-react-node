@@ -91,9 +91,9 @@ const Modal = ({ children, isModalOpen, toggleModal, onSubmit }) => {
               <button onClick={closeModal} className={style.button__close} />
               {children}
               <div className={style.button__wrapper}>
-                <button onClick={confirmAction} className={style.button__ready}>
+                {/* <button onClick={confirmAction} className={style.button__ready}>
                   Готово
-                </button>
+                </button> */}
                 <button onClick={closeModal} className={style.button__cancel}>
                   Відміна
                 </button>
