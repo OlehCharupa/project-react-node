@@ -42,10 +42,10 @@ const SignIn = () => {
 
                     }}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, values }) => (
                         <Form className={signIn.form__registr}>
                             <div className={signIn.form__item}>
-                                <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" />
+                                <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" value={values.email || ''} required/>
                                 {errors.email && touched.email ? (
                                     <label className={signIn.labelError} htmlFor='email' >{errors.email}</label>
                                 ) : (!!(errorState.indexOf('403')+1) ? <label className={signIn.labelError} htmlFor='email' >Ви ввели неправильно електронну адресу або пароль</label>
@@ -53,7 +53,7 @@ const SignIn = () => {
                             </div>
 
                             <div className={signIn.form__item}>
-                                <Field name="password" type="password" id='pass' className={signIn.input} placeholder="Password" />
+                                <Field name="password" type="password" id='pass' className={signIn.input} placeholder="Password" value={values.password || ''} required/>
                                 {errors.password && touched.password ? (
                                     <label className={signIn.labelError} htmlFor='pass' >{errors.password}</label>
                                 ) : (<label htmlFor='pass' className={signIn.label} >Пароль*</label>)}

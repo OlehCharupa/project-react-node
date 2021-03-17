@@ -6,13 +6,15 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
-
+import error from '../../redux/reducers/authReducer.js'
 const SignUp = () => {
+    // console.clear();
 
     const dispatch = useDispatch()
     const history = useHistory()
     const errorState = useSelector(state => state.auth.error.message);
-
+    const errorStateError = useSelector(state => state.auth.error);
+// console.log('errorStateError', errorStateError({message: ''}));
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Неправильна електронна адреса')
@@ -31,6 +33,9 @@ const SignUp = () => {
             .required("Обов'язковий"),
 
     });
+    // const initialErrorState = ({message: ''});
+
+    // console.log('errorState', error.error(initialErrorState));
     return (
         <>
             <div className={signUp.registr__block}>
@@ -43,21 +48,29 @@ const SignUp = () => {
                     validationSchema={SignupSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         // same shape as initial values
-                        if(!!(errorState)){
+                        dispatch(register(values));
+                        if(!!(errorState.indexOf('409'))){
+                            setTimeout(() => {
+                                console.log('errorState', errorState);
+                                // console.log('errorStateError', errorStateError.message.clear());
+                                setSubmitting(false);
+                                // return errorState = '';
+                            }, 500)
+                        }else{
                             setTimeout(() => {
                                 history.push('/login')
                                 setSubmitting(false);
                             }, 500)
-                        }   
-                        dispatch(register(values));
+                        }
+                        
                         
 
                     }}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, values }) => (
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
-                                <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" required/>
+                                <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" value={values.email || ''} required/>
 
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
@@ -66,14 +79,14 @@ const SignUp = () => {
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Пароль*" required/>
+                                <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Пароль*" value={values.password || ''} required/>
                                 {errors.password && touched.password ? (
                                     <label className={signUp.labelError} htmlFor='pass' >{errors.password}</label>
                                 ) : (<label htmlFor='pass' className={signUp.label} >Пароль*</label>)}
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="Пароль*" required/>
+                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="Пароль*" value={values.repeatPassword || ''} required/>
                                 {errors.repeatPassword && touched.repeatPassword ? (
                                     <label className={signUp.labelError} htmlFor='repeatPass'>{errors.repeatPassword}</label>
                                 ) : <label htmlFor='repeatPass' className={signUp.label} >Пароль*</label>}
