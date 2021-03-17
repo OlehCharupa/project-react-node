@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import style from "./ProjectSidebarItem.module.css";
 
 const ProjectSidebarItem = ({ id, title }) => {
-  const { projectId } = useParams();
-
   return (
     <>
       <li className={style.item}>
