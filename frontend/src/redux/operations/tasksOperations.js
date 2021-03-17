@@ -16,9 +16,7 @@ const fetchTasks = (sprintId) => (dispatch) => {
   dispatch(tasksAction.fetchTasksRequest());
   axios
     .get(`task/${sprintId}`)
-    .then(({ data }) =>
-      dispatch(tasksAction.fetchTasksSuccess(data.message ? [] : data))
-    )
+    .then(({ data }) => dispatch(tasksAction.fetchTasksSuccess(data)))
     .catch((error) => dispatch(tasksAction.fetchTasksError(error)));
 };
 
