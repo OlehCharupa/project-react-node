@@ -61,7 +61,7 @@ const SignUp = () => {
 
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (!!(errorState.indexOf('409')+1)?<label className={signUp.label} htmlFor='email' >Таку електронну адресу вже зареєстровано!</label>
+                                ) : (!!(errorState.indexOf('409')+1)?<label className={signUp.labelError} htmlFor='email' >Таку електронну адресу вже зареєстровано!</label>
                                 : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>)}
                             </div>
 
