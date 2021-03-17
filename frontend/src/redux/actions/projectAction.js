@@ -13,6 +13,9 @@ import {
   ADD_MEMBER_REQUEST,
   ADD_MEMBER_SUCCESS,
   ADD_MEMBER_ERROR,
+  UPDATE_PROJECT_ERROR,
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_REQUEST,
   CHANGE_ERROR,
 } from "../constants/projectsConstans.js";
 
@@ -32,6 +35,10 @@ const addMemberRequest = createAction(ADD_MEMBER_REQUEST)
 const addMemberSuccess = createAction(ADD_MEMBER_SUCCESS)
 const addMemberError = createAction(ADD_MEMBER_ERROR)
 
+const updateProjectRequest = createAction(UPDATE_PROJECT_REQUEST);
+const updateProjectSuccess = createAction(UPDATE_PROJECT_SUCCESS);
+const updateProjectError = createAction(UPDATE_PROJECT_ERROR);
+
 const changeError = createAction(CHANGE_ERROR);
 
 export default {
@@ -48,4 +55,7 @@ export default {
   addMemberSuccess,
   addMemberError,
   changeError,
+  updateProjectRequest,
+  updateProjectSuccess,
+  updateProjectError,
 };

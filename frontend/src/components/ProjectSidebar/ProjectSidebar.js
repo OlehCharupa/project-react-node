@@ -40,12 +40,11 @@ const ProjectSidebar = () => {
       </NavLink>
       <div className={style.container}>
         <ul className={style.sidebarList}>
-          {projects &&
-            projects.map((project) => (
-              <li className={style.item} key={project._id}>
-                <ProjectSidebarItem id={project._id} />
-              </li>
-            ))}
+          {projects.map((project) => (
+            <li className={style.item} key={project._id}>
+              <ProjectSidebarItem id={project._id} />
+            </li>
+          ))}
         </ul>
       </div>
       <div className={style.linkAdd}>

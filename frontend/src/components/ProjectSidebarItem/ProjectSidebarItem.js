@@ -3,13 +3,31 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import style from "./ProjectSidebarItem.module.css";
+import styled from "styled-components";
+
+const activeClassName = "nav-item-active";
+
+const StyledLink = styled(NavLink).attrs({ activeClassName })`
+  padding-left: 50px;
+
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+
+  color: #181c27;
+
+  &.${activeClassName} {
+    font-weight: 700;
+  }
+`;
 
 const ProjectSidebarItem = ({ id, title }) => {
   return (
     <>
-      <NavLink to={{ pathname: `/projects/${id}` }} className={style.link}>
-        <span className={style.title}>{title}</span>
-      </NavLink>
+      <StyledLink to={{ pathname: `/projects/${id}` }} className={style.link}>
+        {title}
+      </StyledLink>
     </>
   );
 };
