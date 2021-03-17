@@ -6,7 +6,7 @@
     
     background-color: #ffff;
     width: 100%;
-    padding: 47px 20px 79px 20px;
+    padding: 45px 20px 37px 20px;
     box-shadow: 0px 6px 26px rgba(0, 0, 0, 0.300);
     border-radius: 5px;
 }
@@ -26,17 +26,17 @@
 }
 .form__item{
     position: relative;
-    padding-top: 70px;
+    padding-top: 40px;
 }
 
 .label, .labelError{
     position: absolute;
     left: 10px;
-    top: 70px;
+    top: 45px;
     transition: top 0.5s;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.04em;
     color: rgba(24, 28, 39, 0.6);
@@ -64,7 +64,7 @@
     box-shadow: none;
 }
 .input:focus + .label, .input:not(:placeholder-shown) + .label,.input:checked{
-    top: 45px;
+    top: 20px;
     font-size: 14px;
     line-height: 17px;
     color: #FF6B08;
@@ -79,7 +79,7 @@
     }
 } */
 .input:focus + .labelError, .input:not(:placeholder-shown) + .labelError{
-    top: 45px;
+    top: 20px;
     font-size: 14px;
     font-weight: 800;
     line-height: 17px;
@@ -111,6 +111,7 @@
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 18px;
+    outline: none;
 }
 .btn:hover{
     background-color: #ffffff;

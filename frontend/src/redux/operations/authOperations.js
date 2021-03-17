@@ -19,7 +19,6 @@ export const register = (credentials) => async (dispatch) => {
     email: email,
     password: password,
   };
-  console.log("state", state);
   try {
     const result = await axios.post("/auth/register", state);
     token.set(result.data.token);

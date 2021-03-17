@@ -2,7 +2,18 @@
 @media screen and (min-width: 768px) {
 .leftImg{
     position: absolute;
-    bottom: 0;
+    bottom: 15%;
+    left: 0;
+    width: 40%;
+    height: 60%;
+    z-index: -1;
+    background-position: bottom left;
+    background-size: contain;
+    background-image: url('image/laptop/Group6@1x.png');
+}
+.leftLogin{
+    position: absolute;
+    bottom: 10%;
     left: 0;
     width: 40%;
     height: 60%;
@@ -13,9 +24,22 @@
 }
 .leftImgOrabge{
     position: absolute;
-    bottom: 40px;
+    bottom: 20%;
     left: 0px;
-    width: 40%;
+    width:  25%;
+    height: 27%;
+    z-index: 2;
+    background-position: bottom left;
+    background-size: contain;
+    opacity: 0.95;
+    filter: alpha(Opacity=85);
+    background-image: url('image/laptop/Ellipse2@1x.png');
+}
+.leftLoginOrabge{
+    position: absolute;
+    bottom: 15%;
+    left: 0px;
+    width:  25%;
     height: 27%;
     z-index: 2;
     background-position: bottom left;
@@ -26,51 +50,154 @@
 }
 .rightImg{
     position: absolute;
-    bottom: 0;
+    bottom: 120px;
     right: 0;
-    width: 40%;
+    width: 35%;
     height: 85%;
     z-index: -1;
     background-position: bottom right;
     background-size: contain;
-    background-image: url('image/laptop/Group258right@1x.png');
+    background-image: url('image/laptop/Group262tabletRight@1x.png');
+}
+.rightImg:before{
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 74%;
+    right: 25%;
+    width: 32%;
+    height: 10%;
+    z-index: -1;
+    background-position: bottom right;
+    background-size: contain;
+    background-image: url('image/desktop/Ellipse5rihtOrange@1x.png');
 }
 }
-
-@media screen and (min-width: 1170px) {
+@media screen and (min-width: 1024px) {
     .leftImg{
-        position: absolute;
         bottom: 0;
-        left: 0;
+        left: 2%;
         width: 40%;
         height: 80%;
-        z-index: -1;
-        background-position: bottom left;
-        background-size: contain;
+        background-image: url('image/desktop/Group6@1x.png');
+    }
+    .leftLogin{
+        bottom: 0%;
+        left: 0;
+        width: 39%;
+        height: 80%;
         background-image: url('image/desktop/Group6@1x.png');
     }
     .leftImgOrabge{
-        position: absolute;
-        bottom: 0;
-        left: 7%;
-        width: 40%;
+        bottom: 20px;
+        left: 10%;
+        width: 26%;
         height: 37%;
-        z-index: 2;
-        background-position: bottom left;
-        background-size: contain;
-        opacity: 0.95;
-        filter: alpha(Opacity=85);
+        background-image: url('image/desktop/Ellipse2@1x.png');
+    }
+    .leftLoginOrabge{
+        bottom: 4%;
+        left: 10%;
+        width: 27%;
+        height: 35%;
         background-image: url('image/desktop/Ellipse2@1x.png');
     }
     .rightImg{
-        position: absolute;
         top: 15%;
         right: 0;
         width: 40%;
         height: 85%;
-        z-index: -1;
-        background-position: bottom right;
-        background-size: contain;
         background-image: url('image/desktop/Group260right-@1x.png');
     }
+    .rightImg:before{
+        bottom: 92%;
+        right: 57%;
+        width: 18%;
+        height: 12%;
+        background-image: url('image/desktop/Ellipse5rihtOrange@1x.png');
     }
+    }
+@media screen and (min-width: 1170px) {
+    .leftImg{
+        bottom: 0;
+        left: 2%;
+        width: 40%;
+        height: 80%;
+        background-image: url('image/desktop/Group6@1x.png');
+    }
+    .leftLogin{
+        bottom: 0%;
+        left: 0;
+        width: 39%;
+        height: 80%;
+        background-image: url('image/desktop/Group6@1x.png');
+    }
+    .leftImgOrabge{
+        bottom: 20px;
+        left: 10%;
+        width: 29%;
+        height: 37%;
+        background-image: url('image/desktop/Ellipse2@1x.png');
+    }
+    .leftLoginOrabge{
+        bottom: 4%;
+        left: 10%;
+        width: 27%;
+        height: 35%;
+        background-image: url('image/desktop/Ellipse2@1x.png');
+    }
+    .rightImg{
+        top: 15%;
+        right: 0;
+        width: 40%;
+        height: 85%;
+        background-image: url('image/desktop/Group260right-@1x.png');
+    }
+    .rightImg:before{
+        bottom: 92%;
+        right: 57%;
+        width: 18%;
+        height: 12%;
+        background-image: url('image/desktop/Ellipse5rihtOrange@1x.png');
+    }
+    }
+    @media screen and (min-width: 1600px) {
+        .leftImg{
+            bottom: 0;
+            left: 11%;
+            width: 28%;
+            height: 80%;
+        }
+        .leftLogin{
+            bottom: 0%;
+            left: 12%;
+            width: 29%;
+            height: 80%;
+        }
+        .leftImgOrabge{
+            bottom: 20px;
+            left: 19%;
+            width: 20%;
+            height: 35%;
+            z-index: 2;
+        }
+        .leftLoginOrabge{
+            bottom: 4%;
+            left: 20%;
+            width: 27%;
+            height: 35%;
+        }
+        .rightImg{
+            top: 15%;
+            right: 0;
+            width: 40%;
+            height: 85%;
+            z-index: -1;
+        }
+        .rightImg:before{
+            bottom: 92%;
+            right: 75%;
+            width: 18%;
+            height: 12%;
+        }
+        }

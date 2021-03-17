@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 import authAction from "../actions/authAction";
 
 const initialUserState = { email: null, id: null, projects: null };
-
+const initialErrorState = {message: ''};
 const user = createReducer(initialUserState, {
   [authAction.registerSuccess]: (_, { payload }) => payload.data,
   [authAction.loginSuccess]: (_, { payload }) => payload.data,
@@ -18,7 +18,7 @@ const token = createReducer(null, {
   [authAction.logoutSuccess]: () => null,
 });
 
-const error = createReducer(null, {
+const error = createReducer(initialErrorState, {
   [authAction.registerError]: (_, { payload }) => payload,
   [authAction.loginError]: (_, { payload }) => payload,
   [authAction.logoutError]: (_, { payload }) => payload,
@@ -29,6 +29,7 @@ export const authPersistConfig = {
   key: "auth",
   storage,
   whiteList: ["token"],
+  blacklist: ["error"],
 };
 
 export default combineReducers({
