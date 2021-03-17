@@ -22,7 +22,9 @@ const fetchSprints = (projectId) => (dispatch) => {
   axios
     .get(`sprint/${projectId}`)
     .then(({ data }) =>
-      dispatch(sprintsAction.fetchSprintsSuccess(data.message ? [] : data))
+      dispatch(
+        sprintsAction.fetchSprintsSuccess(data.message ? [] : data.sprints)
+      )
     )
     .catch((error) => dispatch(sprintsAction.fetchSprintsError(error)));
 };
