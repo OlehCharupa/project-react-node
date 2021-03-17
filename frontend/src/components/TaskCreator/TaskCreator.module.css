@@ -1,129 +1,171 @@
 .container{
-    display: block;
-    /* height: 100%; */
-    width: 320px;
-    padding: 20px;
-    margin: auto;
-    letter-spacing: 1px;
+  display: block;
+  /* height: 100%; */
+  width: 320px;
+  padding: 20px;
+  margin: auto;
+  letter-spacing: 1px;
 }
 
 * {
-    box-sizing: border-box;
-  }
-  
-  .neon_border {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    padding-top: 0px;
-    margin: auto;
-  }
+  box-sizing: border-box;
+}
 
-  .errorDiv {
-    color: red;
-    /* position: absolute; */
-    right: 10px;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 13px;
-    line-height: 20px;
-    padding: 5px;
-    letter-spacing: 1px;
-  }
-  
-  .form_title {
-    text-align: center;
+.neon_border {
+  width: 100%;
+  /* height: 100%; */
+  padding: 0px 20px;
+  /* padding-top: 0px; */
+  margin: auto;
+}
 
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 32px;
-    color: rgba(24, 28, 39, 1);
-  }
-  
-  .form_item {
-    position: relative;
-    padding-top: 40px;
-    margin-bottom: 10px;
-  }
-  
-  .label {
-    font-family: "Montserrat";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgba(24, 28, 39, 0.6);
+.errorDiv {
+  color: red;
+  /* position: absolute; */
+  right: 10px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 5px;
+  letter-spacing: 1px;
+}
 
-    position: absolute;
-    left: 10px;
-    top: 43px;
-    transition: top 0.5s;
-  }
-  
-  .input,
-  textarea {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    size: 16px;
-    line-height: 20px;
-    letter-spacing: 1px;
-    background-color: none;
-    display: block;
-    padding: 5px;
-    margin: auto;
-    padding: 5px;
-    margin: auto;
-    border: none;
-    border-bottom: none;
-    background: no-repeat bottom, 50% calc(100% - 1px);
-    background-size: 0 100%, 100% 100%;
-    padding-bottom: 8px;
-    width: 100%;
-    cursor: pointer;
-    background-image: linear-gradient(0deg, #ff6b08 2px, rgba(156, 39, 176, 0) 0),
-      linear-gradient(0deg, #ccc 1px, hsla(0, 0%, 82%, 0) 0);  }
-  
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .input:focus,
+.form_title {
+  text-align: center;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+  color: rgba(24, 28, 39, 1);
+}
+
+.form_item {
+  position: relative;
+  padding-top: 40px;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(24, 28, 39, 0.6);
+
+  position: absolute;
+  left: 10px;
+  top: 43px;
+  transition: top 0.5s;
+}
+
+.input,
+textarea {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  size: 16px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  background-color: none;
+  display: block;
+  padding: 5px;
+  margin: auto;
+  padding: 5px;
+  margin: auto;
+  border: none;
+  border-bottom: none;
+  background: no-repeat bottom, 50% calc(100% - 1px);
+  background-size: 0 100%, 100% 100%;
+  padding-bottom: 8px;
+  width: 100%;
+  cursor: pointer;
+  background-image: linear-gradient(0deg, #ff6b08 2px, rgba(156, 39, 176, 0) 0),
+    linear-gradient(0deg, #ccc 1px, hsla(0, 0%, 82%, 0) 0);  }
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.input:focus,
 textarea:focus {
-  outline: none;
-  background-size: 100% 100%, 100% 100%;
-  transition-duration: 0.3s;
-  box-shadow: none;
+outline: none;
+background-size: 100% 100%, 100% 100%;
+transition-duration: 0.3s;
+box-shadow: none;
 }
 .input:hover,
 textarea:hover {
-  outline: none;
-  background-size: 100% 100%, 100% 100%;
-  transition-duration: 0.3s;
-  box-shadow: none;
+outline: none;
+background-size: 100% 100%, 100% 100%;
+transition-duration: 0.3s;
+box-shadow: none;
 }
 
 .input:focus + .label,
 .input:not(:placeholder-shown) + .label,
 textarea:focus + .label,
 textarea:not(:placeholder-shown) + .label {
-  top: 10px;
+top: 10px;
 }
 
 ::-webkit-input-placeholder {
-  opacity: 0;
+opacity: 0;
 }
 
 .input:focus::-webkit-input-placeholder,
 textarea:focus::-webkit-input-placeholder {
-  opacity: 1;
+opacity: 1;
+}
+.members_list {
+  display: block;
+  height: 100%;
+  width: 280px;
+  padding: 20px;
+}
+
+.members_list h3 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(24, 28, 39, 0.6);
+    margin-bottom: 20px;
+}
+
+.members_list p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  /* font-size: 18px;
+  line-height: 22px; */
+  color: rgba(24, 28, 39, 1);
+}
+
+.members_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.members_item:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.delete_button {
+    display: block;
+    width: 15px;
+    height: 15px;
 }
 
 .button__wrapper{
-  /* padding: 40px 0; */
+  padding-top: 40px;
 }
 
 .button__ready {
@@ -156,32 +198,50 @@ textarea:focus::-webkit-input-placeholder {
   border: 2px solid #ff6b08;
 }
 
-  @media screen and (min-width: 768px) {
-    .container {
-        width: 512px;
-    }
+@media screen and (min-width: 768px) {
+  .container {
+      width: 512px;
+      padding-bottom: 0px;
+  }
 
-    .form_title {
-        font-size: 36px;
-        line-height: 44px;
-        margin-bottom: 20px;
-    }
+  .form_title {
+      font-size: 36px;
+      line-height: 44px;
+      margin-bottom: 20px;
+  }
 
-    .input,
-    textarea {
-        font-size: 18px;
-        line-height: 22px;
-    }
+  .input,
+  textarea {
+      font-size: 18px;
+      line-height: 22px;
+  }
 
-    .label {
-        font-size: 18px;
-        line-height: 22px;
-    }
+  .label {
+      font-size: 18px;
+      line-height: 22px;
+  }
 
-    .errorDiv {
-        font-size: 18px;
-        line-height: 22px; 
-    }
+  .errorDiv {
+      font-size: 18px;
+      line-height: 22px; 
+  }
+
+  .members_list h3 {
+      font-size: 14px;
+      line-height: 17px;
 
   }
-  
+
+  .members_list p {
+      font-size: 18px;
+      line-height: 22px;
+  }
+
+  .members_list {
+      width: 100%;
+  }
+
+  .members_item:not(:last-child) {
+      margin-bottom: 10px;
+  }
+}

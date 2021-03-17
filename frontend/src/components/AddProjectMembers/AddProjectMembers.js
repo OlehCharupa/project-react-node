@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProjectMembers.module.css";
@@ -11,19 +11,20 @@ import { projectsSelector } from "../../redux/selectors/projects-selectors";
 import { getUserEmail } from "../../redux/selectors/authSelectors";
 import projectsOperations from "../../redux/operations/projectsOperations";
 
-const reduxProjectMembers = [
-  "asfaasf@a.com",
-  "asfasfsaf@a.com",
-  "asfasdfasfsaf@a.com",
-]; // Заглушка для map
-
 const AddProjectMembers = () => {
   const location = useLocation();
-  let projectId;
+  let projectId = location.pathname.substr(10);
 
-  useEffect(() => {
-    projectId = location.pathname.substr(10);
-  });
+  // useEffect(() => {
+  //   projectId = location.pathname.substr(10);
+  // });
+
+  const usersProjects = useSelector((state) => projectsSelector(state));
+  const currentUser = useSelector((state) => getUserEmail(state));
+  const currentProject = usersProjects.items.find(
+    (project) => project._id === projectId
+  );
+  const currentProjectUsers = currentProject.members;
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
@@ -34,8 +35,8 @@ const AddProjectMembers = () => {
         "Користувач вже є учасником проекту.",
         function (value) {
           const { path, createError } = this;
-          if (reduxProjectMembers.includes(value) || currentUser === value) {
-            console.log(reduxProjectMembers.includes(value));
+          if (currentProjectUsers.includes(value) || currentUser === value) {
+            console.log(currentProjectUsers.includes(value));
             return createError({
               path,
               message: "Користувач вже є учасником проекту.",
@@ -45,13 +46,6 @@ const AddProjectMembers = () => {
         }
       ),
   });
-
-  const usersProjects = useSelector((state) => projectsSelector(state));
-  const currentUser = useSelector((state) => getUserEmail(state));
-  const currentProject = usersProjects.items.find(
-    (project) => project.id === projectId
-  );
-  const currentProjectUsers = currentProject.members;
 
   const isModalOpen = useSelector((state) => state.modal);
   const dispatch = useDispatch();
@@ -89,11 +83,6 @@ const AddProjectMembers = () => {
                 <div className={styles.errorDiv}>{errors.email}</div>
               ) : null}
             </div>
-            <div className={styles.button__wrapper}>
-              <button type="submit" className={styles.button__ready}>
-                Готово
-              </button>
-            </div>
           </Form>
         )}
       </Formik>
@@ -106,6 +95,11 @@ const AddProjectMembers = () => {
             </li>
           ))}
         </ul>
+      </div>
+      <div className={styles.button__wrapper}>
+        <button type="submit" className={styles.button__ready}>
+          Готово
+        </button>
       </div>
     </div>
   );
