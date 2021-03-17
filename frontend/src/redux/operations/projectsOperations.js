@@ -17,9 +17,7 @@ const fetchProjects = () => (dispatch) => {
 
   axios
     .get("project")
-    .then(({ data }) =>
-      dispatch(projectsAction.fetchProjectsSuccess(data.message ? [] : data))
-    )
+    .then(({ data }) => dispatch(projectsAction.fetchProjectsSuccess(data)))
     .catch((error) => dispatch(projectsAction.fetchProjectsError(error)));
 };
 
