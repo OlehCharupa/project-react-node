@@ -138,22 +138,19 @@
   cursor: pointer;
   width: 130px;
 }
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
   .react-datepicker__input-container input {
     width: 120px;
   }
-}
 
-.react-datepicker__input-container input {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-}
-
-
-@media screen and (min-width: 767px) {
   .react-datepicker-wrapper {
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
   }
   .react-datepicker__input-container input {
     padding-top: 32px;
     }
+}
+
+.react-datepicker__input-container input {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
 }

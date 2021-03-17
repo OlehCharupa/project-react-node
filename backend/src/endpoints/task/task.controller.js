@@ -21,13 +21,13 @@ export const addTask = async (req, res) => {
     const hoursWastedPerDay = [];
     const startDateArr = sprint.startDate.split("-");
     const startDateObj = DateTime.local(
-        Number(startDateArr[0]),
+        Number(startDateArr[2]),
         Number(startDateArr[1]),
-        Number(startDateArr[2])
+        Number(startDateArr[0])
     );
     for (let i = 0; i < sprint.duration; i++) {
         hoursWastedPerDay.push({
-            currentDay: startDateObj.plus({ days: i }).toFormat("yyyy-MM-dd"),
+            currentDay: startDateObj.plus({ days: i }).toFormat("dd-MM-yyyy"),
             singleHoursWasted: 0,
         });
     }
@@ -51,7 +51,6 @@ export const addTask = async (req, res) => {
 export const loadTasks = async (req, res, next) => {
     const user = req.user;
     const { sprintId } = req.params;
-    const { search } = req.query;
     const sprint = await SprintModel.findById(sprintId);
     if (!sprint) {
         return res.status(404).send({ message: "Sprint not found" });
@@ -66,29 +65,13 @@ export const loadTasks = async (req, res, next) => {
             .status(403)
             .send({ message: "You are not a contributor of this project" });
     }
-    if (search) {
-        return SprintModel.findById(sprintId)
-            .populate("tasks")
-            .exec((err, data) => {
-                if (err) {
-                    next(err);
-                }
-                const foundTasks = data.tasks.filter((task) =>
-                    task.title.toLowerCase().includes(search.toLowerCase())
-                );
-                if (!foundTasks.length) {
-                    return res.status(200).send({ message: "No tasks found" });
-                }
-                return res.status(200).send(foundTasks);
-            });
-    }
     return SprintModel.findById(sprintId)
         .populate("tasks")
         .exec((err, data) => {
             if (err) {
                 next();
             }
-            if (data.tasks.length) {
+            if (!data.tasks.length) {
                 return res.status(200).send({ message: "No tasks found" });
             }
             return res.status(200).send(data.tasks);

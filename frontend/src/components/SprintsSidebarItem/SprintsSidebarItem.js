@@ -21,19 +21,19 @@ const StyledLink = styled(NavLink).attrs({ activeClassName })`
   }
 `;
 
-const SprintsSidebarItem = ({ id, name }) => {
+const SprintsSidebarItem = ({ id, title }) => {
   const { projectId } = useParams();
   return (
     <>
       <StyledLink to={{ pathname: `/projects/${projectId}/${id}` }}>
-        {name}
+        {title}
       </StyledLink>
     </>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.sprints.items.find((sprint) => sprint.id === ownProps.id);
+  const item = state.sprints.items.find((sprint) => sprint._id === ownProps.id);
   return { ...item };
 };
 

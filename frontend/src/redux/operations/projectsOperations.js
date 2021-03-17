@@ -6,9 +6,9 @@ const addProject = ({ projectName, description }) => (dispatch) => {
 
   axios
     .post("project", { title: projectName, description })
-    .then(({ data }) => {
-      dispatch(projectsAction.addProjectSuccess({ ...data, _id: data.id }));
-    })
+    .then(({ data }) =>
+      dispatch(projectsAction.addProjectSuccess({ ...data, _id: data.id }))
+    )
     .catch((error) => dispatch(projectsAction.addProjectError(error)));
 };
 
@@ -17,7 +17,9 @@ const fetchProjects = () => (dispatch) => {
 
   axios
     .get("project")
-    .then(({ data }) => dispatch(projectsAction.fetchProjectsSuccess(data)))
+    .then(({ data }) =>
+      dispatch(projectsAction.fetchProjectsSuccess(data.message ? [] : data))
+    )
     .catch((error) => dispatch(projectsAction.fetchProjectsError(error)));
 };
 
@@ -30,8 +32,20 @@ const deleteProject = (id) => (dispatch) => {
     .catch((error) => dispatch(projectsAction.deleteProjectError(error)));
 };
 
+const addProjectMember = (id, value) => (dispatch) => {
+  dispatch(projectsAction.addProjectRequest());
+
+  axios
+    .patch(`project/contributor/${id}`, value)
+    .then(({ data }) => {
+      dispatch(projectsAction.addMemberSuccess({ ...data, _id: data.id }));
+    })
+    .catch((error) => dispatch(projectsAction.addMemberError(error)));
+};
+
 export default {
   addProject,
   fetchProjects,
   deleteProject,
+  addProjectMember,
 };

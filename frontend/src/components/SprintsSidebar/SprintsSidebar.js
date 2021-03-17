@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import arrow from "./images/arrow.svg";
 import { allSprintsSelector } from "../../redux/selectors/sprints-selectors";
-import sprintsOperations from "../../redux/operations/sprintsOperations";
 import { useMediaQuery } from "react-responsive";
 import SprintsSidebarItem from "../SprintsSidebarItem/SprintsSidebarItem";
 import { modalToggle } from "../../redux/actions/modalAction";
@@ -187,9 +186,6 @@ const AddTaskLabelP = styled.p`
 
 const SprintsSidebar = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(sprintsOperations.fetchSprints());
-  }, []);
 
   const sprints = useSelector((state) => allSprintsSelector(state));
   const { projectId } = useParams();
@@ -216,8 +212,8 @@ const SprintsSidebar = () => {
       <Default>
         <UL>
           {sprints.map((sprint) => (
-            <LI key={sprint.id}>
-              <SprintsSidebarItem id={sprint.id} />
+            <LI key={sprint._id}>
+              <SprintsSidebarItem id={sprint._id} />
             </LI>
           ))}
         </UL>

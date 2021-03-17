@@ -248,7 +248,7 @@ export default {
             }
         },
         "/project/contributor/{projectId}": {
-            "post": {
+            "patch": {
                 "tags": ["Project"],
                 "summary": "Add members to a project",
                 "security": [{ "Bearer": [] }],
@@ -618,13 +618,6 @@ export default {
                         "required": true,
                         "description": "Sprint's id",
                         "type": "string"
-                    },
-                    {
-                        "name": "search",
-                        "in": "query",
-                        "required": false,
-                        "description": "Find tasks by query (if no query is provided, than all sprint's tasks are loaded)",
-                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -862,12 +855,12 @@ export default {
                                                     "startDate": {
                                                         "type": "string",
                                                         "description": "Sprint's start date",
-                                                        "example": "2020-12-31"
+                                                        "example": "30-12-2020"
                                                     },
                                                     "endDate": {
                                                         "type": "string",
                                                         "description": "Sprint's end date",
-                                                        "example": "2021-1-1"
+                                                        "example": "31-12-2020"
                                                     },
                                                     "tasks": {
                                                         "type": "array",
@@ -902,7 +895,7 @@ export default {
                                                                             "currentDay": {
                                                                                 "type": "string",
                                                                                 "description": "Day's date",
-                                                                                "example": "2020-12-31"
+                                                                                "example": "31-12-2020"
                                                                             },
                                                                             "singleHoursWasted": {
                                                                                 "type": "integer",
@@ -962,193 +955,6 @@ export default {
                         "type": "string",
                         "description": "New session's id",
                         "example": "507f1f77bcf86cd799439011"
-                    }
-                }
-            },
-            "GetUserInfo": {
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string",
-                        "description": "User's email",
-                        "format": "email"
-                    },
-                    "username": {
-                        "type": "string",
-                        "description": "User's name",
-                        "example": "Adam"
-                    },
-                    "id": {
-                        "type": "string",
-                        "description": "User's id",
-                        "example": "507f1f77bcf86cd799439012"
-                    },
-
-                    "children": {
-                        "type": "array",
-                        "description": "User's children",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "rewards": {
-                                    "type": "integer",
-                                    "description": "Child's rewards"
-                                },
-                                "habits": {
-                                    "type": "array",
-                                    "description": "Child's habits",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "days": {
-                                                "type": "array",
-                                                "description": "Habit days",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "date": {
-                                                            "type": "string",
-                                                            "description": "Day's date",
-                                                            "example": "2020-12-31"
-                                                        },
-                                                        "isCompleted": {
-                                                            "type": "string",
-                                                            "description": "Day's status",
-                                                            "enum": ["unknown", "confirmed", "canceled"]
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "_id": {
-                                                "type": "string",
-                                                "description": "Habit's id",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "Habit's name",
-                                                "example": "Name of the habit"
-                                            },
-                                            "rewardPerDay": {
-                                                "type": "integer",
-                                                "description": "Habit's reward for a single day",
-                                                "minimum": 1,
-                                                "example": 1
-                                            },
-                                            "childId": {
-                                                "type": "string",
-                                                "description": "Id of the child whose habit it is",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "__v": {
-                                                "type": "integer",
-                                                "description": "MongoDB document service versionKey (ignore)"
-                                            }
-                                        }
-                                    }
-                                },
-                                "tasks": {
-                                    "type": "array",
-                                    "description": "Child's tasks",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "_id": {
-                                                "type": "string",
-                                                "description": "Task's id",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "Task's name",
-                                                "example": "Name of the task"
-                                            },
-                                            "reward": {
-                                                "type": "string",
-                                                "description": "Task's reward",
-                                                "minimum": 1,
-                                                "example": 1
-                                            },
-                                            "isCompleted": {
-                                                "type": "string",
-                                                "description": "Task's status",
-                                                "enum": ["unknown", "confirmed", "canceled"]
-                                            },
-                                            "childId": {
-                                                "type": "string",
-                                                "description": "Id of the child whose task it is",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "__v": {
-                                                "type": "integer",
-                                                "description": "MongoDB document service versionKey (ignore)"
-                                            }
-                                        }
-                                    }
-                                },
-                                "gifts": {
-                                    "type": "array",
-                                    "description": "Child's gifts",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "_id": {
-                                                "type": "string",
-                                                "description": "Gift's id",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "Gift's name",
-                                                "example": "Name of the gift"
-                                            },
-                                            "price": {
-                                                "type": "integer",
-                                                "description": "Gift's price",
-                                                "minimum": 1,
-                                                "example": 1
-                                            },
-                                            "isPurchased": {
-                                                "type": "boolean",
-                                                "description": "Gift's status"
-                                            },
-                                            "imageUrl": {
-                                                "type": "string",
-                                                "description": "Gift's image url (created if 'file' field was provided while adding new gift)"
-                                            },
-                                            "childId": {
-                                                "type": "string",
-                                                "description": "Id of the child this gift was created for",
-                                                "example": "507f1f77bcf86cd799439011"
-                                            },
-                                            "__v": {
-                                                "type": "integer",
-                                                "description": "MongoDB document service versionKey (ignore)"
-                                            }
-                                        }
-                                    }
-                                },
-                                "_id": {
-                                    "type": "string",
-                                    "description": "Child's id",
-                                    "example": "507f1f77bcf86cd799439011"
-                                },
-                                "name": {
-                                    "type": "string",
-                                    "description": "Child's name",
-                                    "example": "Adam"
-                                },
-                                "gender": {
-                                    "type": "string",
-                                    "description": "Child's gender",
-                                    "enum": ["male", "female"]
-                                },
-                                "__v": {
-                                    "type": "integer",
-                                    "description": "MongoDB document service versionKey (ignore)"
-                                }
-                            }
-                        }
                     }
                 }
             },
@@ -1289,7 +1095,7 @@ export default {
                 }
             },
             "SprintRequest": {
-                "required": ["title", "endDate", "duration"],
+                "required": ["title", "startDate", "duration"],
                 "type": "object",
                 "properties": {
                     "title": {
@@ -1297,10 +1103,10 @@ export default {
                         "description": "Sprint's title",
                         "example": "Sprint 1"
                     },
-                    "endDate": {
+                    "startDate": {
                         "type": "string",
                         "description": "Sprint's end date",
-                        "example": "2020-12-31"
+                        "example": "30-12-2020"
                     },
                     "duration": {
                         "type": "integer",
@@ -1321,12 +1127,12 @@ export default {
                     "startDate": {
                         "type": "string",
                         "description": "Sprint's start date",
-                        "example": "2020-12-30"
+                        "example": "30-12-2020"
                     },
                     "endDate": {
                         "type": "string",
                         "description": "Sprint's end date",
-                        "example": "2020-12-31"
+                        "example": "31-12-2020"
                     },
                     "duration": {
                         "type": "integer",
@@ -1354,12 +1160,12 @@ export default {
                         "startDate": {
                             "type": "string",
                             "description": "Sprint's start date",
-                            "example": "2020-12-30"
+                            "example": "30-12-2020"
                         },
                         "endDate": {
                             "type": "string",
                             "description": "Sprint's end date",
-                            "example": "2020-12-31"
+                            "example": "31-12-2020"
                         },
                         "duration": {
                             "type": "integer",
@@ -1440,7 +1246,7 @@ export default {
                                 "currentDay": {
                                     "type": "string",
                                     "description": "Day's date",
-                                    "example": "2020-12-31"
+                                    "example": "31-12-2020"
                                 },
                                 "singleHoursWasted": {
                                     "type": "integer",
@@ -1487,7 +1293,7 @@ export default {
                                     "currentDay": {
                                         "type": "string",
                                         "description": "Day's date",
-                                        "example": "2020-12-31"
+                                        "example": "31-12-2020"
                                     },
                                     "singleHoursWasted": {
                                         "type": "integer",
@@ -1515,7 +1321,7 @@ export default {
                     "date": {
                         "type": "string",
                         "description": "Day's date",
-                        "example": "2020-12-31"
+                        "example": "31-12-2020"
                     },
                     "hours": {
                         "type": "integer",
@@ -1536,7 +1342,7 @@ export default {
                             "currentDay": {
                                 "type": "string",
                                 "description": "Day's date",
-                                "example": "2020-12-31"
+                                "example": "31-12-2020"
                             },
                             "singleHoursWasted": {
                                 "type": "integer",

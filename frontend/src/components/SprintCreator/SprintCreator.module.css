@@ -216,13 +216,13 @@ textarea:focus::-webkit-input-placeholder {
 
 .wrapper {
   width: 320px;
-  height: 100%;
+  /* height: 100%; */
   padding: 20px;
   margin: auto;
 }
 
 .button__wrapper{
-  padding: 40px 0;
+  padding-top: 20px;
 }
 
 .button__ready {
@@ -245,7 +245,7 @@ textarea:focus::-webkit-input-placeholder {
 .button__ready {
   color: #fff;
   background: #ff6b08;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .button__ready:focus,
@@ -255,10 +255,14 @@ textarea:focus::-webkit-input-placeholder {
   border: 2px solid #ff6b08;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 768px) {
   .wrapper {
     width: 512px;
-    padding: 40px;
+    padding: 0px 40px;
+  }
+
+  .button__wrapper{
+    padding-top: 20px;
   }
 
   .title {
@@ -288,11 +292,11 @@ textarea:focus::-webkit-input-placeholder {
   }
 
   .formItem {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 
   .checkbox_container {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .input:focus + .label,

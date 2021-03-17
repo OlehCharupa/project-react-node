@@ -2,34 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
 import style from "./ProjectSidebarItem.module.css";
 
-const ProjectSidebarItem = ({ id, name }) => {
-  const location = useLocation();
-  const history = useHistory();
-
-  const projectHandler = (e) => {
-    const { projectId } = e.currentTarget.dataset;
-    if (e.target.nodeName !== "BUTTON") {
-      history.push({
-        pathname: `/${projectId}`,
-        from: location,
-      });
-    }
-  };
-
+const ProjectSidebarItem = ({ id, title }) => {
   return (
     <>
-      <NavLink to="/" className={style.link}>
-        <li
-          className={style.item}
-          onClick={projectHandler}
-          data-project-id={id}
-        >
-          <button className={style.colorItem}></button>
-          <span className={style.title}>{name}</span>
-        </li>
+      <NavLink to={{ pathname: `/projects/${id}` }} className={style.link}>
+        <span className={style.title}>{title}</span>
       </NavLink>
     </>
   );
@@ -37,7 +16,7 @@ const ProjectSidebarItem = ({ id, name }) => {
 
 const mapStateToProps = (state, ownProps) => {
   const item = state.projects.items.find(
-    (project) => project.id === ownProps.id
+    (project) => project._id === ownProps.id
   );
   return { ...item };
 };

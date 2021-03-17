@@ -87,6 +87,12 @@ const LoaderDIV = styled.div`
   justify-content: center;
 `;
 
+const H2 = styled.h2`
+  text-align: center;
+  font-size: 24px;
+  color: rgba(24, 28, 39, 0.3);
+`;
+
 const TasksList = () => {
   const tasks = useSelector((state) => getVisibleTasks(state));
   const isLoading = useSelector((state) => loaderSelector(state));
@@ -103,13 +109,19 @@ const TasksList = () => {
           />
         </LoaderDIV>
       )}
-      <TransitionGroup component={Ul}>
-        {tasks.map((task) => (
-          <Li key={task.id}>
-            <TasksListItem id={task.id} />
-          </Li>
-        ))}
-      </TransitionGroup>
+      {tasks.length ? (
+        <TransitionGroup component={Ul}>
+          {tasks.map((task) => (
+            <Li key={task._id}>
+              <TasksListItem id={task._id} />
+            </Li>
+          ))}
+        </TransitionGroup>
+      ) : (
+        <H2>
+          Ваш проект не має задач, скористайтесь кнопкою "Створити задачу"
+        </H2>
+      )}
     </>
   );
 };

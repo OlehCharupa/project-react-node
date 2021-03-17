@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProjectMembers.module.css";
 import { Formik, Form, Field } from "formik";
@@ -6,20 +7,26 @@ import * as Yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 
 import { modalToggle } from "../../redux/actions/modalAction";
-
-// TODO: 1) Вытянуть селектор редакс состояния с участниками проекта и текущего юзера
-//  2) Вытянуть операции на добавление и удаление пользователя проекта
+import { projectsSelector } from "../../redux/selectors/projects-selectors";
+import { getUserEmail } from "../../redux/selectors/authSelectors";
+import projectsOperations from "../../redux/operations/projectsOperations";
 
 const reduxProjectMembers = [
   "asfaasf@a.com",
   "asfasfsaf@a.com",
   "asfasdfasfsaf@a.com",
 ]; // Заглушка для map
-const currentUser = "monkeyCoder@a.com"; // текущий юзера
 
 const AddProjectMembers = () => {
+  const location = useLocation();
+  let projectId;
+
+  useEffect(() => {
+    projectId = location.pathname.substr(10);
+  });
+
   const SignupSchema = Yup.object().shape({
-    addMember: Yup.string()
+    email: Yup.string()
       .email("Введіть існуючий e-mail.")
       .required("Будь ласка, введіть e-mail користувача.")
       .test(
@@ -39,6 +46,13 @@ const AddProjectMembers = () => {
       ),
   });
 
+  const usersProjects = useSelector((state) => projectsSelector(state));
+  const currentUser = useSelector((state) => getUserEmail(state));
+  const currentProject = usersProjects.items.find(
+    (project) => project.id === projectId
+  );
+  const currentProjectUsers = currentProject.members;
+
   const isModalOpen = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const toggleModal = () => {
@@ -50,29 +64,29 @@ const AddProjectMembers = () => {
       <h2 className={styles.form_title}>Додати людей</h2>
       <Formik
         initialValues={{
-          addMember: "",
+          email: "",
         }}
         validationSchema={SignupSchema}
         onSubmit={(value) => {
-          console.log(value);
           toggleModal();
-          // Отдаём аргумент в операцию добавления
+          dispatch(projectsOperations.addProjectMember(projectId, value));
         }}
       >
         {({ errors, touched }) => (
           <Form className={styles.neon_border}>
             <div className={styles.form_item}>
               <Field
-                name="addMember"
+                name="email"
                 placeholder=" "
-                id="addMember"
+                id="email"
+                type="email"
                 className={styles.input}
               />
-              <label className={styles.label} htmlFor="addMember">
+              <label className={styles.label} htmlFor="email">
                 Введіть e-mail
               </label>
-              {errors.addMember && touched.addMember ? (
-                <div className={styles.errorDiv}>{errors.addMember}</div>
+              {errors.email && touched.email ? (
+                <div className={styles.errorDiv}>{errors.email}</div>
               ) : null}
             </div>
             <div className={styles.button__wrapper}>
@@ -86,17 +100,9 @@ const AddProjectMembers = () => {
       <div className={styles.members_list}>
         <h3>Додані користувачі:</h3>
         <ul>
-          <li className={styles.members_item}>
-            <p>{currentUser}</p>
-          </li>
-          {reduxProjectMembers.map((email) => (
+          {currentProjectUsers.map((email) => (
             <li key={uuidv4()} className={styles.members_item}>
               <p>{email}</p>
-              <button
-                onClick={() => console.log(`btn`)}
-                data-email={email}
-                className={styles.delete_button}
-              ></button>
             </li>
           ))}
         </ul>

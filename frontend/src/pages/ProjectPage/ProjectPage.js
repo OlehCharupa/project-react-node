@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { ReactComponent as ReactLogo } from "./images/plus.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { allProjectsSelector } from "../../redux/selectors/projects-selectors";
 import projectsOperations from "../../redux/operations/projectsOperations";
@@ -32,28 +30,48 @@ const ProjectPage = () => {
         <div>
           <h1 className={style.title}>Проекти</h1>
         </div>
-        <div className={style.link} to="/">
+        <div className={style.link}>
           <Modal
             children={<CreateProject />}
             isModalOpen={isModalOpen}
             toggleModal={toggleModal}
           />
-          <button className={style.plusBtn} type="button" onClick={toggleModal}>
-            <span style={{ display: "block" }}>
-              <img src={plus} />
-            </span>
+          <button
+            className={style.plusBtn}
+            style={{
+              width: "44px",
+              height: "44px",
+              display: "flex",
+              whiteSpace: "nowrap",
+              alignItems: "center",
+              heigth: "44px",
+            }}
+            type="button"
+            onClick={toggleModal}
+          >
+            <img
+              src={plus}
+              style={{ width: "44px", height: "44px", margin: "0" }}
+              alt="add project"
+            />
+            <div className={style.create}>Створити проект</div>
           </button>
-          <div className={style.create}>Створити проект</div>
         </div>
       </div>
-      {Array.isArray(projects) ? (
+      {projects.length ? (
         <ul className={style.list}>
           {projects.map((project) => (
-            <ProjectPageItem {...project} key={project._id} id={project._id} />
+            <ProjectPageItem key={project._id} id={project._id} />
           ))}
         </ul>
       ) : (
-        <h2>
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: "24px",
+            color: "rgba(24,28,39,0.3)",
+          }}
+        >
           Ваша колекція проектів порожня, скористайтесь кнопкою "Створити
           проект"
         </h2>

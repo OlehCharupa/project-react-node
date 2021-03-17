@@ -1,14 +1,18 @@
 import axios from "axios";
 import sprintsAction from "../actions/sprintsAction.js";
 
-const addSprint = (name, startDate, finishDate, duration) => (dispatch) => {
+const addSprint = ({ projectId, title, startDate, duration }) => (dispatch) => {
   dispatch(sprintsAction.addSprintRequest());
 
-  //TODO написать логику для запроса, название полей не менять)
-
   axios
-    .post("sprint", { name })
-    .then(({ data }) => dispatch(sprintsAction.addSprintSuccess(data)))
+    .post(`sprint/${projectId}`, {
+      title,
+      startDate,
+      duration,
+    })
+    .then(({ data }) => {
+      dispatch(sprintsAction.addSprintSuccess({ ...data, _id: data.id }));
+    })
     .catch((error) => dispatch(sprintsAction.addSprintError(error)));
 };
 
@@ -17,7 +21,11 @@ const fetchSprints = (projectId) => (dispatch) => {
 
   axios
     .get(`sprint/${projectId}`)
-    .then(({ data }) => dispatch(sprintsAction.fetchSprintsSuccess(data)))
+    .then(({ data }) =>
+      dispatch(
+        sprintsAction.fetchSprintsSuccess(data.message ? [] : data.sprints)
+      )
+    )
     .catch((error) => dispatch(sprintsAction.fetchSprintsError(error)));
 };
 
@@ -30,8 +38,18 @@ const deleteSprint = (id) => (dispatch) => {
     .catch((error) => dispatch(sprintsAction.deleteSprintError(error)));
 };
 
+const updateSprint = (id, title) => (dispatch) => {
+  dispatch(sprintsAction.updateSprintRequest());
+
+  axios
+    .patch(`sprint/${id}`, { title })
+    .then(() => dispatch(sprintsAction.updateSprintSuccess(id)))
+    .catch((error) => dispatch(sprintsAction.updateSprintError(error)));
+};
+
 export default {
   addSprint,
   fetchSprints,
   deleteSprint,
+  updateSprint,
 };

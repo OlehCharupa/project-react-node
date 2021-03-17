@@ -148,10 +148,10 @@ const Button = styled.button`
 
 const TasksListItem = ({
   id,
-  name,
-  plannedHours,
+  title,
+  hoursPlanned,
   wastedHoursPerDay,
-  wastedHours,
+  hoursWasted,
   OnDeleteTask,
 }) => {
   const dispatch = useDispatch();
@@ -183,11 +183,11 @@ const TasksListItem = ({
   return (
     <>
       <DIV>
-        <TITLE>{name}</TITLE>
+        <TITLE>{title}</TITLE>
       </DIV>
       <DIV>
         <P>Заплановано годин</P>
-        <SPAN>{plannedHours}</SPAN>
+        <SPAN>{hoursPlanned}</SPAN>
       </DIV>
       <DIV>
         <P>Витрачено год / день</P>
@@ -201,7 +201,7 @@ const TasksListItem = ({
       </DIV>
       <DIV>
         <P>Витрачено годин</P>
-        <SPAN>{wastedHours}</SPAN>
+        <SPAN>{hoursWasted}</SPAN>
       </DIV>
       <Button
         type="button"
@@ -214,7 +214,7 @@ const TasksListItem = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.tasks.items.find((task) => task.id === ownProps.id);
+  const item = state.tasks.items.find((task) => task._id === ownProps.id);
   return { ...item };
 };
 

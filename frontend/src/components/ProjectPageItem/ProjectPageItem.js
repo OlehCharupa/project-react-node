@@ -40,14 +40,14 @@ const ProjectPageItem = ({ _id, title, description, OnDeleteProject }) => {
 
 const mapStateToProps = (state, ownProps) => {
   const item = state.projects.items.find(
-    (project) => project._id === ownProps._id
+    (project) => project._id === ownProps.id
   );
   return { ...item };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   OnDeleteProject: () =>
-    dispatch(projectsOperations.deleteProject(ownProps._id)),
+    dispatch(projectsOperations.deleteProject(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectPageItem);
