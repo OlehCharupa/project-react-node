@@ -42,14 +42,14 @@ const SprintCreator = () => {
   const CreateSchema = Yup.object().shape({
     sprintName: Yup.string()
       .min(2, "Будь ласка, введіть коректну назву спринту.")
-      .max(16, "Будь ласка, введіть коректну назву спринту.")
+      .max(30, "Будь ласка, введіть коректну назву спринту.")
       .required("Будь ласка, введіть назву спринту."),
     duration: Yup.number()
       .typeError(`Введите число!`)
       .positive("Число должно быть положительным!")
       .integer("Число должно быть целым!")
       .min(1, "Будь ласка, оберіть тривалість спринта.")
-      .max(20, "Too Long!")
+      .max(30, "Too Long!")
       .required("Будь ласка, оберіть тривалість спринта."),
   });
 
@@ -101,7 +101,7 @@ const SprintCreator = () => {
           };
 
           dispatch(sprintOperations.addSprint(reqBody));
-          
+
           setStartDate(Date.now());
           toggleModal();
         }}

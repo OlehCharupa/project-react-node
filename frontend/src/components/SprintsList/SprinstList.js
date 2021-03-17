@@ -50,8 +50,8 @@ const Li = transition.li.attrs({
   &:enter-active {
     opacity: 1;
     transform: translateX(0);
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms -bezier(0.4, 0, 0.2, 1);
+  }cubic
   &:exit { opacity: 1;
   transform: translateX(0); }
   &:exit-active {
