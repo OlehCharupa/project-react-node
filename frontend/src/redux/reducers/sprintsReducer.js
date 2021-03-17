@@ -22,8 +22,16 @@ const items = createReducer([], {
   [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_SPRINT_SUCCESS]: (state, { payload }) =>
     state.filter((sprint) => sprint._id !== payload),
-  [UPDATE_SPRINT_SUCCESS]: (state, { payload }) =>
-    state.filter((sprint) => sprint._id !== payload),
+  [UPDATE_SPRINT_SUCCESS]: (state, { payload }) => {
+    console.dir(payload);
+    return [
+      ...state.filter((sprint) => sprint._id !== payload.id),
+      {
+        ...state.find((sprint) => sprint._id === payload.id),
+        title: payload.newTitle,
+      },
+    ];
+  },
 });
 
 const error = createReducer("", {
