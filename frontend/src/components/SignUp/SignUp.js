@@ -6,15 +6,15 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { register } from '../../redux/operations/authOperations.js';
-import error from '../../redux/reducers/authReducer.js'
+import authAction from "../../redux/actions/authAction";
+
 const SignUp = () => {
     // console.clear();
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const errorState = useSelector(state => state.auth.error.message);
-    const errorStateError = useSelector(state => state.auth.error);
-// console.log('errorStateError', errorStateError({message: ''}));
+    // console.log('errorStateError', errorStateError({message: ''}));
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Неправильна електронна адреса')
@@ -23,14 +23,9 @@ const SignUp = () => {
             .min(6, "Занадто короткий! Мінімум 6")
             .max(20, 'Макс 20')
             .required("Обов'язковий"),
-        repeatPassword: Yup.mixed()
-            .test('Збіг',
-                "Паролі не збігаються",
-                function () {
-                    return this.parent.password === this.parent.repeatPassword;
-                }
-            )
-            .required("Обов'язковий"),
+        repeatPassword: Yup.string()
+            .required("Обов'язковий")
+            .oneOf([Yup.ref("password"), null], "Паролі не збігаються"),
 
     });
     // const initialErrorState = ({message: ''});
@@ -46,47 +41,43 @@ const SignUp = () => {
                         password: '',
                     }}
                     validationSchema={SignupSchema}
-                    onSubmit={(values, { setSubmitting }) => {
-                        // same shape as initial values
-                        dispatch(register(values));
-                        if(!!(errorState.indexOf('409'))){
-                            setTimeout(() => {
-                                console.log('errorState', errorState);
-                                // console.log('errorStateError', errorStateError.message.clear());
-                                setSubmitting(false);
-                                // return errorState = '';
-                            }, 500)
-                        }else{
-                            setTimeout(() => {
-                                history.push('/login')
-                                setSubmitting(false);
-                            }, 500)
-                        }
-                        
-                        
+                    onSubmit={async(values, { setSubmitting, setErrors, resetForm }) => {
 
+                            if(!!errorState.indexOf('Request failed with status code 409')){
+                                setTimeout(() => {
+                                  setErrors({ email: 'Таку електронну адресу вже зареєстровано!' })
+                                    setSubmitting(false);
+                                }, 500)
+                            }else{
+                                setTimeout(() => {
+                                    history.push('/login');
+                                    resetForm();
+                                    setSubmitting(false);
+                                }, 500)
+                            }
+                        dispatch(authAction.registerError({ message: '' }))
+                        dispatch(register(values));
                     }}
                 >
-                    {({ errors, touched, values }) => (
+                    {({ errors, touched, values, handleBlur }) => (
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
-                                <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" value={values.email || ''} required/>
+                                <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" value={values.email || ''} onBlur={handleBlur} required />
 
                                 {errors.email && touched.email ? (
-                                    <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (!!(errorState.indexOf('409')+1)?<label className={signUp.labelError} htmlFor='email' >Таку електронну адресу вже зареєстровано!</label>
-                                : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>)}
+                                    <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>)
+                                    : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>}
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Пароль*" value={values.password || ''} required/>
+                                <Field name="password" type="password" id='pass' className={signUp.input} placeholder="Пароль*" value={values.password || ''} required />
                                 {errors.password && touched.password ? (
                                     <label className={signUp.labelError} htmlFor='pass' >{errors.password}</label>
                                 ) : (<label htmlFor='pass' className={signUp.label} >Пароль*</label>)}
                             </div>
 
                             <div className={signUp.form__item}>
-                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="Пароль*" value={values.repeatPassword || ''} required/>
+                                <Field name="repeatPassword" type="password" id='repeatPass' className={signUp.input} placeholder="Пароль*" value={values.repeatPassword || ''} required />
                                 {errors.repeatPassword && touched.repeatPassword ? (
                                     <label className={signUp.labelError} htmlFor='repeatPass'>{errors.repeatPassword}</label>
                                 ) : <label htmlFor='repeatPass' className={signUp.label} >Пароль*</label>}
