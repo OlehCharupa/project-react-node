@@ -17,9 +17,7 @@ const fetchProjects = () => (dispatch) => {
 
   axios
     .get("project")
-    .then(({ data }) =>
-      dispatch(projectsAction.fetchProjectsSuccess(data.message ? [] : data))
-    )
+    .then(({ data }) => dispatch(projectsAction.fetchProjectsSuccess(data)))
     .catch((error) => dispatch(projectsAction.fetchProjectsError(error)));
 };
 
@@ -43,9 +41,21 @@ const addProjectMember = (id, value) => (dispatch) => {
     .catch((error) => dispatch(projectsAction.addMemberError(error)));
 };
 
+const updateProject = (id, title) => (dispatch) => {
+  dispatch(projectsAction.updateProjectRequest());
+
+  axios
+    .patch(`project/title/${id}`, { title })
+    .then(({ data }) =>
+      dispatch(projectsAction.updateProjectSuccess({ id, ...data }))
+    )
+    .catch((error) => dispatch(projectsAction.updateProjectError(error)));
+};
+
 export default {
   addProject,
   fetchProjects,
   deleteProject,
   addProjectMember,
+  updateProject,
 };

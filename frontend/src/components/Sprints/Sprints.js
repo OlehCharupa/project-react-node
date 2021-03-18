@@ -257,6 +257,7 @@ const ShowDiagramBTN = styled(Button)`
     border: 1px solid #ff6b08;
   }
 `;
+
 const DiagramSVG = styled.svg`
   fill: #ffffff;
 
@@ -266,6 +267,7 @@ const DiagramSVG = styled.svg`
     fill: #ff6b08;
   }
 `;
+
 const HeaderDIV = styled.div`
   display: flex;
   position: relative;
@@ -360,6 +362,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
     month: "numeric",
     year: "numeric",
   };
+
   const localeDate = date.toLocaleString("Uk-uk", options);
 
   const currentIndex =
@@ -423,7 +426,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
         </Device>
       </CurrentDateAndFilterDIV>
       <SprintNameAndAddBtnDIV>
-        {title && <SprintName title={title} />}
+        {title && <SprintName id={id} title={title} />}
         <AddTaskBtnAndLabelDIV>
           <AddTaskBTN aria-label="create task" onClick={toggleModal}>
             +

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ProjectSidebar from "../../components/ProjectSidebar/ProjectSidebar.js";
 import ProjectWrapper from "../../components/ProjectWrapper/ProjectWrapper.js";
 import projectsOperations from "../../redux/operations/projectsOperations";
@@ -8,6 +8,7 @@ import style from "./SprintPage.module.css";
 import container from "../../components/Container/Container.module.css";
 
 const SprintPage = () => {
+  const { projectId } = useParams();
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -19,7 +20,7 @@ const SprintPage = () => {
     <>
       <div className={(container, style.MainPage)}>
         <ProjectSidebar />
-        <ProjectWrapper />
+        <ProjectWrapper id={projectId} />
       </div>
     </>
   );

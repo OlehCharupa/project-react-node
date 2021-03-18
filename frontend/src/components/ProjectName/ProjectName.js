@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import sprintsOperations from "../../redux/operations/sprintsOperations";
+import projectsOperations from "../../redux/operations/projectsOperations";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import sprite from "../Sprints/images/sprite.svg";
@@ -89,29 +89,29 @@ const SVG = styled.svg`
   fill: #fff;
 `;
 
-const SprintName = ({ id, title }) => {
+const ProjectName = ({ id, title }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [sprintName, setSprintName] = useState(title);
+  const [projectName, setProjectName] = useState(title);
 
   const changeNameHandler = (e) => {
-    isEdit && dispatch(sprintsOperations.updateSprint(id, sprintName));
+    isEdit && dispatch(projectsOperations.updateProject(id, projectName));
     setIsEdit(!isEdit);
   };
-  const sprintNameInputHandler = (e) => {
+  const projectNameInputHandler = (e) => {
     const { value } = e.target;
-    setSprintName(value);
+    setProjectName(value);
   };
   return (
     <SprintNameDIV>
       {isEdit ? (
         <SprintNameINPUT
           maxLength="30"
-          value={sprintName}
-          onChange={sprintNameInputHandler}
+          value={projectName}
+          onChange={projectNameInputHandler}
         />
       ) : (
-        <SprintNameLabel>{sprintName}</SprintNameLabel>
+        <SprintNameLabel>{projectName}</SprintNameLabel>
       )}
       <SprintNameBTN onClick={changeNameHandler}>
         <SVG>
@@ -126,4 +126,4 @@ const SprintName = ({ id, title }) => {
   );
 };
 
-export default SprintName;
+export default ProjectName;

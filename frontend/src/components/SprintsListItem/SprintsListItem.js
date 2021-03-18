@@ -82,14 +82,24 @@ const SprintsListItem = ({
   duration,
   OnDeleteSprint,
 }) => {
+  const startDateUnix = new Date(...startDate.split("-").reverse());
+  const endDateUnix = new Date(...endDate.split("-").reverse());
+
+  const options = {
+    day: "numeric",
+    month: "2-digit",
+  };
+  const startDateFormat = startDateUnix.toLocaleString("Uk-uk", options);
+  const endDateFormat = endDateUnix.toLocaleString("Uk-uk", options);
+
   return (
     <>
       <Title>{title}</Title>
       <P>
-        Дата початку<SPAN>{startDate}</SPAN>
+        Дата початку<SPAN>{startDateFormat}</SPAN>
       </P>
       <P>
-        Дата закінченя<SPAN>{endDate}</SPAN>
+        Дата закінченя<SPAN>{endDateFormat}</SPAN>
       </P>
       <P>
         Тривалість<SPAN>{duration}</SPAN>

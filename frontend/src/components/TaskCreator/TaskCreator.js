@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./TaskCreator.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,11 @@ import { modalToggle } from "../../redux/actions/modalAction";
 
 const TaskCreator = () => {
   const location = useLocation();
-  let sprintId;
+  let sprintId=location.pathname.substr(35);
 
-  useEffect(() => {
-    sprintId = location.pathname.substr(35);
-  });
+  // useEffect(() => {
+  //   sprintId = location.pathname.substr(35);
+  // }, []);
 
   const SignupSchema = Yup.object().shape({
     title: Yup.string().min(1).required("Будь ласка, введіть назву."),
