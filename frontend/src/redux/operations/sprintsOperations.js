@@ -45,9 +45,14 @@ const updateSprint = (id, title) => (dispatch) => {
     .catch((error) => dispatch(sprintsAction.updateSprintError(error)));
 };
 
+const resetError = () => (dispatch) => {
+  dispatch(sprintsAction.changeError(""));
+};
+
 export default {
   addSprint,
   fetchSprints,
   deleteSprint,
   updateSprint,
+  resetError,
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import TaskListItemInput from "../TaskListItemInput/TaskListItemInput";
 import tasksOperations from "../../redux/operations/tasksOperations";
 import { connect } from "react-redux";
 import deleteSvg from "./images/delete.svg";
@@ -88,31 +88,6 @@ const DIV = styled.div`
 const SPAN = styled.span`
   display: inline-block;
 `;
-const INPUT = styled.input`
-  display: inline-block;
-  padding: 0;
-  width: 60px;
-  height: 22px;
-
-  border: none;
-  border-bottom: 1px solid rgba(24, 28, 39, 0.2);
-
-  transition: border 250ms linear;
-
-  outline: none;
-  text-align: right;
-
-  font-size: 14px;
-  line-height: 1.21;
-  letter-spacing: 0.04em;
-
-  color: #000000;
-
-  &:hover,
-  &:focus {
-    border-bottom: 1px solid #ff6b08;
-  }
-`;
 const Button = styled.button`
   display: block;
   position: absolute;
@@ -150,36 +125,9 @@ const TasksListItem = ({
   id,
   title,
   hoursPlanned,
-  wastedHoursPerDay,
   hoursWasted,
   OnDeleteTask,
 }) => {
-  const dispatch = useDispatch();
-  const [whpd, setWhpd] = useState(wastedHoursPerDay);
-
-  const handlerInputChange = (e) => {
-    const { value } = e.target;
-    if (isNaN(value)) {
-      return;
-    }
-    setWhpd(+value);
-  };
-  const blurHandler = () => {
-    if (whpd > 0 && whpd !== wastedHoursPerDay) {
-      dispatch(tasksOperations.updateTask(id, whpd));
-    } else setWhpd(wastedHoursPerDay);
-  };
-  const moveCursorToEnd = (e) => {
-    const { target } = e;
-    if (typeof target.selectionStart == "number") {
-      target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange != "undefined") {
-      target.focus();
-      var range = target.createTextRange();
-      range.collapse(false);
-      range.select();
-    }
-  };
   return (
     <>
       <DIV>
@@ -191,13 +139,7 @@ const TasksListItem = ({
       </DIV>
       <DIV>
         <P>Витрачено год / день</P>
-        <INPUT
-          value={whpd}
-          type="text"
-          onChange={handlerInputChange}
-          onBlur={blurHandler}
-          onClick={moveCursorToEnd}
-        ></INPUT>
+        <TaskListItemInput id={id} />
       </DIV>
       <DIV>
         <P>Витрачено годин</P>

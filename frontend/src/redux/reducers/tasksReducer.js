@@ -16,24 +16,30 @@ import {
   UPDATE_TASK_REQUEST,
   CHANGE_TASK_FILTER,
   CHANGE_ERROR,
+  CHANGE_CURRENT_DAY_INDEX,
 } from "../constants/tasksConstants.js";
 
-const initiallState = {
-  "title": null,
-  "hoursPlanned": null,
-  "hoursWasted": null,
-  "hoursWastedPerDay": [],
-};
-
-const items = createReducer([initiallState], {
+const items = createReducer([], {
   [FETCH_TASKS_SUCCESS]: (state, { payload }) => payload,
   [ADD_TASK_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_TASK_SUCCESS]: (state, { payload }) =>
     state.filter((task) => task._id !== payload),
-  [UPDATE_TASK_SUCCESS]: (state, { payload }) => [
-    ...state.filter((task) => task._id !== payload.id),
-    ...payload,
-  ],
+  [UPDATE_TASK_SUCCESS]: (state, { payload }) => {
+    const item = state.find((sprint) => sprint._id === payload.id);
+    const tasks = [...item.hoursWastedPerDay];
+    tasks.splice(payload.index, 1, {
+      currentDay: payload.day.currentDay,
+      singleHoursWasted: payload.day.singleHoursWasted,
+    });
+    return [
+      ...state.filter((sprint) => sprint._id !== payload.id),
+      {
+        ...item,
+        hoursWasted: payload.newWastedHours,
+        hoursWastedPerDay: tasks,
+      },
+    ];
+  },
 });
 
 const filter = createReducer("", {
@@ -59,9 +65,14 @@ const loading = createReducer(false, {
   [UPDATE_TASK_ERROR]: () => false,
 });
 
+const dayIndex = createReducer(0, {
+  [CHANGE_CURRENT_DAY_INDEX]: (state, { payload }) => payload,
+});
+
 export default combineReducers({
   items,
   filter,
   loading,
   error,
+  dayIndex,
 });
