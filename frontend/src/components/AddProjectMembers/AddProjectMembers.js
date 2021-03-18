@@ -62,6 +62,7 @@ const AddProjectMembers = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(value) => {
+          console.log(`submit`);
           toggleModal();
           dispatch(projectsOperations.addProjectMember(projectId, value));
         }}
@@ -83,24 +84,24 @@ const AddProjectMembers = () => {
                 <div className={styles.errorDiv}>{errors.email}</div>
               ) : null}
             </div>
+            <div className={styles.members_list}>
+              <h3>Додані користувачі:</h3>
+              <ul>
+                {currentProjectUsers.map((email) => (
+                  <li key={uuidv4()} className={styles.members_item}>
+                    <p>{email}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.button__wrapper}>
+              <button type="submit" className={styles.button__ready}>
+                Готово
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
-      <div className={styles.members_list}>
-        <h3>Додані користувачі:</h3>
-        <ul>
-          {currentProjectUsers.map((email) => (
-            <li key={uuidv4()} className={styles.members_item}>
-              <p>{email}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.button__wrapper}>
-        <button type="submit" className={styles.button__ready}>
-          Готово
-        </button>
-      </div>
     </div>
   );
 };
