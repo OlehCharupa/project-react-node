@@ -43,7 +43,7 @@ const ProjectWrapper = ({ id, title, duration }) => {
         <div style={{ display: "flex", marginBottom: "30px" }}>
           <div>
             <div className={style.titleSection}>
-                {title && <ProjectName id={id} title={title} />}
+              {title && <ProjectName id={id} title={title} />}
             </div>
             <div className={style.description}></div>
             <AddPeopleProjectWrapper />
@@ -56,6 +56,7 @@ const ProjectWrapper = ({ id, title, duration }) => {
                 whiteSpace: "nowrap",
                 alignItems: "center",
                 height: "44px",
+                width: "100px",
               }}
               type="button"
               aria-label="create sprint"
