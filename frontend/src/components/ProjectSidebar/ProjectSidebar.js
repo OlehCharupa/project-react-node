@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./ProjectSidebar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,11 +18,8 @@ const ProjectSidebar = () => {
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
-    setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
-
-  const [modal, setModal] = useState(isModalOpen);
 
   return (
     <div className={style.mainLeftSprint}>
@@ -49,13 +46,12 @@ const ProjectSidebar = () => {
         </ul>
       </div>
       <div className={style.linkAdd}>
-        {modal && (
           <Modal
             children={<CreateProject />}
             isModalOpen={isModalOpen}
             toggleModal={toggleModal}
           />
-        )}
+
         <button
           style={{
             backgroundColor: "transparent",
@@ -74,7 +70,7 @@ const ProjectSidebar = () => {
           />
           <div className={style.createProject}>Створити проєкт</div>
         </button>
-      </div>
+       </div>
     </div>
   );
 };

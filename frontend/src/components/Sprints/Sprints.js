@@ -368,20 +368,17 @@ const Sprints = ({ id, title, duration, endDate }) => {
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
-    setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
-  const [modal, setModal] = useState(isModalOpen);
+
 
   return (
     <SprintDIV>
-      {modal && (
-        <Modal
+      <Modal
           children={<TaskCreator />}
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
         />
-      )}
       <Mobile>
         <AddTaskBTN aria-label="create task" onClick={toggleModal}>
           +

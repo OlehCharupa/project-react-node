@@ -1,38 +1,35 @@
-
-
-.mainLeftSprint{
+.mainLeftSprint {
   z-index: 100;
 }
 
-.arrow{
+.arrow {
   content: url(./images/arrow.svg);
   width: 30px;
 }
 
-.showProjectContainer{
+.showProjectContainer {
   display: flex;
 }
 
-.link, .linkAdd{
+.link,
+.linkAdd {
   text-decoration: none;
-  color: #181C27;
+  color: #181c27;
 }
 
-
 @media screen and (max-width: 767px) {
-  
-  .sidebarList{
+  .sidebarList {
     display: none;
   }
-  
-  .showProject{
+
+  .showProject {
     width: 150px;
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  .mainLeftSprint{
+  .mainLeftSprint {
     width: 216px;
     min-height: 100%;
   }
@@ -48,22 +45,20 @@
     left: 0;
   }
 
-  .linkAdd{
+  .linkAdd {
     display: none;
   }
 
-  .plusBtn{
+  .plusBtn {
     display: none;
   }
-
-  
 }
 
 @media screen and (min-width: 768px) {
-  .mainLeftSprint{
+  .mainLeftSprint {
     position: sticky;
     height: calc(100vh - 80px);
-    width: 216px;
+    width: 215px;
     padding-top: 20px;
     padding-right: 27px;
     top: 0;
@@ -80,73 +75,68 @@
     right: 0px;
   }
 
-  .showProjectMain{
+  .showProjectMain {
     width: 150px;
   }
 
-  .showProjectContainer{
+  .showProjectContainer {
     display: flex;
     width: 100px;
   }
 
-  .showProject{
+  .showProject {
     width: 200px;
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
-  .sidebarList{
-    width: 170px; 
+  .sidebarList {
+    width: 170px;
   }
 
-  .linkAdd{
+  .linkAdd {
     position: absolute;
     text-align: center;
     bottom: 90px;
     left: 30px;
   }
-  
-  .container{
+
+  .container {
     overflow: auto;
     max-height: 400px;
   }
-  
-  .plusBtn{
+
+  .plusBtn {
     background-color: transparent;
     margin: 0 auto;
     padding-top: 5px;
-    transition: all .3s linear;
+    transition: all 0.3s linear;
     border-radius: 40px;
     width: 44px;
     height: 44px;
     background-position: 50%;
-    background-color: #FF6B08;
+    background-color: #ff6b08;
   }
-  
+
   .linkAdd .plusBtn:hover,
-  .linkAdd .plusBtn:focus{
-    box-shadow: 0 0 10px 0 #FF6B08 inset, 0 0 10px 4px #FF6B08;
+  .linkAdd .plusBtn:focus {
+    box-shadow: 0 0 10px 0 #ff6b08 inset, 0 0 10px 4px #ff6b08;
   }
-  .createProject{
+  .createProject {
     margin-top: 15px;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    color: #181C27;
+    color: #181c27;
   }
-  
-
 }
 @media screen and (min-width: 1280px) {
-
-  .container{
+  .container {
     position: absolute;
     max-height: 500px;
     top: 30%;
   }
-
 }
-

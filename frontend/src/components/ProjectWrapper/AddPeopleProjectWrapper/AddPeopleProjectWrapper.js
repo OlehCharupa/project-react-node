@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./AddPeopleProjectWrapper.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import add from "../images/add.svg";
@@ -12,23 +12,20 @@ const AddPeopleProjectWrapper = () => {
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
-    setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
 
-  const [modal, setModal] = useState(isModalOpen);
-
   return (
     <div>
-      {modal && (
+    
         <Modal
           children={<AddProjectMembers />}
           isModalOpen={isModalOpen}
           toggleModal={toggleModal}
         />
-      )}
+ 
       <div className={style.addPeople}>
-        <img src={add} style={{ width: "20px", marginRight: "10px" }} />
+        <img src={add} alt="add" style={{ width: "20px", marginRight: "10px" }} />
         <button
           style={{ backgroundColor: "transparent" }}
           type="button"
