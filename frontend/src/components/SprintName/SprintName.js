@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import sprintsOperations from "../../redux/operations/sprintsOperations";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -93,6 +93,10 @@ const SprintName = ({ id, title }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [sprintName, setSprintName] = useState(title);
+
+  useEffect(() => {
+    setSprintName(title);
+  }, [title]);
 
   const changeNameHandler = (e) => {
     isEdit && dispatch(sprintsOperations.updateSprint(id, sprintName));

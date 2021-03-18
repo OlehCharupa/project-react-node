@@ -61,6 +61,7 @@ const ProjectSidebar = () => {
             whiteSpace: "nowrap",
             alignItems: "center",
             height: "44px",
+            cursor: "pointer",
           }}
           type="button"
           onClick={toggleModal}

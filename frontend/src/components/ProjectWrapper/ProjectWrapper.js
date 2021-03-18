@@ -51,6 +51,7 @@ const ProjectWrapper = ({ id, title }) => {
                 alignItems: "center",
                 height: "44px",
                 width: "100px",
+                cursor: "pointer",
               }}
               type="button"
               aria-label="create sprint"

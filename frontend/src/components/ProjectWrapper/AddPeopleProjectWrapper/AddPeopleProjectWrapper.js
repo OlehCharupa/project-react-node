@@ -30,7 +30,7 @@ const AddPeopleProjectWrapper = () => {
       <div className={style.addPeople}>
         <img src={add} style={{ width: "20px", marginRight: "10px" }} />
         <button
-          style={{ backgroundColor: "transparent" }}
+          style={{ backgroundColor: "transparent", cursor: "pointer" }}
           type="button"
           aria-label="add members"
           onClick={toggleModal}
