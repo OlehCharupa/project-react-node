@@ -2,6 +2,12 @@
   padding-bottom: 60px;
 }
 
+button:active, button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
 
 .titleSection{
   position: relative;
