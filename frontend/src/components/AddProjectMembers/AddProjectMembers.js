@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProjectMembers.module.css";
@@ -13,11 +13,12 @@ import projectsOperations from "../../redux/operations/projectsOperations";
 
 const AddProjectMembers = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   let projectId = location.pathname.substr(10);
 
-  // useEffect(() => {
-  //   projectId = location.pathname.substr(10);
-  // });
+  useEffect(() => {
+    dispatch(projectsOperations.fetchProjects());
+  }, [dispatch]);
 
   const usersProjects = useSelector((state) => projectsSelector(state));
   const currentUser = useSelector((state) => getUserEmail(state));
@@ -48,7 +49,6 @@ const AddProjectMembers = () => {
   });
 
   const isModalOpen = useSelector((state) => state.modal);
-  const dispatch = useDispatch();
   const toggleModal = () => {
     dispatch(modalToggle(!isModalOpen));
   };
