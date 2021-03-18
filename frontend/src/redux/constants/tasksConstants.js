@@ -16,3 +16,5 @@ export const UPDATE_TASK_ERROR = "tasks/updateTaskError";
 
 export const CHANGE_TASK_FILTER = "tasks/filterChange";
 export const CHANGE_ERROR = "error/change";
+
+export const CHANGE_CURRENT_DAY_INDEX = "tasks/currentDayIndex";

@@ -6,7 +6,12 @@ import sprite from "./images/sprite.svg";
 import arrowLeft from "./images/arrow-left.svg";
 import arrowRight from "./images/arrow-right.svg";
 import tasksAction from "../../redux/actions/tasksAction";
-import { filterSelector } from "../../redux/selectors/tasks-selectors";
+import {
+  allTasksSelector,
+  filterSelector,
+  currentDayIndexSelector,
+  getCurrentDay,
+} from "../../redux/selectors/tasks-selectors";
 import tasksOperations from "../../redux/operations/tasksOperations";
 import TasksList from "../TasksList/TasksList";
 import { useMediaQuery } from "react-responsive";
@@ -33,7 +38,6 @@ const Device = ({ children }) => {
   const isNotDesktop = useMediaQuery({ maxWidth: 1279 });
   return isNotDesktop ? children : null;
 };
-
 const SprintDIV = styled.div`
   padding-top: 20px;
   padding-bottom: 100px;
@@ -257,7 +261,6 @@ const ShowDiagramBTN = styled(Button)`
     border: 1px solid #ff6b08;
   }
 `;
-
 const DiagramSVG = styled.svg`
   fill: #ffffff;
 
@@ -267,7 +270,6 @@ const DiagramSVG = styled.svg`
     fill: #ff6b08;
   }
 `;
-
 const HeaderDIV = styled.div`
   display: flex;
   position: relative;
@@ -341,33 +343,14 @@ const CurrentDateAndFilterDIV = styled.div`
 const Sprints = ({ id, title, duration, endDate }) => {
   const dispatch = useDispatch();
   const { sprintId } = useParams();
+  const tasks = useSelector((state) => allTasksSelector(state));
   const filter = useSelector((state) => filterSelector(state));
+  const currentIndex = useSelector((state) => currentDayIndexSelector(state));
+  const currentDay = useSelector((state) => getCurrentDay(state));
 
   useEffect(() => {
     dispatch(tasksOperations.fetchTasks(sprintId));
   }, [sprintId]);
-
-  const date = new Date();
-  const dateUnix = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
-
-  const endDateFormat = endDate ? endDate.split("-").reverse() : dateUnix;
-  const endDateUnix = new Date(endDateFormat);
-
-  const options = {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  };
-
-  const localeDate = date.toLocaleString("Uk-uk", options);
-
-  const currentIndex =
-    duration - Math.ceil(Math.abs(endDateUnix - dateUnix) / (1000 * 3600 * 24));
-  const [currentDay, setCurrentDay] = useState(localeDate);
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -375,6 +358,19 @@ const Sprints = ({ id, title, duration, endDate }) => {
     dispatch(modalToggle(!isModalOpen));
   };
   const [modal, setModal] = useState(isModalOpen);
+
+  const prevDayHandler = (e) => {
+    if (!currentIndex) {
+      return;
+    }
+    dispatch(tasksAction.changeCurrentDayIndex(currentIndex - 1));
+  };
+  const nextDayHandler = (e) => {
+    if (tasks[0].hoursWastedPerDay.length === currentIndex + 1) {
+      return;
+    }
+    dispatch(tasksAction.changeCurrentDayIndex(currentIndex + 1));
+  };
 
   return (
     <SprintDIV>
@@ -398,14 +394,14 @@ const Sprints = ({ id, title, duration, endDate }) => {
       <CurrentDateAndFilterDIV>
         <DateDIV>
           <CurrentDateDIV>
-            <PrevBtn aria-label="previous day" />
+            <PrevBtn aria-label="previous day" onClick={prevDayHandler} />
             <CurrentDateP>
               <CurrentDateSPAN>
-                {currentIndex ? currentIndex : 1}
+                {tasks.length && currentIndex + 1}
               </CurrentDateSPAN>
               /{duration}
             </CurrentDateP>
-            <NextBtn aria-label="next day" />
+            <NextBtn aria-label="next day" onClick={nextDayHandler} />
           </CurrentDateDIV>
           <DateP>{currentDay}</DateP>
         </DateDIV>
@@ -473,7 +469,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
           </Desktop>
         </HeaderDIV>
       </Default>
-      <TasksList />
+      <TasksList currentIndex={currentIndex} />
     </SprintDIV>
   );
 };

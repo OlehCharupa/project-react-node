@@ -15,6 +15,7 @@ import {
   UPDATE_TASK_SUCCESS,
   UPDATE_TASK_ERROR,
   CHANGE_ERROR,
+  CHANGE_CURRENT_DAY_INDEX,
 } from "../constants/tasksConstants";
 
 const addTaskRequest = createAction(ADD_TASK_REQUEST);
@@ -35,6 +36,7 @@ const updateTaskError = createAction(UPDATE_TASK_ERROR);
 
 const changeTaskFilter = createAction(CHANGE_TASK_FILTER);
 const changeError = createAction(CHANGE_ERROR);
+const changeCurrentDayIndex = createAction(CHANGE_CURRENT_DAY_INDEX);
 
 export default {
   addTaskRequest,
@@ -51,4 +53,5 @@ export default {
   updateTaskError,
   changeTaskFilter,
   changeError,
+  changeCurrentDayIndex,
 };
