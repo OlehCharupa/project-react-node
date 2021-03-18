@@ -16,6 +16,7 @@
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",
     "moment-business-days": "^1.2.0",
+    "netlify": "^6.1.16",
     "persist": "^0.2.7",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
@@ -40,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [

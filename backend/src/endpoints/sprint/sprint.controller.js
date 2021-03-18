@@ -64,9 +64,6 @@ export const loadSprints = async (req, res, next) => {
             if (err) {
                 next();
             }
-            // if (!data.sprints.length) {
-            //     return res.status(200).send({ message: "No sprints found" });
-            // }
             return res
                 .status(200)
                 .send(data.sprints);

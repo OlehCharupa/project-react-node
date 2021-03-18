@@ -35,15 +35,11 @@ const SprintNameLabel = styled.p`
 `;
 const SprintNameINPUT = styled.input`
   width: 100%;
-  min-height: 64px;
 
   border: none;
   border-radius: 5px;
   outline: none;
-  cursor: default;
 
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: 500;
   font-size: 26px;
   line-height: 1.23;
@@ -52,12 +48,7 @@ const SprintNameINPUT = styled.input`
   color: #181c27;
 
   @media (min-width: 768px) {
-    min-height: 88px;
     font-size: 36px;
-  }
-
-  @media (min-width: 1280px) {
-    min-height: 75px;
   }
 `;
 const SprintNameBTN = styled.button`
@@ -92,7 +83,11 @@ const SVG = styled.svg`
 const SprintName = ({ id, title }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [sprintName, setSprintName] = useState(title);
+  const [sprintName, setSprintName] = useState();
+
+  useEffect(() => {
+    setSprintName(title);
+  }, [title]);
 
   useEffect(() => {
     setSprintName(title);

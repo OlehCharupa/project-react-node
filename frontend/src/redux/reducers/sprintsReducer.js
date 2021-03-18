@@ -22,20 +22,21 @@ const items = createReducer([], {
   [ADD_SPRINT_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_SPRINT_SUCCESS]: (state, { payload }) =>
     state.filter((sprint) => sprint._id !== payload),
-  [UPDATE_SPRINT_SUCCESS]: (state, { payload }) => {
-    console.dir(payload);
-    return [
-      ...state.filter((sprint) => sprint._id !== payload.id),
-      {
-        ...state.find((sprint) => sprint._id === payload.id),
-        title: payload.newTitle,
-      },
-    ];
-  },
+  [UPDATE_SPRINT_SUCCESS]: (state, { payload }) => [
+    ...state.filter((sprint) => sprint._id !== payload.id),
+    {
+      ...state.find((sprint) => sprint._id === payload.id),
+      title: payload.newTitle,
+    },
+  ],
 });
 
 const error = createReducer("", {
   [CHANGE_ERROR]: (state, { payload }) => payload,
+  [ADD_SPRINT_ERROR]: (state, { payload }) => payload,
+  [FETCH_SPRINTS_ERROR]: (state, { payload }) => payload,
+  [UPDATE_SPRINT_ERROR]: (state, { payload }) => payload,
+  [DELETE_SPRINT_ERROR]: (state, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
