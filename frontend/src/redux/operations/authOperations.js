@@ -1,5 +1,6 @@
 import axios from "axios";
 import authAction from "../actions/authAction";
+
 axios.defaults.baseURL = "https://bc24.herokuapp.com/";
 
 const token = {
