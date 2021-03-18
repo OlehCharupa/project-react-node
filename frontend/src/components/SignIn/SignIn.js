@@ -5,6 +5,8 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from "yup";
 import { NavLink } from 'react-router-dom';
 import { logIn } from '../../redux/operations/authOperations.js';
+import authAction from "../../redux/actions/authAction";
+
 const SignIn = () => {
     const dispatch = useDispatch()
     const errorState = useSelector(state => state.auth.error.message);
@@ -30,30 +32,32 @@ const SignIn = () => {
                         password: '',
                     }}
                     validationSchema={SigninSchema}
-                    onSubmit={(values, { setSubmitting }) => {
-                        // same shape as initial values
-                        if (!!(errorState)) {
+                    onSubmit={(values, { setSubmitting, setErrors }) => {
+                        if(!!errorState.indexOf('Request failed with status code 403')){
+                            setTimeout(() => {
+                              setErrors({ email: 'Ви ввели неправильно електронну адресу або пароль' });
+                                setSubmitting(false);
+                            }, 500)
+                        }else{
                             setTimeout(() => {
                                 setSubmitting(false);
                             }, 500)
                         }
-                        dispatch(logIn(values));
-
-
+                    dispatch(authAction.loginError({ message: '' }));
+                    dispatch(logIn(values));
                     }}
                 >
-                    {({ errors, touched }) => (
+                    {({ errors, touched, values }) => (
                         <Form className={signIn.form__registr}>
                             <div className={signIn.form__item}>
-                                <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" />
+                                <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" value={values.email || ''} required/>
                                 {errors.email && touched.email ? (
                                     <label className={signIn.labelError} htmlFor='email' >{errors.email}</label>
-                                ) : (!!(errorState.indexOf('403')+1) ? <label className={signIn.labelError} htmlFor='email' >Ви ввели неправильно електронну адресу або пароль</label>
-                                    : (<label className={signIn.label} htmlFor='email' >Електронна пошта*</label>))}
+                                ) : (<label className={signIn.label} htmlFor='email' >Електронна пошта*</label>)}
                             </div>
 
                             <div className={signIn.form__item}>
-                                <Field name="password" type="password" id='pass' className={signIn.input} placeholder="Password" />
+                                <Field name="password" type="password" id='pass' className={signIn.input} placeholder="Password" value={values.password || ''} required/>
                                 {errors.password && touched.password ? (
                                     <label className={signIn.labelError} htmlFor='pass' >{errors.password}</label>
                                 ) : (<label htmlFor='pass' className={signIn.label} >Пароль*</label>)}
