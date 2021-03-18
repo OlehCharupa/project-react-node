@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import projectsOperations from "../../redux/operations/projectsOperations";
 import style from "./ProjectWrapper.module.css";
-import pen from "./images/pen.svg";
 import plus from "../../pages/ProjectPage/images/plus.svg";
-import container from "../Container/Container.module.css";
 import ProjectName from "../ProjectName/ProjectName";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -17,9 +12,8 @@ import AddPeopleProjectWrapper from "./AddPeopleProjectWrapper/AddPeopleProjectW
 import { modalToggle } from "../../redux/actions/modalAction";
 import Modal from "../Modal/Modal";
 import SprintCreator from "../SprintCreator/SprintCreator";
-import AddProjectMembers from "../AddProjectMembers/AddProjectMembers";
 
-const ProjectWrapper = ({ id, title, duration }) => {
+const ProjectWrapper = ({ id, title }) => {
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector((state) => state.modal);
@@ -80,7 +74,9 @@ const ProjectWrapper = ({ id, title, duration }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const item = state.projects.items.find((project) => project._id === ownProps.id);
+  const item = state.projects.items.find(
+    (project) => project._id === ownProps.id
+  );
   return { ...item };
 };
 
