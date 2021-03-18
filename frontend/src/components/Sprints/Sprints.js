@@ -21,6 +21,7 @@ import TaskCreator from "../../components/TaskCreator/TaskCreator";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import SprintName from "../SprintName/SprintName";
+import DiagramModalWind from "../DiagramModalWind/DiagramModalWind";
 
 const Desktop = ({ children }) => {
   const isDesktop = useMediaQuery({ minWidth: 1280 });
@@ -77,6 +78,7 @@ const CurrentDateP = styled.p`
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 20px;
+  width: 40px;
 
   cursor: default;
 `;
@@ -353,6 +355,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
   }, [sprintId]);
 
   const isModalOpen = useSelector((state) => state.modal);
+  const [showDiagramModal, setShowDiagramModal] = useState(false);
   const toggleModal = () => {
     setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
@@ -381,16 +384,29 @@ const Sprints = ({ id, title, duration, endDate }) => {
           toggleModal={toggleModal}
         />
       )}
+      {showDiagramModal && (
+        <DiagramModalWind
+          isModal={showDiagramModal}
+          setIsModal={setShowDiagramModal}
+        />
+      )}
       <Mobile>
         <AddTaskBTN aria-label="create task" onClick={toggleModal}>
           +
         </AddTaskBTN>
       </Mobile>
-      <ShowDiagramBTN aria-label="show diagram">
-        <DiagramSVG width="22" height="22">
-          <use href={sprite + "#icon-diagram"}></use>
-        </DiagramSVG>
-      </ShowDiagramBTN>
+      {tasks.length > 2 && (
+        <ShowDiagramBTN
+          aria-label="show diagram"
+          onClick={() => {
+            setShowDiagramModal(!showDiagramModal);
+          }}
+        >
+          <DiagramSVG width="22" height="22">
+            <use href={sprite + "#icon-diagram"}></use>
+          </DiagramSVG>
+        </ShowDiagramBTN>
+      )}
       <CurrentDateAndFilterDIV>
         <DateDIV>
           <CurrentDateDIV>
