@@ -16,7 +16,6 @@ const addSprintSchema = Joi.object({
     title: Joi.string().required(),
     startDate: Joi.string()
         .custom((value, helpers) => {
-            console.log(typeof value);
             const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
             const isValidDate = dateRegex.test(value);
             if (!isValidDate) {
