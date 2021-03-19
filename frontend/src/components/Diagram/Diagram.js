@@ -11,7 +11,7 @@ const Diagram = () => {
     const duration = useSelector(state => sprintDurationSelector(state))
     const hoursPlanned = useSelector(state => hoursPlannedSelector(state))
     const days = useSelector(state => daysSelector(state))
-
+    console.log(days)
 
     const redLine = (hoursPlanned, duration) => {
         const arrTimeOfProgect = [hoursPlanned];
@@ -26,7 +26,7 @@ const Diagram = () => {
     };
 
     const blueLine = (hoursPlanned, duration, allTasks) => {
-        const getSumArrOfHoursPerDay = () => {
+        const getSumArrOfHoursPerDay = (duration, allTasks) => {
             const arrSumOfPerDay = [];
             const corrHoursArrChecker = (item) => {
                 const itemHoursPlanned = item.hoursPlanned;
@@ -50,17 +50,17 @@ const Diagram = () => {
             for (let i = 0; i < duration; i += 1) {
                 let total = 0;
                 for (let item of allTasks) {
-                    total += singleHoursWasted(item, i);
+                    total -= singleHoursWasted(item, i);
                 }
                 arrSumOfPerDay.push(total);
             }
             return arrSumOfPerDay;
         };
         const arrOftotalHoursPerDay = getSumArrOfHoursPerDay(duration, allTasks);
-
-        const arrTimes = [];
-        const startPoint = hoursPlanned
-        for (let arg = 0; arg < arrOftotalHoursPerDay; arg += 1) {
+        console.log("arrOftotalHoursPerDay", arrOftotalHoursPerDay)
+        const arrTimes = [hoursPlanned];
+        let startPoint = hoursPlanned
+        for (let arg of arrOftotalHoursPerDay) {
             arrTimes.push((startPoint - arg).toFixed(2));
             startPoint -= arg
         }
@@ -70,20 +70,19 @@ const Diagram = () => {
 
     const formatDays = (days) => {
         const conversionDay = (day) => {
-            const newDay = moment(day)
-                .locale("uk")
+            const newDay = moment(day, 'DD-MM-YYYY')
                 .format("DD MMM");
-            let dayToUp = newDay.split("");
-            const firstLetterToUpp = dayToUp[3].toUpperCase();
-            dayToUp.splice(3, 1, firstLetterToUpp);
-            return dayToUp.join("");
+            return newDay
         }
         const result = days.map((day) => conversionDay(day))
 
         return result
     };
+    // console.log(hoursPlanned)
+    // console.log(duration)
+    // console.log("allTasks", allTasks)
+    console.log(blueLine(hoursPlanned, duration, allTasks))
     const chartData = {
-        // labels: ["1 Dec", "2 Dec", "3 Dec"],
         labels: formatDays(days), // дени (даты снизу диаграммы) arrDays
         datasets: [
             {
@@ -92,7 +91,6 @@ const Diagram = () => {
                 lineTension: 0,
                 borderColor: "rgb(255, 0, 0)",
                 backgroundColor: "rgb(255, 0, 0)",
-                // data: [4, 2, 0]
                 data: redLine(hoursPlanned, duration), // массив времени
             },
             {
@@ -101,7 +99,6 @@ const Diagram = () => {
                 lineTension: 0.4,
                 borderColor: "rgb(0, 89, 255)",
                 backgroundColor: "rgb(0, 89, 255)",
-                // data: [5, 1, 1, 0]
                 data: blueLine(hoursPlanned, duration, allTasks), // массив времени
             },
         ],
