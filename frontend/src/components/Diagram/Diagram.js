@@ -11,7 +11,6 @@ const Diagram = () => {
     const duration = useSelector(state => sprintDurationSelector(state))
     const hoursPlanned = useSelector(state => hoursPlannedSelector(state))
     const days = useSelector(state => daysSelector(state))
-    console.log(days)
 
     const redLine = (hoursPlanned, duration) => {
         const arrTimeOfProgect = [hoursPlanned];
@@ -57,7 +56,7 @@ const Diagram = () => {
             return arrSumOfPerDay;
         };
         const arrOftotalHoursPerDay = getSumArrOfHoursPerDay(duration, allTasks);
-        console.log("arrOftotalHoursPerDay", arrOftotalHoursPerDay)
+
         const arrTimes = [hoursPlanned];
         let startPoint = hoursPlanned
         for (let arg of arrOftotalHoursPerDay) {
@@ -77,9 +76,8 @@ const Diagram = () => {
         result.unshift(0)
         return result
     };
-    console.log(blueLine(hoursPlanned, duration, allTasks))
     const chartData = {
-        labels: formatDays(days), // дени (даты снизу диаграммы) arrDays
+        labels: formatDays(days),
         datasets: [
             {
                 label: "Запланований залишок трудовитрат",
@@ -87,7 +85,7 @@ const Diagram = () => {
                 lineTension: 0,
                 borderColor: "rgb(255, 0, 0)",
                 backgroundColor: "rgb(255, 0, 0)",
-                data: redLine(hoursPlanned, duration), // массив времени
+                data: redLine(hoursPlanned, duration),
             },
             {
                 label: "Актуальний залишок трудовитрат",
@@ -95,7 +93,7 @@ const Diagram = () => {
                 lineTension: 0.4,
                 borderColor: "rgb(0, 89, 255)",
                 backgroundColor: "rgb(0, 89, 255)",
-                data: blueLine(hoursPlanned, duration, allTasks), // массив времени
+                data: blueLine(hoursPlanned, duration, allTasks),
             },
         ],
     }
@@ -146,12 +144,6 @@ const Diagram = () => {
             caretPadding: 5,
             caretSize: 10,
             cornerRadius: 6,
-            // callbacks: {
-            //     label: (tooltipItem) => {
-            //         let label = `  ${tooltipItem.value}`;
-            //         return label;
-            //     },
-            // },
         },
         scales: {
             yAxes: [
