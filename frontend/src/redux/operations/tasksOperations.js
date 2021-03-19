@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import tasksAction from "../actions/tasksAction";
 
 const addTask = ({ sprintId, title, hoursPlanned }) => (dispatch) => {
@@ -12,12 +13,19 @@ const addTask = ({ sprintId, title, hoursPlanned }) => (dispatch) => {
     .catch((error) => dispatch(tasksAction.addTaskError(error)));
 };
 
-const fetchTasks = (sprintId) => (dispatch) => {
-  dispatch(tasksAction.fetchTasksRequest());
-  axios
-    .get(`task/${sprintId}`)
-    .then(({ data }) => dispatch(tasksAction.fetchTasksSuccess(data)))
-    .catch((error) => dispatch(tasksAction.fetchTasksError(error)));
+const fetchTasks = (sprintId) => async (dispatch) => {
+  await dispatch(tasksAction.fetchTasksRequest());
+  await dispatch(tasksAction.changeCurrentDayIndex(0));
+
+  try {
+    const result = await axios.get(`task/${sprintId}`);
+    await dispatch(
+      tasksAction.changeCurrentDayIndex(findCurrentDay(result.data))
+    );
+    dispatch(tasksAction.fetchTasksSuccess(result.data));
+  } catch (error) {
+    dispatch(tasksAction.fetchTasksError(error));
+  }
 };
 
 const deleteTask = (id) => (dispatch) => {
@@ -29,12 +37,14 @@ const deleteTask = (id) => (dispatch) => {
     .catch((error) => dispatch(tasksAction.deleteTaskError(error)));
 };
 
-const updateTask = (id, whpd) => (dispatch) => {
+const updateTask = (id, singleHoursWasted, currentDay, index) => (dispatch) => {
   dispatch(tasksAction.updateTaskRequest());
 
   axios
-    .patch("task", { id, wastedHoursPerDay: whpd })
-    .then(({ data }) => dispatch(tasksAction.updateTaskSuccess(data)))
+    .patch(`task/${id}`, { hours: singleHoursWasted, date: currentDay })
+    .then(({ data }) =>
+      dispatch(tasksAction.updateTaskSuccess({ ...data, id, index }))
+    )
     .catch((error) => dispatch(tasksAction.updateTaskError(error)));
 };
 
@@ -44,3 +54,20 @@ export default {
   deleteTask,
   updateTask,
 };
+
+function findCurrentDay(data) {
+  if (!data.length) {
+    return 0;
+  }
+  const currentDate = moment().format("DD-MM-YYYY");
+  const hoursWastedPerDay = data[0].hoursWastedPerDay;
+  const index = hoursWastedPerDay.findIndex(
+    (value) => value.currentDay === currentDate
+  );
+
+  if (index < 0) {
+    return 0;
+  }
+
+  return index;
+}
