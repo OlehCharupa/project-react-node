@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./ProjectSidebar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,9 @@ const ProjectSidebar = () => {
   const dispatch = useDispatch();
 
   const projects = useSelector((state) => allProjectsSelector(state));
+
+  useEffect(() => {
+  },[projects.title])
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -61,6 +64,7 @@ const ProjectSidebar = () => {
             whiteSpace: "nowrap",
             alignItems: "center",
             height: "44px",
+            cursor: "pointer",
           }}
           type="button"
           onClick={toggleModal}

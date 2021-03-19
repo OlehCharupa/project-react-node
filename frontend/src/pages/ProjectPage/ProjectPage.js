@@ -45,6 +45,7 @@ const ProjectPage = () => {
               whiteSpace: "nowrap",
               alignItems: "center",
               heigth: "44px",
+              cursor: "pointer",
             }}
             type="button"
             onClick={toggleModal}

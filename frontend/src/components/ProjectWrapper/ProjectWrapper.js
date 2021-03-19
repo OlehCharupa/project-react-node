@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./ProjectWrapper.module.css";
 import plus from "../../pages/ProjectPage/images/plus.svg";
 import ProjectName from "../ProjectName/ProjectName";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { allProjectsSelector } from "../../redux/selectors/projects-selectors";
 
 import SprintsList from "../SprintsList/SprinstList";
 import AddPeopleProjectWrapper from "./AddPeopleProjectWrapper/AddPeopleProjectWrapper";
@@ -15,6 +16,7 @@ import SprintCreator from "../SprintCreator/SprintCreator";
 
 const ProjectWrapper = ({ id, title }) => {
   const dispatch = useDispatch();
+  const projects = useSelector((state) => allProjectsSelector(state));
 
   const isModalOpen = useSelector((state) => state.modal);
   const toggleModal = () => {
@@ -51,6 +53,7 @@ const ProjectWrapper = ({ id, title }) => {
                 alignItems: "center",
                 height: "44px",
                 width: "100px",
+                cursor: "pointer",
               }}
               type="button"
               aria-label="create sprint"

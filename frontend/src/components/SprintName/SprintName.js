@@ -85,6 +85,11 @@ const SprintName = ({ id, title }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [sprintName, setSprintName] = useState();
 
+
+  useEffect(() => {
+    setSprintName(title);
+  }, [title]);
+
   useEffect(() => {
     setSprintName(title);
   }, [title]);
@@ -97,6 +102,7 @@ const SprintName = ({ id, title }) => {
     const { value } = e.target;
     setSprintName(value);
   };
+
   return (
     <SprintNameDIV>
       {isEdit ? (

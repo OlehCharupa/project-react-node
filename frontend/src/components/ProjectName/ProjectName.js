@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import projectsOperations from "../../redux/operations/projectsOperations";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import sprite from "../Sprints/images/sprite.svg";
 
@@ -97,14 +97,21 @@ const ProjectName = ({ id, title }) => {
     setProjectName(title)
   }, [title])
 
-  const changeNameHandler = (e) => {
+
+  useEffect(() => {
+    setProjectName(title);
+  }, [title]);
+  
+  const changeNameHandler = () => {
     isEdit && dispatch(projectsOperations.updateProject(id, projectName));
     setIsEdit(!isEdit);
   };
+  
   const projectNameInputHandler = (e) => {
     const { value } = e.target;
     setProjectName(value);
   };
+
   return (
     <SprintNameDIV>
       {isEdit ? (

@@ -61,7 +61,6 @@ const loading = createReducer(false, {
   [UPDATE_PROJECT_REQUEST]: () => true,
   [UPDATE_PROJECT_SUCCESS]: () => false,
   [UPDATE_PROJECT_ERROR]: () => false,
-
 });
 
 export default combineReducers({

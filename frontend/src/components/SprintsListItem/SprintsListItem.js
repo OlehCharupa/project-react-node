@@ -89,6 +89,7 @@ const SprintsListItem = ({
     day: "numeric",
     month: "2-digit",
   };
+
   const startDateFormat = startDateUnix.toLocaleString("Uk-uk", options);
   const endDateFormat = endDateUnix.toLocaleString("Uk-uk", options);
 
