@@ -9,12 +9,13 @@ const DiagramModalWind = ({ isModal, setIsModal }) => {
     }
     useEffect(() => {
         window.addEventListener("keydown", keyEsc)
-
+        document.querySelector('body').style.overflow = "hidden"
     }, []);
 
     const closeModal = () => {
         window.removeEventListener("keydown", keyEsc)
         setIsModal(false)
+        document.querySelector('body').style.overflow = "auto"
     }
 
 
