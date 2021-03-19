@@ -14,8 +14,8 @@ export const ADD_MEMBER_REQUEST = "project/addMemberRequest";
 export const ADD_MEMBER_SUCCESS = "project/addMemberSuccess";
 export const ADD_MEMBER_ERROR = "project/addMemberError";
 
-export const UPDATE_PROJECT_REQUEST = "sprints/updateSprintRequest";
-export const UPDATE_PROJECT_SUCCESS = "sprints/updateSprintSuccess";
-export const UPDATE_PROJECT_ERROR = "sprints/updateSprintError";
+export const UPDATE_PROJECT_REQUEST = "projects/updateSprintRequest";
+export const UPDATE_PROJECT_SUCCESS = "projects/updateSprintSuccess";
+export const UPDATE_PROJECT_ERROR = "projects/updateSprintError";
 
 export const CHANGE_ERROR = "error/change";
