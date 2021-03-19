@@ -55,3 +55,4 @@ const AddPeopleProjectWrapper = () => {
 };
 
 export default AddPeopleProjectWrapper;
+;

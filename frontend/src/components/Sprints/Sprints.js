@@ -360,6 +360,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
     setModal(!isModalOpen);
     dispatch(modalToggle(!isModalOpen));
   };
+
   const [modal, setModal] = useState(isModalOpen);
 
   const prevDayHandler = (e) => {

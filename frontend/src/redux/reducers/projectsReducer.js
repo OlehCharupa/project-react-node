@@ -14,19 +14,30 @@ import {
   ADD_MEMBER_REQUEST,
   ADD_MEMBER_SUCCESS,
   ADD_MEMBER_ERROR,
+  UPDATE_PROJECT_REQUEST,
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_ERROR,
   CHANGE_ERROR,
 } from "../constants/projectsConstans.js";
 
 const items = createReducer([], {
   [FETCH_PROJECTS_SUCCESS]: (state, { payload }) => payload,
   [ADD_PROJECT_SUCCESS]: (state, { payload }) => [...state, payload],
-  [ADD_MEMBER_SUCCESS]: (state, {payload}) => [...state, payload],
+  [ADD_MEMBER_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_PROJECT_SUCCESS]: (state, { payload }) =>
-    state.filter((sprint) => sprint._id !== payload),
+    state.filter((project) => project._id !== payload),
+  [UPDATE_PROJECT_SUCCESS]: (state, { payload }) => [
+    ...state.filter((project) => project._id !== payload.id),
+    {
+      ...state.find((project) => project._id === payload.id),
+      title: payload.newTitle,
+    },
+  ],
 });
 
 const error = createReducer("", {
   [CHANGE_ERROR]: (state, { payload }) => payload,
+  [UPDATE_PROJECT_ERROR]: (state, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
@@ -42,6 +53,9 @@ const loading = createReducer(false, {
   [ADD_MEMBER_REQUEST]: () => true,
   [ADD_MEMBER_SUCCESS]: () => false,
   [ADD_MEMBER_ERROR]: () => false,
+  [UPDATE_PROJECT_REQUEST]: () => true,
+  [UPDATE_PROJECT_SUCCESS]: () => false,
+  [UPDATE_PROJECT_ERROR]: () => false,
 });
 
 export default combineReducers({

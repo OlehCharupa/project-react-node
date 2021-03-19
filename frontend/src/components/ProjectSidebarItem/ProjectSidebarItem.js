@@ -26,7 +26,7 @@ const ProjectSidebarItem = ({ id, title }) => {
   return (
     <>
       <StyledLink to={{ pathname: `/projects/${id}` }} className={style.link}>
-        <span className={style.title}>{title}</span>
+        {title}
       </StyledLink>
     </>
   );
