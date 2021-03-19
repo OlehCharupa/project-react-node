@@ -15,7 +15,6 @@ const Ul = styled.ul`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     margin: -10px;
   }
