@@ -16,6 +16,7 @@ const getCurrentUserRequest = createAction("@auth/getCurrentUserRequest");
 const getCurrentUserSuccess = createAction("@auth/getCurrentUserSuccess");
 const getCurrentUserError = createAction("@auth/getCurrentUserError");
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   registerRequest,
   loginRequest,

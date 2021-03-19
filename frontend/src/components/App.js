@@ -19,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const App = () => {
       });
       dispatch(sprintsOperations.resetError());
     }
-  }, [projectId, error]);
+  }, [projectId, error, history, dispatch]);
 
   return (
     <div className="App">

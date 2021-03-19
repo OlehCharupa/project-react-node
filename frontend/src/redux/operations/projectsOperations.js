@@ -52,6 +52,7 @@ const updateProject = (id, title) => (dispatch) => {
     .catch((error) => dispatch(projectsAction.updateProjectError(error)));
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addProject,
   fetchProjects,

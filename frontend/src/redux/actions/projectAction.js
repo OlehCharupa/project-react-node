@@ -41,6 +41,7 @@ const updateProjectError = createAction(UPDATE_PROJECT_ERROR);
 
 const changeError = createAction(CHANGE_ERROR);
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addProjectRequest,
   addProjectSuccess,

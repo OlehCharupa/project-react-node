@@ -28,7 +28,7 @@ const AddPeopleProjectWrapper = () => {
         />
       )}
       <div className={style.addPeople}>
-        <img src={add} style={{ width: "20px", marginRight: "10px" }} />
+        <img src={add} alt="add" style={{ width: "20px", marginRight: "10px" }} />
         <button
           style={{ backgroundColor: "transparent", cursor: "pointer" }}
           type="button"

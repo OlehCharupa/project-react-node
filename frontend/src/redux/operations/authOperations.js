@@ -62,4 +62,5 @@ const getCurrentUser = () => async (dispatch, getState) => {
   token.set(persistedToken);
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { logIn, logOut, getCurrentUser };

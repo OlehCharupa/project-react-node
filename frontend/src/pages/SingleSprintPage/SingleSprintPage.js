@@ -19,6 +19,7 @@ const SingleSprintPage = () => {
 
   useEffect(() => {
     !location.from && dispatch(sprintsOperations.fetchSprints(projectId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

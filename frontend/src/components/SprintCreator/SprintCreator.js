@@ -25,10 +25,6 @@ const SprintCreator = () => {
   const location = useLocation();
   let projectId = location.pathname.substr(10);
 
-  // useEffect(() => {
-  //   projectId = location.pathname.substr(10);
-  // });
-
   const pastDaysToggle = () => {
     setHidePastDays((state) => !state);
   };

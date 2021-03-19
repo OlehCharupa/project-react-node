@@ -10,6 +10,7 @@ const DiagramModalWind = ({ isModal, setIsModal }) => {
     useEffect(() => {
         window.addEventListener("keydown", keyEsc)
         document.querySelector('body').style.overflow = "hidden"
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const closeModal = () => {

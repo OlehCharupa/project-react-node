@@ -352,7 +352,7 @@ const Sprints = ({ id, title, duration, endDate }) => {
 
   useEffect(() => {
     dispatch(tasksOperations.fetchTasks(sprintId));
-  }, [sprintId]);
+  }, [dispatch, sprintId]);
 
   const isModalOpen = useSelector((state) => state.modal);
   const [showDiagramModal, setShowDiagramModal] = useState(false);

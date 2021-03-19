@@ -10,11 +10,7 @@ import { modalToggle } from "../../redux/actions/modalAction";
 
 const TaskCreator = () => {
   const location = useLocation();
-  let sprintId=location.pathname.substr(35);
-
-  // useEffect(() => {
-  //   sprintId = location.pathname.substr(35);
-  // }, []);
+  let sprintId = location.pathname.substr(35);
 
   const SignupSchema = Yup.object().shape({
     title: Yup.string().min(1).required("Будь ласка, введіть назву."),
@@ -37,8 +33,8 @@ const TaskCreator = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          const {title, hoursPlanned} = values;
-          dispatch(taskOperations.addTask({sprintId, title, hoursPlanned: Number(...hoursPlanned)}))
+          const { title, hoursPlanned } = values;
+          dispatch(taskOperations.addTask({ sprintId, title, hoursPlanned: Number(...hoursPlanned) }))
           toggleModal();
         }}
       >

@@ -48,6 +48,7 @@ const updateTask = (id, singleHoursWasted, currentDay, index) => (dispatch) => {
     .catch((error) => dispatch(tasksAction.updateTaskError(error)));
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addTask,
   fetchTasks,

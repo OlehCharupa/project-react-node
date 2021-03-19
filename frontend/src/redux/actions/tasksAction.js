@@ -38,6 +38,7 @@ const changeTaskFilter = createAction(CHANGE_TASK_FILTER);
 const changeError = createAction(CHANGE_ERROR);
 const changeCurrentDayIndex = createAction(CHANGE_CURRENT_DAY_INDEX);
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addTaskRequest,
   addTaskSuccess,

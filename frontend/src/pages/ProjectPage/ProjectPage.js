@@ -15,6 +15,7 @@ const ProjectPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(projectsOperations.fetchProjects());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isModalOpen = useSelector((state) => state.modal);

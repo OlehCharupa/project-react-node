@@ -14,6 +14,7 @@ const SprintPage = () => {
 
   useEffect(() => {
     !location.from && dispatch(projectsOperations.fetchProjects());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
