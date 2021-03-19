@@ -14,9 +14,10 @@ import {
   ADD_MEMBER_REQUEST,
   ADD_MEMBER_SUCCESS,
   ADD_MEMBER_ERROR,
-  UPDATE_PROJECT_REQUEST,
-  UPDATE_PROJECT_SUCCESS,
   UPDATE_PROJECT_ERROR,
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_REQUEST,
+
   CHANGE_ERROR,
 } from "../constants/projectsConstans.js";
 
@@ -25,11 +26,11 @@ const items = createReducer([], {
   [ADD_PROJECT_SUCCESS]: (state, { payload }) => [...state, payload],
   [ADD_MEMBER_SUCCESS]: (state, { payload }) => [...state, payload],
   [DELETE_PROJECT_SUCCESS]: (state, { payload }) =>
-    state.filter((project) => project._id !== payload),
+    state.filter((sprint) => sprint._id !== payload),
   [UPDATE_PROJECT_SUCCESS]: (state, { payload }) => [
-    ...state.filter((project) => project._id !== payload.id),
+    ...state.filter((sprint) => sprint._id !== payload.id),
     {
-      ...state.find((project) => project._id === payload.id),
+      ...state.find((sprint) => sprint._id === payload.id),
       title: payload.newTitle,
     },
   ],
@@ -37,7 +38,11 @@ const items = createReducer([], {
 
 const error = createReducer("", {
   [CHANGE_ERROR]: (state, { payload }) => payload,
+  [ADD_PROJECT_ERROR]: (state, { payload }) => payload,
+  [FETCH_PROJECTS_ERROR]: (state, { payload }) => payload,
   [UPDATE_PROJECT_ERROR]: (state, { payload }) => payload,
+  [DELETE_PROJECT_ERROR]: (state, { payload }) => payload,
+
 });
 
 const loading = createReducer(false, {

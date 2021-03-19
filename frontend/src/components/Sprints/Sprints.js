@@ -370,7 +370,10 @@ const Sprints = ({ id, title, duration, endDate }) => {
     dispatch(tasksAction.changeCurrentDayIndex(currentIndex - 1));
   };
   const nextDayHandler = (e) => {
-    if (tasks[0].hoursWastedPerDay.length === currentIndex + 1) {
+    if (
+      tasks.length &&
+      tasks[0].hoursWastedPerDay.length === currentIndex + 1
+    ) {
       return;
     }
     dispatch(tasksAction.changeCurrentDayIndex(currentIndex + 1));

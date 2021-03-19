@@ -92,7 +92,10 @@ const SVG = styled.svg`
 const ProjectName = ({ id, title }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [projectName, setProjectName] = useState();
+  const [projectName, setProjectName] = useState(title);
+  useEffect(() => {
+    setProjectName(title)
+  }, [title])
 
 
   useEffect(() => {
