@@ -15,7 +15,7 @@ const Router = express.Router
 
 const addTaskSchema = Joi.object({
     title: Joi.string().required(),
-    hoursPlanned: Joi.number().required().min(1).max(8),
+    hoursPlanned: Joi.number().required().min(1),
 });
 
 const addTaskIdSchema = Joi.object({
