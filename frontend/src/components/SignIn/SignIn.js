@@ -35,7 +35,7 @@ const SignIn = () => {
                     onSubmit={(values, { setSubmitting, setErrors }) => {
                         if(!!errorState.indexOf('Request failed with status code 403')){
                             setTimeout(() => {
-                              setErrors({ email: 'Ви ввели неправильно електронну адресу або пароль' });
+                              setErrors({ email: 'Ви ввели неправильно електронну адресу', password: 'Ви ввели неправильно пароль'});
                                 setSubmitting(false);
                             }, 500)
                         }else{

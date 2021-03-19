@@ -42,7 +42,8 @@ const SignUp = () => {
                     }}
                     validationSchema={SignupSchema}
                     onSubmit={async(values, { setSubmitting, setErrors, resetForm }) => {
-
+                        dispatch(register(values));
+                        dispatch(authAction.registerError({ message: '' }))
                             if(!!errorState.indexOf('Request failed with status code 409')){
                                 setTimeout(() => {
                                   setErrors({ email: 'Таку електронну адресу вже зареєстровано!' })
@@ -55,18 +56,19 @@ const SignUp = () => {
                                     setSubmitting(false);
                                 }, 500)
                             }
-                        dispatch(authAction.registerError({ message: '' }))
-                        dispatch(register(values));
+                            setSubmitting(false);
+                        
+                        
                     }}
                 >
                     {({ errors, touched, values, handleBlur }) => (
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
                                 <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" value={values.email || ''} onBlur={handleBlur} required />
-
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>)
                                     : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>}
+
                             </div>
 
                             <div className={signUp.form__item}>
