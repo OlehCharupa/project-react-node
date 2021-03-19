@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import projectsOperations from "../../redux/operations/projectsOperations";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -93,6 +93,9 @@ const ProjectName = ({ id, title }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [projectName, setProjectName] = useState(title);
+  useEffect(() => {
+    setProjectName(title)
+  }, [title])
 
   const changeNameHandler = (e) => {
     isEdit && dispatch(projectsOperations.updateProject(id, projectName));
