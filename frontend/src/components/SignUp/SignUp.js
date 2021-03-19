@@ -9,12 +9,10 @@ import { register } from '../../redux/operations/authOperations.js';
 import authAction from "../../redux/actions/authAction";
 
 const SignUp = () => {
-    // console.clear();
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const errorState = useSelector(state => state.auth.error.message);
-    // console.log('errorStateError', errorStateError({message: ''}));
+    const errorState = useSelector(state => state.auth.error);
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Неправильна електронна адреса')
@@ -28,9 +26,9 @@ const SignUp = () => {
             .oneOf([Yup.ref("password"), null], "Паролі не збігаються"),
 
     });
-    // const initialErrorState = ({message: ''});
+    const state = errorState.config.data;
+    let stateJson = JSON.parse(state);
 
-    // console.log('errorState', error.error(initialErrorState));
     return (
         <>
             <div className={signUp.registr__block}>
@@ -43,8 +41,9 @@ const SignUp = () => {
                     validationSchema={SignupSchema}
                     onSubmit={async(values, { setSubmitting, setErrors, resetForm }) => {
                         dispatch(register(values));
-                        dispatch(authAction.registerError({ message: '' }))
-                            if(!!errorState.indexOf('Request failed with status code 409')){
+                        dispatch(authAction.registerError({ message: '', config: {data: "{}"} }))
+                        setTimeout(()=>{
+                            if(values.email === stateJson.email || !!errorState.message.indexOf('Request failed with status code 409')){
                                 setTimeout(() => {
                                   setErrors({ email: 'Таку електронну адресу вже зареєстровано!' })
                                     setSubmitting(false);
@@ -56,19 +55,18 @@ const SignUp = () => {
                                     setSubmitting(false);
                                 }, 500)
                             }
-                            setSubmitting(false);
-                        
-                        
+                           },0)
+                        // dispatch(authAction.registerError({ message: '' }))
                     }}
                 >
                     {({ errors, touched, values, handleBlur }) => (
                         <Form className={signUp.form__registr}>
                             <div className={signUp.form__item}>
                                 <Field className={signUp.input} name="email" type="email" id='email' placeholder="Електронна пошта*" value={values.email || ''} onBlur={handleBlur} required />
+
                                 {errors.email && touched.email ? (
                                     <label className={signUp.labelError} htmlFor='email' >{errors.email}</label>)
                                     : <label className={signUp.label} htmlFor='email' >Електронна пошта*</label>}
-
                             </div>
 
                             <div className={signUp.form__item}>

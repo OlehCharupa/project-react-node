@@ -9,7 +9,9 @@ import authAction from "../../redux/actions/authAction";
 
 const SignIn = () => {
     const dispatch = useDispatch()
-    const errorState = useSelector(state => state.auth.error.message);
+    const errorState = useSelector(state => state.auth.error);
+    const state = errorState.config.data;
+    let stateJson = JSON.parse(state);
 
     const SigninSchema = Yup.object().shape({
         email: Yup.string()
@@ -33,9 +35,9 @@ const SignIn = () => {
                     }}
                     validationSchema={SigninSchema}
                     onSubmit={(values, { setSubmitting, setErrors }) => {
-                        if(!!errorState.indexOf('Request failed with status code 403')){
+                        if(values.email === stateJson.email || !!errorState.message.indexOf('Request failed with status code 403')){
                             setTimeout(() => {
-                              setErrors({ email: 'Ви ввели неправильно електронну адресу', password: 'Ви ввели неправильно пароль'});
+                              setErrors({ password: 'Ви ввели неправильно електронну адресу або пароль'});
                                 setSubmitting(false);
                             }, 500)
                         }else{
@@ -43,11 +45,12 @@ const SignIn = () => {
                                 setSubmitting(false);
                             }, 500)
                         }
-                    dispatch(authAction.loginError({ message: '' }));
+                    dispatch(authAction.loginError({ message: '', config: {data: "{}"}  }));
                     dispatch(logIn(values));
                     }}
                 >
                     {({ errors, touched, values }) => (
+                       
                         <Form className={signIn.form__registr}>
                             <div className={signIn.form__item}>
                                 <Field className={signIn.input} name="email" type="email" id='email' placeholder="Email" value={values.email || ''} required/>
