@@ -35,6 +35,9 @@ const SignIn = () => {
                     }}
                     validationSchema={SigninSchema}
                     onSubmit={(values, { setSubmitting, setErrors }) => {
+                        dispatch(authAction.loginError({ message: '', config: {data: "{}"}  }));
+                        dispatch(logIn(values));
+                        setTimeout(()=>{
                         if(values.email === stateJson.email || !!errorState.message.indexOf('Request failed with status code 403')){
                             setTimeout(() => {
                               setErrors({ password: 'Ви ввели неправильно електронну адресу або пароль'});
@@ -45,8 +48,7 @@ const SignIn = () => {
                                 setSubmitting(false);
                             }, 500)
                         }
-                    dispatch(authAction.loginError({ message: '', config: {data: "{}"}  }));
-                    dispatch(logIn(values));
+                    },0)
                     }}
                 >
                     {({ errors, touched, values }) => (
