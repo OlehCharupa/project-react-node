@@ -50,7 +50,7 @@ const Diagram = () => {
             for (let i = 0; i < duration; i += 1) {
                 let total = 0;
                 for (let item of allTasks) {
-                    total -= singleHoursWasted(item, i);
+                    total += singleHoursWasted(item, i);
                 }
                 arrSumOfPerDay.push(total);
             }
@@ -64,7 +64,6 @@ const Diagram = () => {
             arrTimes.push((startPoint - arg).toFixed(2));
             startPoint -= arg
         }
-
         return arrTimes
     };
 
@@ -75,12 +74,9 @@ const Diagram = () => {
             return newDay
         }
         const result = days.map((day) => conversionDay(day))
-
+        result.unshift(0)
         return result
     };
-    // console.log(hoursPlanned)
-    // console.log(duration)
-    // console.log("allTasks", allTasks)
     console.log(blueLine(hoursPlanned, duration, allTasks))
     const chartData = {
         labels: formatDays(days), // дени (даты снизу диаграммы) arrDays
